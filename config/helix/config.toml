@@ -1,0 +1,30 @@
+theme = "catppuccin_mocha"
+
+[editor]
+line-number = "relative"
+bufferline = "always"
+color-modes = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.indent-guides]
+render = true
+
+[editor.lsp]
+display-inlay-hints = true
+
+[keys.normal]
+"{" = "goto_previous_buffer"
+"}" = "goto_next_buffer"
+"X" = "extend_line_above"
+
+[keys.normal.space]
+w = ":write"
+q = ":quit"
+c = ":buffer-close"
+G = ":sh zellij action new-pane -c -i -- lazygit"
+e = ":sh zellij action new-pane -c -d down -- zellij-hx-xplr"
+

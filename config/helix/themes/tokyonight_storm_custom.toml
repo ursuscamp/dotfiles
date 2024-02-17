@@ -1,0 +1,4 @@
+inherits = "tokyonight_storm"
+
+"ui.cursor" = { fg = "black", bg = "orange" }
+"ui.cursor.primary" = { fg = "black", bg = "magenta" }

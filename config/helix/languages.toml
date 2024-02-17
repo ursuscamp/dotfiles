@@ -1,0 +1,45 @@
+[language-server.rubocop]
+command = "rubocop"
+args = ["--lsp", "--stderr", "--fail-level", "fatal"]
+timeout = 3
+
+[language-server]
+emmet-ls = { command = "emmet-ls", args = ["--stdio"]}
+
+[[language]]
+name = "python"
+language-servers = ["pyright"]
+
+[[language]]
+name = "ruby"
+language-servers = ["rubocop", {name="solargraph", except-features=["format","diagnostics"]}]
+auto-format = true
+
+[language-server.rust-analyzer.config.check]
+command = "clippy"
+
+######################
+# Javascript, etc.
+######################
+
+[[language]]
+name = "typescript"
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "javascript"
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "html"
+language-servers = [ "vscode-html-language-server", "emmet-ls" ]
+formatter = { command = "prettier", args = ["--parser", "html"] }
+auto-format = true
+
+[[language]]
+name = "jinja"
+language-servers = [ "vscode-html-language-server" , "emmet-ls" ]
+formatter = { command = "prettier", args = ["--parser", "jinja-template"] }
+auto-format = true
