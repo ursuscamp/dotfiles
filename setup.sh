@@ -12,6 +12,7 @@ echo "SOURCE:      $SOURCE"
 echo "DESTINATION: $DESTINATION"
 echo "CONFIG:      $CONFIG"
 
+echo
 echo "Generating symlinks..."
 for package in $PACKAGES
 do
