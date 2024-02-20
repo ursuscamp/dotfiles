@@ -67,6 +67,7 @@ require('lazy').setup({
   {'hrsh7th/cmp-nvim-lsp'},
   {'hrsh7th/nvim-cmp'},
   {'L3MON4D3/LuaSnip'},
+  {'lvimuser/lsp-inlayhints.nvim'},
 })
 
 -------------------
@@ -124,12 +125,14 @@ require('bufferline').setup({
 require('Comment').setup()
 
 -- LSP stuff
+require("lsp-inlayhints").setup()
 local lsp_zero = require('lsp-zero')
 
 lsp_zero.on_attach(function(client, bufnr)
   -- see :help lsp-zero-keybindings
   -- to learn the available actions
   lsp_zero.default_keymaps({buffer = bufnr})
+  require('lsp-inlayhints').on_attach(client, bufnr)
 end)
 require('mason').setup({})
 require('mason-lspconfig').setup({
@@ -138,10 +141,6 @@ require('mason-lspconfig').setup({
     lsp_zero.default_setup,
   },
 })
--- lsp.rust_analyzer.setup({})
--- lsp.lua_ls.setup({})
--- lsp.tsserver.setup({})
--- lsp.html.setup({})
 
 
 -------------------
