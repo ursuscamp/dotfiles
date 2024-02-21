@@ -25,6 +25,4 @@ display-inlay-hints = true
 w = ":write"
 q = ":quit"
 c = ":buffer-close"
-G = ":sh zellij action new-pane -c -i -- lazygit"
-e = ":sh zellij action new-pane -c -d down -- zellij-hx-xplr"
 
