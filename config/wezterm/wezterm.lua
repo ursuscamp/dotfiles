@@ -7,8 +7,8 @@ if wezterm.config_builder then
 end
 
 config.color_scheme = "Catppuccin Macchiato"
-config.font = wezterm.font("FiraCode Nerd Font Mono")
-config.font_size = 15
+config.font = wezterm.font("UbuntuMono Nerd Font")
+config.font_size = 16
 
 config.keys = {
 	{

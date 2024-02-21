@@ -8,7 +8,7 @@
         "revision": "16aa7909152e49d7016c8811d98cf70c83d46cb0"
       },
       "homebrew/cask-versions": {
-        "revision": "bf47a1b644ae190a0a1ceb3ea1a48e49b0fa523a"
+        "revision": "730e9c382696cf802b5ad7df67eebaf14328bb7e"
       }
     },
     "brew": {
@@ -1143,18 +1143,24 @@
         "options": {
           "full_name": "homebrew/cask-versions/wezterm-nightly"
         }
+      },
+      "font-ubuntu-mono-nerd-font": {
+        "version": "3.1.1",
+        "options": {
+          "full_name": "font-ubuntu-mono-nerd-font"
+        }
       }
     }
   },
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.2.9-14-gb083b1a",
-        "HOMEBREW_PREFIX": "/opt/homebrew",
+        "HOMEBREW_VERSION": "4.2.9",
+        "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
         "CLT": "15.1.0.0.1.1700200546",
-        "Xcode": "15.2",
-        "macOS": "14.2.1"
+        "Xcode": "15.1",
+        "macOS": "14.3.1"
       }
     }
   }

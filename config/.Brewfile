@@ -26,6 +26,7 @@ brew "xplr"
 brew "zellij"
 
 cask "font-fira-code-nerd-font"
+cask "font-ubuntu-mono-nerd-font"
 
 if ENV['HOMEBREW_WORK']
   brew "awscli"
