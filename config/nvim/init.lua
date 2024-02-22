@@ -68,6 +68,16 @@ require('lazy').setup({
   {'hrsh7th/nvim-cmp'},
   {'L3MON4D3/LuaSnip'},
   {'lvimuser/lsp-inlayhints.nvim'},
+  -- {
+  --   "folke/trouble.nvim",
+  --   dependencies = { "nvim-tree/nvim-web-devicons" },
+  --   opts = {
+  --    -- your configuration comes here
+  --    -- or leave it empty to use the default settings
+  --    -- refer to the configuration section below
+  --   },
+  -- },
+  { 'stevearc/conform.nvim' },
 })
 
 -------------------
@@ -124,6 +134,14 @@ require('bufferline').setup({
 
 require('Comment').setup()
 
+require('conform').setup({
+  format_on_save = {
+    -- These options will be passed to conform.format()
+    timeout_ms = 500,
+    lsp_fallback = true,
+  },
+})
+
 -- LSP stuff
 require("lsp-inlayhints").setup()
 local lsp_zero = require('lsp-zero')
@@ -134,6 +152,7 @@ lsp_zero.on_attach(function(client, bufnr)
   lsp_zero.default_keymaps({buffer = bufnr})
   require('lsp-inlayhints').on_attach(client, bufnr)
 end)
+
 require('mason').setup({})
 require('mason-lspconfig').setup({
   ensure_installed = { "rust_analyzer", "lua_ls", "tsserver", "html" },
@@ -146,6 +165,7 @@ require('mason-lspconfig').setup({
 -------------------
 ---- Keymaps
 -------------------
+vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = "Write file" })
 vim.keymap.set('n', '<C-q>', ':qa<CR>', { desc = "Quit" } )
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = "Move left window" })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = "Move down window" })
