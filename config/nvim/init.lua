@@ -54,9 +54,7 @@ require('lazy').setup({
   {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
   {
     'numToStr/Comment.nvim',
-    opts = {
-        -- add any options here
-    },
+    opts = {},
     lazy = false,
   },
 
@@ -77,7 +75,21 @@ require('lazy').setup({
   --    -- refer to the configuration section below
   --   },
   -- },
-  { 'stevearc/conform.nvim' },
+  { 'stevearc/conform.nvim'  },
+  { 'j-hui/fidget.nvim', opts = {} },
+  {
+    -- Set lualine as statusline
+    'nvim-lualine/lualine.nvim',
+    -- See `:help lualine.txt`
+    opts = {
+      options = {
+        icons_enabled = true,
+        theme = 'auto',
+        component_separators = '|',
+        section_separators = '',
+      },
+    },
+  },
 })
 
 -------------------
@@ -132,7 +144,6 @@ require('bufferline').setup({
   }
 })
 
-require('Comment').setup()
 
 require('conform').setup({
   format_on_save = {
@@ -141,6 +152,7 @@ require('conform').setup({
     lsp_fallback = true,
   },
 })
+
 
 -- LSP stuff
 require("lsp-inlayhints").setup()
@@ -152,6 +164,12 @@ lsp_zero.on_attach(function(client, bufnr)
   lsp_zero.default_keymaps({buffer = bufnr})
   require('lsp-inlayhints').on_attach(client, bufnr)
 end)
+
+vim.diagnostic.config(
+  {
+    virtual_text = true,
+  }
+)
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
