@@ -60,12 +60,25 @@ require('lazy').setup({
 
   {'williamboman/mason.nvim'},
   {'williamboman/mason-lspconfig.nvim'},
-  {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
-  {'neovim/nvim-lspconfig'},
-  {'hrsh7th/cmp-nvim-lsp'},
-  {'hrsh7th/nvim-cmp'},
-  {'L3MON4D3/LuaSnip'},
-  {'lvimuser/lsp-inlayhints.nvim'},
+  {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v3.x',
+    lazy = true,
+    config = false,
+  },
+  {
+    'neovim/nvim-lspconfig',
+    dependencies = {
+      {'hrsh7th/cmp-nvim-lsp'},
+    }
+  },
+  {
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+      {'L3MON4D3/LuaSnip'}
+    },
+  },
+  {'lvimuser/lsp-inlayhints.nvim', opts = {} },
   -- {
   --   "folke/trouble.nvim",
   --   dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -155,7 +168,6 @@ require('conform').setup({
 
 
 -- LSP stuff
-require("lsp-inlayhints").setup()
 local lsp_zero = require('lsp-zero')
 
 lsp_zero.on_attach(function(client, bufnr)
@@ -165,12 +177,6 @@ lsp_zero.on_attach(function(client, bufnr)
   require('lsp-inlayhints').on_attach(client, bufnr)
 end)
 
-vim.diagnostic.config(
-  {
-    virtual_text = true,
-  }
-)
-
 require('mason').setup({})
 require('mason-lspconfig').setup({
   ensure_installed = { "rust_analyzer", "lua_ls", "tsserver", "html" },
@@ -179,6 +185,7 @@ require('mason-lspconfig').setup({
   },
 })
 
+vim.diagnostic.config()
 
 -------------------
 ---- Keymaps
