@@ -177,13 +177,26 @@ local lsp_zero = require('lsp-zero')
 lsp_zero.on_attach(function(client, bufnr)
 	-- see :help lsp-zero-keybindings
 	-- to learn the available actions
-	lsp_zero.default_keymaps({ buffer = bufnr })
+	-- lsp_zero.default_keymaps({ buffer = bufnr, preserve_mappings = false })
 	require('lsp-inlayhints').on_attach(client, bufnr)
+
+	vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Goto previous diagnostic", buffer = bufnr })
+	vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Goto next diagnostic", buffer = bufnr })
+	vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Hover diagnostic", buffer = bufnr })
+	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "Goto definition", buffer = bufnr })
+	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "Goto declation", buffer = bufnr })
+	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = "List implementations", buffer = bufnr })
+	vim.keymap.set('n', 'go', vim.lsp.buf.type_definition, { desc = "Goto definition of symbol type", buffer = bufnr })
+	vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = "List references under cursor", buffer = bufnr })
+	vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, { desc = "Display signature of symbol", buffer = bufnr })
+	vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, { desc = "Rename symbol", buffer = bufnr })
+	vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, { desc = "Code actions", buffer = bufnr })
+	vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = "Show floating diagnostics", buffer = bufnr })
 end)
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-	ensure_installed = { "rust_analyzer", "lua_ls", "tsserver", "html" },
+	ensure_installed = { "rust_analyzer", "lua_ls", "tsserver", "html", "solargraph" },
 	handlers = {
 		lsp_zero.default_setup,
 	},
