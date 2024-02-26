@@ -46,13 +46,14 @@ require('lazy').setup({
 			})
 		end
 	},
+	{ "nvim-treesitter/nvim-treesitter-textobjects" },
 	{
 		'nvim-telescope/telescope.nvim',
 		tag = '0.1.5',
 		dependencies = { 'nvim-lua/plenary.nvim' }
 	},
-	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-	{ 'akinsho/bufferline.nvim',                  version = "*", dependencies = 'nvim-tree/nvim-web-devicons' },
+	{ 'nvim-telescope/telescope-fzf-native.nvim',   build = 'make' },
+	{ 'akinsho/bufferline.nvim',                    version = "*", dependencies = 'nvim-tree/nvim-web-devicons' },
 	{
 		'numToStr/Comment.nvim',
 		opts = {},
@@ -168,6 +169,29 @@ require('conform').setup({
 	},
 })
 
+require('nvim-treesitter.configs').setup({
+	textobjects = {
+		select = {
+			enable = true,
+
+			-- Automatically jump forward to textobj, similar to targets.vim
+			lookahead = true,
+
+			keymaps = {
+				-- You can use the capture groups defined in textobjects.scm
+				["af"] = { query = "@function.outer", desc = "outer function" },
+				["if"] = { query = "@function.inner", desc = "inner function" },
+				["ac"] = { query = "@class.outer", desc = "outer class" },
+				["ic"] = { query = "@class.inner", desc = "inner class" },
+				["iC"] = { query = "@comment.inner", desc = "inner comment" },
+				["aC"] = { query = "@comment.outer", desc = "outer comment" },
+				["iB"] = { query = "@block.inner", desc = "inner block" },
+				["aB"] = { query = "@block.outer", desc = "outer block" },
+			},
+		},
+	},
+})
+
 
 -- LSP stuff
 require('neodev').setup()
@@ -186,7 +210,8 @@ lsp_zero.on_attach(function(client, bufnr)
 	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "Goto definition", buffer = bufnr })
 	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "Goto declation", buffer = bufnr })
 	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = "List implementations", buffer = bufnr })
-	vim.keymap.set('n', 'go', vim.lsp.buf.type_definition, { desc = "Goto definition of symbol type", buffer = bufnr })
+	vim.keymap.set('n', 'go', vim.lsp.buf.type_definition,
+		{ desc = "Goto definition of symbol type", buffer = bufnr })
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = "List references under cursor", buffer = bufnr })
 	vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, { desc = "Display signature of symbol", buffer = bufnr })
 	vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, { desc = "Rename symbol", buffer = bufnr })
@@ -251,3 +276,24 @@ cmp.setup({
 		documentation = cmp.config.window.bordered(),
 	},
 })
+
+
+-------------------
+---- Which-key
+-------------------
+
+require('which-key').register({
+	["<leader>f"] = {
+		name = "Find"
+	},
+})
+
+local wkp = require('which-key.plugins.presets')
+wkp.objects["i("] = "inner ()"
+wkp.objects["a("] = "outer ()"
+wkp.objects["i["] = "inner []"
+wkp.objects["a["] = "outer []"
+wkp.objects["i{"] = "inner {}"
+wkp.objects["a{"] = "outer {}"
+wkp.objects["iB"] = nil
+wkp.objects["aB"] = nil

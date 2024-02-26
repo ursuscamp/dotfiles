@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PACKAGES="helix wezterm alacritty kitty zellij xplr fish nvim"
+PACKAGES="helix wezterm alacritty kitty zellij xplr fish nvim mininvim"
 
 REPO=~/Dev/dotfiles
 DESTINATION=$HOME
