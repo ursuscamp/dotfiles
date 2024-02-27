@@ -7,10 +7,19 @@ require("mason-lspconfig").setup({
 	ensure_installed = { "lua_ls", "tsserver", "rust_analyzer" },
 })
 
-require("lspconfig").rust_analyzer.setup({})
-require("lspconfig").tsserver.setup({})
-require("lspconfig").lua_ls.setup({})
-require("lspconfig").emmet_ls.setup({})
-require("lspconfig").pyright.setup({})
-require("lspconfig").solargraph.setup({})
+local lspconfig = require("lspconfig")
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+local servers = {
+	rust_analyzer = {},
+	tsserver = {},
+	lua_ls = {},
+	emmet_ls = {},
+	pyright = {},
+	solargraph = {},
+}
+
+for server, opts in pairs(servers) do
+	opts["capabilities"] = capabilities
+	lspconfig[server].setup(opts)
+end

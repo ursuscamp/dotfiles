@@ -15,3 +15,6 @@ require('mini.starter').setup()
 
 MiniDeps.add({ source = 'echasnovski/mini.surround', checkout = 'stable' })
 require('mini.surround').setup()
+
+-- MiniDeps.add({ source = 'echasnovski/mini.completion', checkout = 'stable' })
+-- require('mini.completion').setup()
