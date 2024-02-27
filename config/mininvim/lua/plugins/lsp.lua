@@ -4,6 +4,7 @@ MiniDeps.add({ source = "neovim/nvim-lspconfig" })
 
 require("mason").setup()
 require("mason-lspconfig").setup({
+	automatic_installation = true,
 	ensure_installed = { "lua_ls", "tsserver", "rust_analyzer" },
 })
 
@@ -17,6 +18,7 @@ local servers = {
 	emmet_ls = {},
 	pyright = {},
 	solargraph = {},
+	marksman = {},
 }
 
 for server, opts in pairs(servers) do

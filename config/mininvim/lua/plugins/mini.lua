@@ -5,7 +5,13 @@ MiniDeps.add({ source = 'echasnovski/mini.comment', checkout = 'stable' })
 require('mini.comment').setup()
 
 MiniDeps.add({ source = 'echasnovski/mini.indentscope', checkout = 'stable' })
-require('mini.indentscope').setup()
+require('mini.indentscope').setup({
+	draw = {
+		animation = function(s, n)
+			return 2
+		end,
+	}
+})
 
 MiniDeps.add({ source = 'echasnovski/mini.pairs', checkout = 'stable' })
 require('mini.pairs').setup()
@@ -15,6 +21,3 @@ require('mini.starter').setup()
 
 MiniDeps.add({ source = 'echasnovski/mini.surround', checkout = 'stable' })
 require('mini.surround').setup()
-
--- MiniDeps.add({ source = 'echasnovski/mini.completion', checkout = 'stable' })
--- require('mini.completion').setup()
