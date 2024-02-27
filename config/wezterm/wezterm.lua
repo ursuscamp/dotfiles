@@ -86,7 +86,7 @@ config.keys = {
 			wezterm.mux.spawn_window({
 				width = 200,
 				height = 50,
-				args = {"lazygit"},
+				args = { "lazygit" },
 				cwd = cwd.file_path,
 			})
 			-- wezterm.mux.spawn_window({
@@ -96,7 +96,17 @@ config.keys = {
 			-- 	args = { "lazygit" },
 			-- })
 		end)
-	}
+	},
+	{
+		key = "LeftArrow",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.MoveTabRelative(-1),
+	},
+	{
+		key = "RightArrow",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.MoveTabRelative(1),
+	},
 }
 
 config.colors = {
