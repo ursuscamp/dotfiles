@@ -1,3 +1,17 @@
+require('mini.bufremove').setup()
+
+require('mini.files').setup({
+	mappings = {
+		go_out = 'H',
+		go_out_plus = 'h',
+	}
+})
+
+vim.keymap.set('n', '<leader>e', MiniFiles.open, { desc = "Explore files" })
+
+
+require('mini.statusline').setup()
+
 require('mini.jump2d').setup()
 
 require('mini.comment').setup()

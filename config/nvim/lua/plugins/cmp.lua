@@ -7,11 +7,15 @@ MiniDeps.add({
 		'hrsh7th/cmp-cmdline',
 		'L3MON4D3/LuaSnip',
 		'saadparwaiz1/cmp_luasnip',
+		'rafamadriz/friendly-snippets',
 	}
 })
 
 local cmp = require('cmp')
 local luasnip = require('luasnip')
+
+-- Lazy load some snippets from friendly-snippets or elsewhere
+require("luasnip.loaders.from_vscode").lazy_load()
 
 local has_words_before = function()
 	unpack = unpack or table.unpack
