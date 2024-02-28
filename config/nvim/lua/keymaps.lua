@@ -1,69 +1,76 @@
 local util = require('util')
 
-vim.keymap.set('n', '<C-q>', ':qa!<CR>', { desc = "Quit all (w/o saving)" })
-vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = "Quit window" })
-vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = "Write buffer" })
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+local function map_keys(k)
+	for _, v in ipairs(k) do
+		util.mapn(v[1], v[2], v[3])
+	end
+end
+
+local nowkeys = {
+	-- Some basics
+	{ '<C-q>',      '<cmd>qa!<CR>',             'Quit all (w/o saving)' },
+	{ '<leader>q',  '<cmd>q<CR>',               'Quit window' },
+	{ '<leader>w',  '<cmd>w<CR>',               'Write buffer' },
+	{ '<Esc>',      '<cmd>nohlsearch<CR>',      nil },
+
+	-- Windows
+	{ '<C-h>',      '<C-w><C-h>',               nil },
+	{ '<C-j>',      '<C-w><C-j>',               nil },
+	{ '<C-k>',      '<C-w><C-k>',               nil },
+	{ '<C-l>',      '<C-w><C-l>',               nil },
+
+	-- Buffers
+	{ '<leader>bs', util.save_session,          'Save session with default name' },
+	{ '<leader>bS', MiniSessions.select,        'Pick session' },
+	{ '<leader>bv', '<cmd>vsplit<CR>',          'Split vertically' },
+	{ '<leader>bh', '<cmd>split<CR>',           'Split horizontally' },
+
+	-- Movement
+	{ '[d',         vim.diagnostic.goto_prev,   "Previous diagnostic" },
+	{ ']d',         vim.diagnostic.goto_next,   "Next diagnostic" },
+	{ '<leader>lf', vim.lsp.buf.format,         "Format buffer" },
+	{ 'gd',         vim.lsp.buf.declaration,    "Goto declaration" },
+	{ 'gD',         vim.lsp.buf.definition,     "Goto definition" },
+	{ 'ga',         vim.lsp.buf.code_action,    "Code actions" },
+	{ 'gI',         vim.lsp.buf.implementation, "Goto implementation" },
+	{ 'gr',         vim.lsp.buf.rename,         "Rename symbole" },
+	{ 'K',          vim.lsp.buf.hover,          "Hover definition" },
+
+	-- Git
+	{ '<leader>gg', '<cmd>LazyGit<CR>',         'LazyGit' },
+}
 
 vim.keymap.set('n', 's', '<Nop>', { noremap = true })
 
+map_keys(nowkeys)
+
+-- Due to plugin lazy loading, these must be set later
 MiniDeps.later(function()
-	vim.keymap.set('n', '<leader>c', MiniBufremove.delete, { desc = "Close buffer" })
-	vim.keymap.set('n', '<leader>e', MiniFiles.open, { desc = "Explore files" })
-end)
+	local laterkeys = {
+		{ '<leader>c',  MiniBufremove.delete,               "Close buffer" },
+		{ '<leader>e',  MiniFiles.open,                     "Explore files" },
 
+		-- -- Basic pickers
+		{ '<leader>ff', MiniPick.builtin.files,             "Find files" },
+		{ '<leader>fg', MiniPick.builtin.grep,              "Live grep" },
+		{ '<leader>fG', '<cmd>Pick files tool=git<CR>',     "Find in git" },
+		{ '<leader>fh', MiniPick.builtin.help,              "Find help" },
+		{ '<leader>fb', MiniPick.builtin.buffers,           "Find open buffers" },
+		{ '<leader>fk', MiniExtra.pickers.keymaps,          "Find keymaps" },
+		{ '<leader>fo', MiniExtra.pickers.oldfiles,         "Find recent files" },
+		{ '<leader>fd', util.buff_diagnostics,              "Find buffer diagnostics" },
+		{ '<leader>fD', MiniExtra.pickers.diagnostic,       "Find all diagnostics" },
 
+		-- -- LSP pickers
+		{ '<leader>ld', util.lsppicker("declaration"),      "Symbol declarations" },
+		{ '<leader>lD', util.lsppicker("definition"),       "Symbol declarations" },
+		{ '<leader>ls', util.lsppicker("document_symbol"),  "Symbol in document" },
+		{ '<leader>lS', util.lsppicker("workspace_symbol"), "Symbol in workspace" },
+		{ '<leader>li', util.lsppicker("implementation"),   "Symbol implementation" },
+		{ '<leader>lr', util.lsppicker("references"),       "Symbol references" },
+		{ '<leader>lt', util.lsppicker("type_definition"),  "Symbol type definition" },
+	}
 
--- Windows
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
--- Buffers
-vim.keymap.set('n', '<leader>bs', util.save_session, { desc = "Save session with default name" })
-vim.keymap.set('n', '<leader>bS', MiniSessions.select, { desc = "Pick session" })
-vim.keymap.set('n', '<leader>bv', '<cmd>vsplit<CR>', { desc = "Split vertically" })
-vim.keymap.set('n', '<leader>bh', '<cmd>split<CR>', { desc = "Split vertically" })
-
-
--- Movement and goto
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Next diagnostic" })
-vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, { desc = "Format buffer" })
-vim.keymap.set('n', 'gd', vim.lsp.buf.declaration, { desc = "Goto declaration" })
-vim.keymap.set('n', 'gD', vim.lsp.buf.definition, { desc = "Goto definition" })
-vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, { desc = "Code actions" })
-vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, { desc = "Goto implementation" })
-vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Hover definition" })
-
-
--- Basic pickers
-MiniDeps.later(function()
-	vim.keymap.set('n', '<leader>ff', MiniPick.builtin.files, { desc = "Find files" })
-	vim.keymap.set('n', '<leader>fg', MiniPick.builtin.grep, { desc = "Live grep" })
-	vim.keymap.set('n', '<leader>fG', function() MiniPick.builtin.files({ tool = "git" }) end, { desc = "Find git" })
-	vim.keymap.set('n', '<leader>fh', MiniPick.builtin.help, { desc = "Find help" })
-	vim.keymap.set('n', '<leader>fb', MiniPick.builtin.buffers, { desc = "Find help" })
-	vim.keymap.set('n', '<leader>fd', function() MiniExtra.pickers.diagnostic({ scope = "current" }) end,
-		{ desc = "Find buffer diagnostics" })
-	vim.keymap.set('n', '<leader>fk', MiniExtra.pickers.keymaps, { desc = "Find keymaps" })
-	vim.keymap.set('n', '<leader>fo', MiniExtra.pickers.oldfiles, { desc = "Find recent files" })
-
-	-- LSP pickers
-	vim.keymap.set('n', '<leader>fD', MiniExtra.pickers.diagnostic, { desc = "Find all diagnostics" })
-	vim.keymap.set('n', '<leader>ld', function() MiniExtra.pickers.lsp({ scope = "declaration" }) end,
-		{ desc = "Symbol declarations" })
-	vim.keymap.set('n', '<leader>lD', function() MiniExtra.pickers.lsp({ scope = "definition" }) end,
-		{ desc = "Symbol definition" })
-	vim.keymap.set('n', '<leader>ls', function() MiniExtra.pickers.lsp({ scope = "document_symbol" }) end,
-		{ desc = "Symbol in document" })
-	vim.keymap.set('n', '<leader>lS', function() MiniExtra.pickers.lsp({ scope = "workspace_symbol" }) end,
-		{ desc = "Symbol in workspace" })
-	vim.keymap.set('n', '<leader>li', function() MiniExtra.pickers.lsp({ scope = "implementation" }) end,
-		{ desc = "Symbol implementation" })
-	vim.keymap.set('n', '<leader>lr', function() MiniExtra.pickers.lsp({ scope = "references" }) end,
-		{ desc = "Symbol references" })
-	vim.keymap.set('n', '<leader>lt', function() MiniExtra.pickers.lsp({ scope = "type_definition" }) end,
-		{ desc = "Symbol type definition" })
+	map_keys(laterkeys)
 end)
