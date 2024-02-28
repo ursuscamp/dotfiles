@@ -1,7 +1,7 @@
 require('plugins.catppuccin')
 require('plugins.gitsigns')
-require('plugins.treesitter')
 require('plugins.mini')
+require('plugins.treesitter')
 require('plugins.cmp')
 require('plugins.lsp')
 require('plugins.conform')

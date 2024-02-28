@@ -120,6 +120,15 @@ MiniDeps.later(function()
 			-- `z` key
 			{ mode = 'n', keys = 'z' },
 			{ mode = 'x', keys = 'z' },
+
+			-- Moves
+			{ mode = 'n', keys = ']' },
+			{ mode = 'x', keys = ']' },
+			{ mode = 'n', keys = '[' },
+			{ mode = 'x', keys = '[' },
+
+			-- Modes
+			{ mode = 'n', keys = 'v' },
 		},
 
 		clues = {
