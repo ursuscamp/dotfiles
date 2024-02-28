@@ -1,3 +1,5 @@
 MiniDeps.add({ source = 'Aasim-A/scrollEOF.nvim' })
 
-require('scrollEOF').setup()
+MiniDeps.later(function()
+	require('scrollEOF').setup()
+end)
