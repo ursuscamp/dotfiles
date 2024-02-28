@@ -3,6 +3,8 @@ vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = "Quit window" })
 vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = "Write buffer" })
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+vim.keymap.set('n', 's', '<Nop>', { noremap = true })
+
 MiniDeps.later(function()
 	vim.keymap.set('n', '<leader>c', MiniBufremove.delete, { desc = "Close buffer" })
 	vim.keymap.set('n', '<leader>e', MiniFiles.open, { desc = "Explore files" })
@@ -27,6 +29,7 @@ vim.keymap.set('n', 'gd', vim.lsp.buf.declaration, { desc = "Goto declaration" }
 vim.keymap.set('n', 'gD', vim.lsp.buf.definition, { desc = "Goto definition" })
 vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, { desc = "Code actions" })
 vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, { desc = "Goto implementation" })
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Hover definition" })
 
 
 -- Basic pickers
