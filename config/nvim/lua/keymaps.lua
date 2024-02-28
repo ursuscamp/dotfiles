@@ -1,6 +1,7 @@
 vim.keymap.set('n', '<C-q>', ':qa!<CR>', { desc = "Quit all (w/o saving)" })
 vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = "Quit window" })
 vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = "Write buffer" })
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 MiniDeps.later(function()
 	vim.keymap.set('n', '<leader>c', MiniBufremove.delete, { desc = "Close buffer" })
