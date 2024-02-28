@@ -53,6 +53,8 @@ MiniDeps.now(function()
 end)
 
 MiniDeps.later(function()
+	require('mini.ai').setup()
+
 	require('mini.bufremove').setup()
 
 	require('mini.files').setup({
