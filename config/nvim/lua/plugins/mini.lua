@@ -26,6 +26,8 @@ MiniDeps.now(function()
 		}
 	})
 
+	require('mini.sessions').setup()
+
 	local starter = require('mini.starter')
 	starter.setup({
 		header = [[
@@ -38,10 +40,9 @@ MiniDeps.now(function()
 		evaluate_single = true,
 		items = {
 			starter.sections.builtin_actions(),
+			starter.sections.sessions(5, true),
 			starter.sections.recent_files(10, true),
 			starter.sections.pick(),
-			-- Use this if you set up 'mini.sessions'
-			-- starter.sections.sessions(5, true)
 		},
 		content_hooks = {
 			starter.gen_hook.adding_bullet(),
@@ -81,7 +82,6 @@ MiniDeps.later(function()
 		}
 	})
 	vim.ui.select = MiniPick.ui_select
-
 
 	local miniclue = require('mini.clue')
 	miniclue.setup({
@@ -138,7 +138,7 @@ MiniDeps.later(function()
 			miniclue.gen_clues.z(),
 			{ mode = 'n', keys = '<leader>l', desc = '+LSP Actions' },
 			{ mode = 'n', keys = '<leader>f', desc = '+Find' },
-			{ mode = 'n', keys = '<leader>s', desc = '+Split' },
+			{ mode = 'n', keys = '<leader>b', desc = '+Buffer' },
 		},
 	})
 end)

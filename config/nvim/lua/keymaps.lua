@@ -1,3 +1,5 @@
+local util = require('util')
+
 vim.keymap.set('n', '<C-q>', ':qa!<CR>', { desc = "Quit all (w/o saving)" })
 vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = "Quit window" })
 vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = "Write buffer" })
@@ -12,13 +14,17 @@ end)
 
 
 
--- Window stuff
+-- Windows
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-vim.keymap.set('n', '<leader>sv', '<cmd>vsplit<CR>', { desc = "Split vertically" })
-vim.keymap.set('n', '<leader>sh', '<cmd>split<CR>', { desc = "Split vertically" })
+
+-- Buffers
+vim.keymap.set('n', '<leader>bs', util.save_session, { desc = "Save session with default name" })
+vim.keymap.set('n', '<leader>bS', MiniSessions.select, { desc = "Pick session" })
+vim.keymap.set('n', '<leader>bv', '<cmd>vsplit<CR>', { desc = "Split vertically" })
+vim.keymap.set('n', '<leader>bh', '<cmd>split<CR>', { desc = "Split vertically" })
 
 
 -- Movement and goto
