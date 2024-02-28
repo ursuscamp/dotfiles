@@ -78,10 +78,10 @@ MiniDeps.later(function()
 	require('mini.pick').setup({
 		mappings = {
 			choose_marked = '<C-S-CR>',
-			move_down = '<C-j>',
-			move_up = '<C-k>',
 		}
 	})
+	vim.ui.select = MiniPick.ui_select
+
 
 	local miniclue = require('mini.clue')
 	miniclue.setup({
@@ -126,9 +126,6 @@ MiniDeps.later(function()
 			{ mode = 'x', keys = ']' },
 			{ mode = 'n', keys = '[' },
 			{ mode = 'x', keys = '[' },
-
-			-- Modes
-			{ mode = 'n', keys = 'v' },
 		},
 
 		clues = {
