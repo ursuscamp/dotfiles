@@ -2,14 +2,16 @@ MiniDeps.add({ source = 'akinsho/bufferline.nvim', checkout = "*", depends = { '
 
 local bufferline = require('bufferline')
 
-bufferline.setup({
-	options = {
-		offsets = {
-			{ filetype = "neo-tree" },
-		},
+MiniDeps.now(function()
+	bufferline.setup({
+		options = {
+			offsets = {
+				{ filetype = "neo-tree" },
+			},
 
-	},
-})
+		},
+	})
+end)
 
 vim.keymap.set('n', ']b', '<cmd>BufferLineCycleNext<CR>', { desc = "Next buffer" })
 vim.keymap.set('n', '[b', '<cmd>BufferLineCyclePrev<CR>', { desc = "Previous buffer" })

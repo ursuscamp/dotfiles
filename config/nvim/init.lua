@@ -14,9 +14,8 @@ if not vim.loop.fs_stat(mini_path) then
 	vim.cmd('packadd mini.nvim | helptags ALL')
 end
 
--- Set up 'mini.deps' (customize to your liking)
 require('mini.deps').setup({ path = { package = path_package } })
 
+require('options')
 require('plugins')
 require('keymaps')
-require('options')

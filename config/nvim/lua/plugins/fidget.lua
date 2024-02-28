@@ -1,3 +1,5 @@
 MiniDeps.add({ source = "j-hui/fidget.nvim" })
 
-require('fidget').setup()
+MiniDeps.later(function()
+	require('fidget').setup()
+end)

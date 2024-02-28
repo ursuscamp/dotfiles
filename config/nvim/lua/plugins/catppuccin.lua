@@ -3,4 +3,6 @@ MiniDeps.add({
 	name = "catppuccin",
 })
 
-vim.cmd.colorscheme "catppuccin-macchiato"
+MiniDeps.now(function()
+	vim.cmd.colorscheme "catppuccin-macchiato"
+end)

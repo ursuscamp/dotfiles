@@ -1,3 +1,5 @@
 MiniDeps.add({ source = 'lewis6991/gitsigns.nvim' })
 
-require('gitsigns').setup()
+MiniDeps.now(function()
+	require('gitsigns').setup()
+end)

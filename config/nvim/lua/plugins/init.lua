@@ -1,7 +1,6 @@
 require('plugins.catppuccin')
 require('plugins.gitsigns')
 require('plugins.treesitter')
-require('plugins.which-key')
 require('plugins.mini')
 require('plugins.cmp')
 require('plugins.lsp')
