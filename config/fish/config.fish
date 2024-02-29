@@ -16,6 +16,8 @@ set -x EDITOR "nvim"
 set -x FZF_DEFAULT_COMMAND 'fd --type f'
 set -x FZF_DEFAULT_OPTS '--multi --bind ctrl-y:accept'
 
+set -x PGDATA $HOME/.local/share/postgres
+
 if status --is-interactive
 	# Erase the greeting and show something more interesting.
 	set fish_greeting
