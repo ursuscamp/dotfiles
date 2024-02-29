@@ -15,7 +15,15 @@ MiniDeps.later(function()
 	local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 	local servers = {
-		rust_analyzer = {},
+		rust_analyzer = {
+			settings = {
+				["rust-analyzer"] = {
+					checkOnSave = {
+						command = "clippy"
+					}
+				}
+			}
+		},
 		tsserver = {},
 		lua_ls = {},
 		emmet_ls = {},
