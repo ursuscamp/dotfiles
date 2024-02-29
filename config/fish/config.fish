@@ -13,7 +13,8 @@ set -xg PATH $PATH $HOME/bin \
 
 set -x EDITOR "nvim"
 
-set -xg FZF_DEFAULT_COMMAND 'fd --type f'
+set -x FZF_DEFAULT_COMMAND 'fd --type f'
+set -x FZF_DEFAULT_OPTS '--multi --bind ctrl-y:accept'
 
 if status --is-interactive
 	# Erase the greeting and show something more interesting.
