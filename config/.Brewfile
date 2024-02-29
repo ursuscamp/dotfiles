@@ -1,6 +1,7 @@
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 
+brew "awscli"
 brew "bat"
 brew "chezmoi"
 brew "direnv"
@@ -16,6 +17,7 @@ brew "httpie"
 brew "jq"
 brew "lazygit"
 brew "lsd"
+brew "mise"
 brew "neovim"
 brew "ripgrep"
 brew "sd"
@@ -27,7 +29,3 @@ brew "zellij"
 
 cask "font-fira-code-nerd-font"
 cask "font-ubuntu-mono-nerd-font"
-
-if ENV['HOMEBREW_WORK']
-  brew "awscli"
-end

@@ -15,12 +15,6 @@ set -x EDITOR "nvim"
 
 set -xg FZF_DEFAULT_COMMAND 'fd --type f'
 
-source ~/.asdf/asdf.fish
-
-# bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
-
 if status --is-interactive
 	# Erase the greeting and show something more interesting.
 	set fish_greeting
@@ -47,5 +41,4 @@ if status --is-interactive
 	end
 
 	starship init fish | source
-	direnv hook fish | source
 end
