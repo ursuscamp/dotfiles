@@ -62,6 +62,7 @@ MiniDeps.later(function()
 		{ '<leader>fo', MiniExtra.pickers.oldfiles,         "Find recent files" },
 		{ '<leader>fd', util.buff_diagnostics,              "Find buffer diagnostics" },
 		{ '<leader>fD', MiniExtra.pickers.diagnostic,       "Find all diagnostics" },
+		{ '<leader>fs', MiniSessions.select,                "Open a session" },
 
 		-- -- LSP pickers
 		{ '<leader>ld', util.lsppicker("declaration"),      "Symbol declarations" },

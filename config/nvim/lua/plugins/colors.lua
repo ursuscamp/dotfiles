@@ -3,6 +3,8 @@ MiniDeps.add({
 	name = "catppuccin",
 })
 
+MiniDeps.add('Mofiqul/dracula.nvim')
+
 MiniDeps.now(function()
-	vim.cmd.colorscheme "catppuccin-macchiato"
+	vim.cmd.colorscheme "dracula"
 end)

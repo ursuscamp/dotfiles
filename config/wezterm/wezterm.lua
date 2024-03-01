@@ -6,7 +6,9 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-config.color_scheme = "Catppuccin Macchiato"
+-- config.color_scheme = "Catppuccin Macchiato"
+-- config.color_scheme = "FarSide (terminal.sexy)"
+config.color_scheme = "Dracula"
 config.font = wezterm.font("JetBrains Mono")
 config.font_size = 14
 

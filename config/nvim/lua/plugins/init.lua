@@ -1,4 +1,4 @@
-require('plugins.catppuccin')
+require('plugins.colors')
 require('plugins.gitsigns')
 require('plugins.mini')
 require('plugins.treesitter')
