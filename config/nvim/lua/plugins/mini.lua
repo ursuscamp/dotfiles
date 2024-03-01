@@ -65,7 +65,12 @@ MiniDeps.later(function()
 		}
 	})
 
-	require('mini.jump2d').setup()
+	require('mini.jump2d').setup({
+		view = {
+			dim = true,
+			n_steps_ahead = 2,
+		}
+	})
 
 	require('mini.comment').setup()
 
