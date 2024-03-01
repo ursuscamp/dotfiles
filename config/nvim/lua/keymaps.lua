@@ -1,5 +1,8 @@
 local util = require('util')
 
+vim.keymap.set('n', 's', '<Nop>', { noremap = true })
+vim.keymap.set('i', 'jk', '<Esc>')
+vim.keymap.set('n', 'U', '<cmd>redo<CR>', { noremap = true })
 
 local function map_keys(k)
 	for _, v in ipairs(k) do
@@ -40,8 +43,6 @@ local nowkeys = {
 	-- Git
 	{ '<leader>gg', '<cmd>LazyGit<CR>',         'LazyGit' },
 }
-
-vim.keymap.set('n', 's', '<Nop>', { noremap = true })
 
 map_keys(nowkeys)
 
