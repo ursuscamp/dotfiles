@@ -65,7 +65,14 @@ MiniDeps.later(function()
 		}
 	})
 
-	require('mini.jump2d').setup({
+	-- Setup minijump with a custom spotter.
+	-- It will show jumps for: word beginnings, endings of long words and punctuation
+	local jump = require('mini.jump2d')
+	local word_spotter = jump.gen_pattern_spotter('[%w_]+', 'start')
+	local long_word_spotter = jump.gen_pattern_spotter('%w%w%w%w%w+', 'end')
+	local punctuation_spotter = jump.gen_pattern_spotter('%p+', 'start')
+	jump.setup({
+		spotter = jump.gen_union_spotter(word_spotter, long_word_spotter, punctuation_spotter),
 		view = {
 			dim = true,
 			n_steps_ahead = 2,
