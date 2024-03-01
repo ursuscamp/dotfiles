@@ -74,4 +74,10 @@ MiniDeps.later(function()
 	}
 
 	map_keys(laterkeys)
+
+	-- Flash
+	vim.keymap.set({ 'n', 's', 'x' }, '<CR>', function() require('flash').jump() end,
+		{ desc = "Flash jump", noremap = true })
+	vim.keymap.set({ 'n', 's', 'x' }, '<C-]>', function() require('flash').treesitter() end,
+		{ desc = "Flash jump", noremap = true })
 end)
