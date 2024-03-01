@@ -29,3 +29,4 @@ brew "zellij"
 
 cask "font-fira-code-nerd-font"
 cask "font-ubuntu-mono-nerd-font"
+cask "font-jetbrains-mono-nerd-font"

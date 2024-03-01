@@ -5,10 +5,10 @@
         "revision": "2baad615c5fd73bd16f701ca4feb868aef9c6c2f"
       },
       "homebrew/cask-fonts": {
-        "revision": "d1985142ad6b15d7c260cb1cbfdacbadb1dd0c7e"
+        "revision": "89b3641db3c55cc766f78c5752f3140f098093f1"
       },
       "homebrew/cask-versions": {
-        "revision": "e18f518e9b4c1ab049f1ff0b96109ecaaaca84c8"
+        "revision": "711c1298bc56482664edc439c7a1f77eb7332492"
       }
     },
     "brew": {
@@ -1193,18 +1193,24 @@
         "options": {
           "full_name": "font-ubuntu-mono-nerd-font"
         }
+      },
+      "font-jetbrains-mono-nerd-font": {
+        "version": "3.1.1",
+        "options": {
+          "full_name": "font-jetbrains-mono-nerd-font"
+        }
       }
     }
   },
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.2.10",
-        "HOMEBREW_PREFIX": "/usr/local",
+        "HOMEBREW_VERSION": "4.2.10-73-g977ac20",
+        "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "15.1.0.0.1.1700200546",
-        "Xcode": "15.1",
-        "macOS": "14.3.1"
+        "Xcode": "15.2",
+        "macOS": "14.2.1"
       }
     }
   }
