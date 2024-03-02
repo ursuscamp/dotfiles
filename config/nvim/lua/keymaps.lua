@@ -54,7 +54,7 @@ MiniDeps.later(function()
 
 		-- -- Basic pickers
 		{ '<leader>ff', MiniPick.builtin.files,             "Find files" },
-		{ '<leader>fg', MiniPick.builtin.grep,              "Live grep" },
+		{ '<leader>fg', MiniPick.builtin.grep_live,         "Live grep" },
 		{ '<leader>fG', '<cmd>Pick files tool=git<CR>',     "Find in git" },
 		{ '<leader>fh', MiniPick.builtin.help,              "Find help" },
 		{ '<leader>fb', MiniPick.builtin.buffers,           "Find open buffers" },
