@@ -2,6 +2,7 @@ MiniDeps.add({ source = "folke/neodev.nvim" })
 MiniDeps.add({ source = "williamboman/mason.nvim" })
 MiniDeps.add({ source = "williamboman/mason-lspconfig.nvim" })
 MiniDeps.add({ source = "neovim/nvim-lspconfig" })
+MiniDeps.add({ source = "lvimuser/lsp-inlayhints.nvim" })
 
 MiniDeps.later(function()
 	require("neodev").setup()
@@ -10,6 +11,7 @@ MiniDeps.later(function()
 		automatic_installation = true,
 		ensure_installed = { "lua_ls", "tsserver", "rust_analyzer" },
 	})
+	require("lsp-inlayhints").setup()
 
 	local lspconfig = require("lspconfig")
 	local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -36,4 +38,18 @@ MiniDeps.later(function()
 		opts["capabilities"] = capabilities
 		lspconfig[server].setup(opts)
 	end
+
+	vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
+	vim.api.nvim_create_autocmd("LspAttach", {
+		group = "LspAttach_inlayhints",
+		callback = function(args)
+			if not (args.data and args.data.client_id) then
+				return
+			end
+
+			local bufnr = args.buf
+			local client = vim.lsp.get_client_by_id(args.data.client_id)
+			require("lsp-inlayhints").on_attach(client, bufnr)
+		end,
+	})
 end)
