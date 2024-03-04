@@ -2,7 +2,8 @@
 --
 
 -- Set folding to indent, start all unfolded
-vim.opt.foldmethod = 'indent'
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.opt.foldenable = false
 
 vim.opt.relativenumber = true
