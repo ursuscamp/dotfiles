@@ -5,6 +5,8 @@ MiniDeps.add({
 
 MiniDeps.add('Mofiqul/dracula.nvim')
 
+MiniDeps.add('EdenEast/nightfox.nvim')
+
 MiniDeps.now(function()
-	vim.cmd.colorscheme "dracula"
+	vim.cmd.colorscheme "nightfox"
 end)
