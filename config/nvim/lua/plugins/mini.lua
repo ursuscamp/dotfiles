@@ -54,6 +54,8 @@ MiniDeps.now(function()
 end)
 
 MiniDeps.later(function()
+	require('mini.cursorword').setup()
+
 	require('mini.ai').setup()
 
 	require('mini.bufremove').setup()
@@ -81,6 +83,23 @@ MiniDeps.later(function()
 		}
 	})
 	vim.ui.select = MiniPick.ui_select
+
+	require('mini.bracketed').setup({
+		buffer     = { suffix = '', options = {} },
+		comment    = { suffix = 'c', options = {} },
+		conflict   = { suffix = 'x', options = {} },
+		diagnostic = { suffix = 'd', options = {} },
+		file       = { suffix = '', options = {} },
+		indent     = { suffix = '', options = {} },
+		jump       = { suffix = '', options = {} },
+		location   = { suffix = '', options = {} },
+		oldfile    = { suffix = '', options = {} },
+		quickfix   = { suffix = 'q', options = {} },
+		treesitter = { suffix = 't', options = {} },
+		undo       = { suffix = '', options = {} },
+		window     = { suffix = '', options = {} },
+		yank       = { suffix = '', options = {} },
+	})
 
 	local miniclue = require('mini.clue')
 	miniclue.setup({
