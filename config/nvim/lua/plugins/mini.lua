@@ -144,6 +144,10 @@ MiniDeps.later(function()
 			{ mode = 'x', keys = ']' },
 			{ mode = 'n', keys = '[' },
 			{ mode = 'x', keys = '[' },
+
+			-- Surround
+			{ mode = 'n', keys = 's' },
+			{ mode = 'x', keys = 's' },
 		},
 
 		clues = {
