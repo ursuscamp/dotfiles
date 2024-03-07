@@ -12,36 +12,40 @@ end
 
 local nowkeys = {
 	-- Some basics
-	{ '<C-q>',      '<cmd>qa!<CR>',             'Quit all (w/o saving)' },
-	{ '<leader>q',  '<cmd>q<CR>',               'Quit window' },
-	{ '<leader>w',  '<cmd>w<CR>',               'Write buffer' },
-	{ '<Esc>',      '<cmd>nohlsearch<CR>',      nil },
+	{ '<C-q>',      '<cmd>qa!<CR>',                 'Quit all (w/o saving)' },
+	{ '<leader>q',  '<cmd>q<CR>',                   'Quit window' },
+	{ '<leader>w',  '<cmd>w<CR>',                   'Write buffer' },
+	{ '<Esc>',      '<cmd>nohlsearch<CR>',          nil },
 
 	-- Windows
-	{ '<C-h>',      '<C-w><C-h>',               nil },
-	{ '<C-j>',      '<C-w><C-j>',               nil },
-	{ '<C-k>',      '<C-w><C-k>',               nil },
-	{ '<C-l>',      '<C-w><C-l>',               nil },
+	{ '<C-h>',      '<C-w><C-h>',                   nil },
+	{ '<C-j>',      '<C-w><C-j>',                   nil },
+	{ '<C-k>',      '<C-w><C-k>',                   nil },
+	{ '<C-l>',      '<C-w><C-l>',                   nil },
 
 	-- Buffers
-	{ '<leader>bs', util.save_session,          'Save session with default name' },
-	{ '<leader>bS', MiniSessions.select,        'Pick session' },
-	{ '<leader>bv', '<cmd>vsplit<CR>',          'Split vertically' },
-	{ '<leader>bh', '<cmd>split<CR>',           'Split horizontally' },
+	{ '<leader>bs', util.save_session,              'Save session with default name' },
+	{ '<leader>bS', MiniSessions.select,            'Pick session' },
+	{ '<leader>bv', '<cmd>vsplit<CR>',              'Split vertically' },
+	{ '<leader>bh', '<cmd>split<CR>',               'Split horizontally' },
+	{ ']b',         '<cmd>BufferLineCycleNext<CR>', 'Next buffer' },
+	{ '[b',         '<cmd>BufferLineCyclePrev<CR>', 'Previous buffer' },
+	{ '>b',         '<cmd>BufferLineMoveNext<CR>',  'Move buffer right' },
+	{ '<b',         '<cmd>BufferLineMovePrev<CR>',  'Move buffer left' },
 
 	-- Movement
-	{ '[d',         vim.diagnostic.goto_prev,   "Previous diagnostic" },
-	{ ']d',         vim.diagnostic.goto_next,   "Next diagnostic" },
-	{ '<leader>lf', vim.lsp.buf.format,         "Format buffer" },
-	{ 'gD',         vim.lsp.buf.declaration,    "Goto declaration" },
-	{ 'gd',         vim.lsp.buf.definition,     "Goto definition" },
-	{ 'ga',         vim.lsp.buf.code_action,    "Code actions" },
-	{ 'gI',         vim.lsp.buf.implementation, "Goto implementation" },
-	{ 'gr',         vim.lsp.buf.rename,         "Rename symbole" },
-	{ 'K',          vim.lsp.buf.hover,          "Hover definition" },
+	{ '[d',         vim.diagnostic.goto_prev,       "Previous diagnostic" },
+	{ ']d',         vim.diagnostic.goto_next,       "Next diagnostic" },
+	{ '<leader>lf', vim.lsp.buf.format,             "Format buffer" },
+	{ 'gD',         vim.lsp.buf.declaration,        "Goto declaration" },
+	{ 'gd',         vim.lsp.buf.definition,         "Goto definition" },
+	{ 'ga',         vim.lsp.buf.code_action,        "Code actions" },
+	{ 'gI',         vim.lsp.buf.implementation,     "Goto implementation" },
+	{ 'gr',         vim.lsp.buf.rename,             "Rename symbole" },
+	{ 'K',          vim.lsp.buf.hover,              "Hover definition" },
 
 	-- Git
-	{ '<leader>gg', '<cmd>LazyGit<CR>',         'LazyGit' },
+	{ '<leader>gg', '<cmd>LazyGit<CR>',             'LazyGit' },
 }
 
 map_keys(nowkeys)
@@ -50,6 +54,7 @@ map_keys(nowkeys)
 MiniDeps.later(function()
 	local laterkeys = {
 		{ '<leader>c',  MiniBufremove.delete,               "Close buffer" },
+		{ '<leader>C',  '<cmd>BufferLineCloseOther<CR>',    "Close other buffers" },
 		{ '<leader>e',  MiniFiles.open,                     "Explore files" },
 
 		-- -- Basic pickers

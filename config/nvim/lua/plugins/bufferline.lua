@@ -8,12 +8,8 @@ MiniDeps.now(function()
 			offsets = {
 				{ filetype = "neo-tree" },
 			},
+			diagnostics = "nvim_lsp",
 
 		},
 	})
 end)
-
-vim.keymap.set('n', ']b', '<cmd>BufferLineCycleNext<CR>', { desc = "Next buffer" })
-vim.keymap.set('n', '[b', '<cmd>BufferLineCyclePrev<CR>', { desc = "Previous buffer" })
-vim.keymap.set('n', '>b', '<cmd>BufferLineMoveNext<CR>', { desc = "Move buffer right" })
-vim.keymap.set('n', '<b', '<cmd>BufferLineMovePrev<CR>', { desc = "Move buffer left" })
