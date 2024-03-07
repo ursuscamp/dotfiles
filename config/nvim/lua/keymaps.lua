@@ -70,8 +70,8 @@ MiniDeps.later(function()
 		{ '<leader>fs', MiniSessions.select,                "Open a session" },
 
 		-- -- LSP pickers
-		{ '<leader>ld', util.lsppicker("declaration"),      "Symbol declarations" },
-		{ '<leader>lD', util.lsppicker("definition"),       "Symbol declarations" },
+		{ '<leader>lD', util.lsppicker("declaration"),      "Symbol declarations" },
+		{ '<leader>ld', util.lsppicker("definition"),       "Symbol declarations" },
 		{ '<leader>ls', util.lsppicker("document_symbol"),  "Symbol in document" },
 		{ '<leader>lS', util.lsppicker("workspace_symbol"), "Symbol in workspace" },
 		{ '<leader>li', util.lsppicker("implementation"),   "Symbol implementation" },
