@@ -68,6 +68,7 @@ MiniDeps.later(function()
 		{ '<leader>fd', util.buff_diagnostics,              "Find buffer diagnostics" },
 		{ '<leader>fD', MiniExtra.pickers.diagnostic,       "Find all diagnostics" },
 		{ '<leader>fs', MiniSessions.select,                "Open a session" },
+		{ '<leader>fr', MiniExtra.pickers.registers,        "Registers" },
 
 		-- -- LSP pickers
 		{ '<leader>lD', util.lsppicker("declaration"),      "Symbol declarations" },
@@ -84,6 +85,6 @@ MiniDeps.later(function()
 	-- Flash
 	vim.keymap.set({ 'n', 's', 'x' }, '<CR>', function() require('flash').jump() end,
 		{ desc = "Flash jump", noremap = true })
-	vim.keymap.set({ 'n', 's', 'x' }, '<C-]>', function() require('flash').treesitter() end,
+	vim.keymap.set({ 'n', 's', 'x' }, '<S-Enter>', function() require('flash').treesitter() end,
 		{ desc = "Flash jump", noremap = true })
 end)
