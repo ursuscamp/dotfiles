@@ -27,3 +27,9 @@ vim.diagnostic.config({
 		border = "rounded"
 	}
 })
+
+vim.filetype.add({
+	pattern = {
+		[".*.jinja"] = "html",
+	}
+})
