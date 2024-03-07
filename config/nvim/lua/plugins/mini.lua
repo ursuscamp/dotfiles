@@ -20,7 +20,7 @@ MiniDeps.now(function()
 
 	require('mini.indentscope').setup({
 		draw = {
-			animation = function(s, n)
+			animation = function()
 				return 2
 			end,
 		}

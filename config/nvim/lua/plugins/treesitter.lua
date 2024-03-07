@@ -5,6 +5,8 @@ MiniDeps.add({
 	}
 })
 
+MiniDeps.add('nvim-treesitter/nvim-treesitter-context')
+
 MiniDeps.later(function()
 	require('nvim-treesitter.configs').setup({
 		ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "rust", "ruby", "html", "javascript", "typescript" },
@@ -16,4 +18,6 @@ MiniDeps.later(function()
 			enable = true,
 		}
 	})
+
+	require('treesitter-context').setup()
 end)
