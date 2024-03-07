@@ -28,8 +28,20 @@ vim.diagnostic.config({
 	}
 })
 
+-- Read jinja files as html for syntax highlight purposes
 vim.filetype.add({
 	pattern = {
 		[".*.jinja"] = "html",
 	}
+})
+
+-- Outputing OSC 7 whenever the directory is changed.
+-- This way wezterm will detect when the nvim directory is changed and the next terminal split
+-- will open in the current directory.
+vim.api.nvim_create_augroup("OSC7", { clear = true });
+vim.api.nvim_create_autocmd({ 'DirChanged', 'BufEnter', 'SessionLoadPost' }, {
+	pattern = { '*' },
+	callback = function()
+		io.write("\027]7;file://" .. vim.fn.getcwd() .. "\027\\")
+	end
 })
