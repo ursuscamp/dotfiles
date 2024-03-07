@@ -19,6 +19,7 @@ MiniDeps.now(function()
 	require('mini.statusline').setup()
 
 	require('mini.indentscope').setup({
+		symbol = '│',
 		draw = {
 			animation = function()
 				return 2
