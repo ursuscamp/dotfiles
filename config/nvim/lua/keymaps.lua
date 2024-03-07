@@ -46,6 +46,10 @@ local nowkeys = {
 
 	-- Git
 	{ '<leader>gg', '<cmd>LazyGit<CR>',             'LazyGit' },
+	{ '<leader>gb', function()
+		require('gitsigns').blame_line({ full = true })
+	end, 'Git blame' },
+	{ '<leader>gB', require('gitsigns').toggle_current_line_blame, 'Toggle line blame' },
 }
 
 map_keys(nowkeys)
