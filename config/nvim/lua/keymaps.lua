@@ -32,6 +32,8 @@ local nowkeys = {
 	{ '[b',         '<cmd>BufferLineCyclePrev<CR>', 'Previous buffer' },
 	{ '>b',         '<cmd>BufferLineMoveNext<CR>',  'Move buffer right' },
 	{ '<b',         '<cmd>BufferLineMovePrev<CR>',  'Move buffer left' },
+	{ '<C-n>',      '<cmd>BufferLineCycleNext<CR>', 'Next buffer' },
+	{ '<C-p>',      '<cmd>BufferLineCyclePrev<CR>', 'Previous buffer' },
 
 	-- Movement
 	{ '[d',         vim.diagnostic.goto_prev,       "Previous diagnostic" },
