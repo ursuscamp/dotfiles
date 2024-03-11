@@ -45,3 +45,11 @@ vim.api.nvim_create_autocmd({ 'DirChanged', 'BufEnter', 'SessionLoadPost' }, {
 		io.write("\027]7;file://" .. vim.fn.getcwd() .. "\027\\")
 	end
 })
+
+-- After laoding a session, set the tab title
+vim.api.nvim_create_autocmd({ 'SessionLoadPost' }, {
+	pattern = { '*' },
+	callback = function()
+		vim.fn.system({ 'wezterm', 'cli', 'set-tab-title', vim.fn.getcwd() })
+	end
+})
