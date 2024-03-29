@@ -10,6 +10,8 @@ local function map_keys(k)
 	end
 end
 
+local builtin = require('telescope.builtin')
+
 local nowkeys = {
 	-- Some basics
 	{ '<C-q>',      '<cmd>qa!<CR>',                 'Quit all (w/o saving)' },
@@ -40,9 +42,9 @@ local nowkeys = {
 	{ ']d',         vim.diagnostic.goto_next,       "Next diagnostic" },
 	{ '<leader>lf', vim.lsp.buf.format,             "Format buffer" },
 	{ 'gD',         vim.lsp.buf.declaration,        "Goto declaration" },
-	{ 'gd',         vim.lsp.buf.definition,         "Goto definition" },
+	{ 'gd',         builtin.lsp_definitions,        "Goto definition" },
 	{ 'ga',         vim.lsp.buf.code_action,        "Code actions" },
-	{ 'gI',         vim.lsp.buf.implementation,     "Goto implementation" },
+	{ 'gI',         builtin.lsp_implementations,    "Goto implementation" },
 	{ 'gr',         vim.lsp.buf.rename,             "Rename symbole" },
 	{ 'K',          vim.lsp.buf.hover,              "Hover definition" },
 
@@ -59,31 +61,43 @@ map_keys(nowkeys)
 -- Due to plugin lazy loading, these must be set later
 MiniDeps.later(function()
 	local laterkeys = {
-		{ '<leader>c',  MiniBufremove.delete,               "Close buffer" },
-		{ '<leader>C',  '<cmd>BufferLineCloseOther<CR>',    "Close other buffers" },
-		{ '<leader>e',  MiniFiles.open,                     "Explore files" },
+		{ '<leader>c',  MiniBufremove.delete,                 "Close buffer" },
+		{ '<leader>C',  '<cmd>BufferLineCloseOther<CR>',      "Close other buffers" },
+		{ '<leader>e',  MiniFiles.open,                       "Explore files" },
 
 		-- -- Basic pickers
-		{ '<leader>ff', MiniPick.builtin.files,             "Find files" },
-		{ '<leader>fg', MiniPick.builtin.grep_live,         "Live grep" },
-		{ '<leader>fG', '<cmd>Pick files tool=git<CR>',     "Find in git" },
-		{ '<leader>fh', MiniPick.builtin.help,              "Find help" },
-		{ '<leader>fb', MiniPick.builtin.buffers,           "Find open buffers" },
-		{ '<leader>fk', MiniExtra.pickers.keymaps,          "Find keymaps" },
-		{ '<leader>fo', MiniExtra.pickers.oldfiles,         "Find recent files" },
-		{ '<leader>fd', util.buff_diagnostics,              "Find buffer diagnostics" },
-		{ '<leader>fD', MiniExtra.pickers.diagnostic,       "Find all diagnostics" },
-		{ '<leader>fs', MiniSessions.select,                "Open a session" },
-		{ '<leader>fr', MiniExtra.pickers.registers,        "Registers" },
+		{ '<leader>ff', builtin.find_files,                   "Find files" },
+		{ '<leader>fg', builtin.live_grep,                    "Live grep" },
+		{ '<leader>fG', builtin.git_files,                    "Find in git" },
+		{ '<leader>fh', builtin.help_tags,                    "Find help" },
+		{ '<leader>fb', builtin.buffers,                      "Find open buffers" },
+		{ '<leader>fk', builtin.keymaps,                      "Find keymaps" },
+		{ '<leader>fo', builtin.oldfiles,                     "Find recent files" },
+		{ '<leader>fd', ':Telescope diagnostics bufnr=0<CR>', "Find buffer diagnostics" },
+		{ '<leader>fD', builtin.diagnostics,                  "Find all diagnostics" },
+		{ '<leader>fs', MiniSessions.select,                  "Open a session" },
+		{ '<leader>fr', builtin.registers,                    "Registers" },
+		{ '<leader>fy', builtin.filetypes,                    "File types" },
+		-- { '<leader>ff', MiniPick.builtin.files,             "Find files" },
+		-- { '<leader>fg', MiniPick.builtin.grep_live,         "Live grep" },
+		-- { '<leader>fG', '<cmd>Pick files tool=git<CR>',     "Find in git" },
+		-- { '<leader>fh', MiniPick.builtin.help,              "Find help" },
+		-- { '<leader>fb', MiniPick.builtin.buffers,           "Find open buffers" },
+		-- { '<leader>fk', MiniExtra.pickers.keymaps,          "Find keymaps" },
+		-- { '<leader>fo', MiniExtra.pickers.oldfiles,         "Find recent files" },
+		-- { '<leader>fd', util.buff_diagnostics,              "Find buffer diagnostics" },
+		-- { '<leader>fD', MiniExtra.pickers.diagnostic,       "Find all diagnostics" },
+		-- { '<leader>fs', MiniSessions.select,                "Open a session" },
+		-- { '<leader>fr', MiniExtra.pickers.registers,        "Registers" },
 
 		-- -- LSP pickers
-		{ '<leader>lD', util.lsppicker("declaration"),      "Symbol declarations" },
-		{ '<leader>ld', util.lsppicker("definition"),       "Symbol declarations" },
-		{ '<leader>ls', util.lsppicker("document_symbol"),  "Symbol in document" },
-		{ '<leader>lS', util.lsppicker("workspace_symbol"), "Symbol in workspace" },
-		{ '<leader>li', util.lsppicker("implementation"),   "Symbol implementation" },
-		{ '<leader>lr', util.lsppicker("references"),       "Symbol references" },
-		{ '<leader>lt', util.lsppicker("type_definition"),  "Symbol type definition" },
+		-- { '<leader>lD', util.lsppicker("declaration"),        "Symbol declarations" },
+		{ '<leader>ld', builtin.lsp_definitions,              "Symbol declarations" },
+		{ '<leader>ls', builtin.lsp_document_symbols,         "Symbol in document" },
+		{ '<leader>lS', builtin.lsp_workspace_symbols,        "Symbol in workspace" },
+		{ '<leader>li', builtin.lsp_implementations,          "Symbol implementation" },
+		{ '<leader>lr', builtin.lsp_references,               "Symbol references" },
+		{ '<leader>lt', builtin.lsp_type_definitions,         "Symbol type definition" },
 	}
 
 	map_keys(laterkeys)

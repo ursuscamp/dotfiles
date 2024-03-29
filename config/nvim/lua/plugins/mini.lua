@@ -77,13 +77,13 @@ MiniDeps.later(function()
 
 	require('mini.extra').setup()
 
-	require('mini.pick').setup({
-		mappings = {
-			choose_marked = '<C-S-CR>',
-			choose = '<C-y>'
-		}
-	})
-	vim.ui.select = MiniPick.ui_select
+	-- require('mini.pick').setup({
+	-- 	mappings = {
+	-- 		choose_marked = '<C-S-CR>',
+	-- 		choose = '<C-y>'
+	-- 	}
+	-- })
+	-- vim.ui.select = MiniPick.ui_select
 
 	require('mini.bracketed').setup({
 		buffer     = { suffix = '', options = {} },

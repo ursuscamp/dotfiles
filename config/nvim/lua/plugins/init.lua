@@ -1,5 +1,6 @@
 require('plugins.colors')
 require('plugins.gitsigns')
+require('plugins.telescope')
 require('plugins.mini')
 require('plugins.treesitter')
 require('plugins.cmp')
