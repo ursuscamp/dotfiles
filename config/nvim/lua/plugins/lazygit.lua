@@ -1,4 +1,4 @@
-MiniDeps.add({
-	source = 'kdheepak/lazygit.nvim',
-	depends = { 'nvim-lua/plenary.nvim' }
-})
+return { {
+	'kdheepak/lazygit.nvim',
+	dependencies = { 'nvim-lua/plenary.nvim' }
+} }

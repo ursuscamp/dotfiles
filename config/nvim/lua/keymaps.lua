@@ -26,8 +26,6 @@ local nowkeys = {
 	{ '<C-l>',      '<C-w><C-l>',                   nil },
 
 	-- Buffers
-	{ '<leader>bs', util.save_session,              'Save session with default name' },
-	{ '<leader>bS', MiniSessions.select,            'Pick session' },
 	{ '<leader>bv', '<cmd>vsplit<CR>',              'Split vertically' },
 	{ '<leader>bh', '<cmd>split<CR>',               'Split horizontally' },
 	{ ']b',         '<cmd>BufferLineCycleNext<CR>', 'Next buffer' },
@@ -59,52 +57,37 @@ local nowkeys = {
 map_keys(nowkeys)
 
 -- Due to plugin lazy loading, these must be set later
-MiniDeps.later(function()
-	local laterkeys = {
-		{ '<leader>c',  MiniBufremove.delete,                 "Close buffer" },
-		{ '<leader>C',  '<cmd>BufferLineCloseOther<CR>',      "Close other buffers" },
-		{ '<leader>e',  MiniFiles.open,                       "Explore files" },
+local laterkeys = {
+	{ '<leader>c',  MiniBufremove.delete,                 "Close buffer" },
+	{ '<leader>C',  '<cmd>BufferLineCloseOther<CR>',      "Close other buffers" },
+	{ '<leader>e',  MiniFiles.open,                       "Explore files" },
 
-		-- -- Basic pickers
-		{ '<leader>ff', builtin.find_files,                   "Find files" },
-		{ '<leader>fg', builtin.live_grep,                    "Live grep" },
-		{ '<leader>fG', builtin.git_files,                    "Find in git" },
-		{ '<leader>fh', builtin.help_tags,                    "Find help" },
-		{ '<leader>fb', builtin.buffers,                      "Find open buffers" },
-		{ '<leader>fk', builtin.keymaps,                      "Find keymaps" },
-		{ '<leader>fo', builtin.oldfiles,                     "Find recent files" },
-		{ '<leader>fd', ':Telescope diagnostics bufnr=0<CR>', "Find buffer diagnostics" },
-		{ '<leader>fD', builtin.diagnostics,                  "Find all diagnostics" },
-		{ '<leader>fs', MiniSessions.select,                  "Open a session" },
-		{ '<leader>fr', builtin.registers,                    "Registers" },
-		{ '<leader>fy', builtin.filetypes,                    "File types" },
-		-- { '<leader>ff', MiniPick.builtin.files,             "Find files" },
-		-- { '<leader>fg', MiniPick.builtin.grep_live,         "Live grep" },
-		-- { '<leader>fG', '<cmd>Pick files tool=git<CR>',     "Find in git" },
-		-- { '<leader>fh', MiniPick.builtin.help,              "Find help" },
-		-- { '<leader>fb', MiniPick.builtin.buffers,           "Find open buffers" },
-		-- { '<leader>fk', MiniExtra.pickers.keymaps,          "Find keymaps" },
-		-- { '<leader>fo', MiniExtra.pickers.oldfiles,         "Find recent files" },
-		-- { '<leader>fd', util.buff_diagnostics,              "Find buffer diagnostics" },
-		-- { '<leader>fD', MiniExtra.pickers.diagnostic,       "Find all diagnostics" },
-		-- { '<leader>fs', MiniSessions.select,                "Open a session" },
-		-- { '<leader>fr', MiniExtra.pickers.registers,        "Registers" },
+	-- -- Basic pickers
+	{ '<leader>ff', builtin.find_files,                   "Find files" },
+	{ '<leader>fg', builtin.live_grep,                    "Live grep" },
+	{ '<leader>fG', builtin.git_files,                    "Find in git" },
+	{ '<leader>fh', builtin.help_tags,                    "Find help" },
+	{ '<leader>fb', builtin.buffers,                      "Find open buffers" },
+	{ '<leader>fk', builtin.keymaps,                      "Find keymaps" },
+	{ '<leader>fo', builtin.oldfiles,                     "Find recent files" },
+	{ '<leader>fd', ':Telescope diagnostics bufnr=0<CR>', "Find buffer diagnostics" },
+	{ '<leader>fD', builtin.diagnostics,                  "Find all diagnostics" },
+	{ '<leader>fr', builtin.registers,                    "Registers" },
+	{ '<leader>fy', builtin.filetypes,                    "File types" },
 
-		-- -- LSP pickers
-		-- { '<leader>lD', util.lsppicker("declaration"),        "Symbol declarations" },
-		{ '<leader>ld', builtin.lsp_definitions,              "Symbol declarations" },
-		{ '<leader>ls', builtin.lsp_document_symbols,         "Symbol in document" },
-		{ '<leader>lS', builtin.lsp_workspace_symbols,        "Symbol in workspace" },
-		{ '<leader>li', builtin.lsp_implementations,          "Symbol implementation" },
-		{ '<leader>lr', builtin.lsp_references,               "Symbol references" },
-		{ '<leader>lt', builtin.lsp_type_definitions,         "Symbol type definition" },
-	}
+	-- -- LSP pickers
+	{ '<leader>ld', builtin.lsp_definitions,              "Symbol declarations" },
+	{ '<leader>ls', builtin.lsp_document_symbols,         "Symbol in document" },
+	{ '<leader>lS', builtin.lsp_workspace_symbols,        "Symbol in workspace" },
+	{ '<leader>li', builtin.lsp_implementations,          "Symbol implementation" },
+	{ '<leader>lr', builtin.lsp_references,               "Symbol references" },
+	{ '<leader>lt', builtin.lsp_type_definitions,         "Symbol type definition" },
+}
 
-	map_keys(laterkeys)
+map_keys(laterkeys)
 
-	-- Flash
-	vim.keymap.set({ 'n', 's', 'x' }, '<CR>', function() require('flash').jump() end,
-		{ desc = "Flash jump", noremap = true })
-	vim.keymap.set({ 'n', 's', 'x' }, '<S-Enter>', function() require('flash').treesitter() end,
-		{ desc = "Flash jump", noremap = true })
-end)
+-- Flash
+vim.keymap.set({ 'n', 's', 'x' }, '<CR>', function() require('flash').jump() end,
+	{ desc = "Flash jump", noremap = true })
+vim.keymap.set({ 'n', 's', 'x' }, '<S-Enter>', function() require('flash').treesitter() end,
+	{ desc = "Flash jump", noremap = true })
