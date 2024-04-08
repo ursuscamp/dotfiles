@@ -7,7 +7,8 @@ return {
 			{
 				'nvim-telescope/telescope-fzf-native.nvim',
 				build = 'make',
-			}
+			},
+			'nvim-telescope/telescope-ui-select.nvim',
 		},
 		config = function()
 			require('telescope').setup({
@@ -27,6 +28,8 @@ return {
 					},
 				},
 			})
+
+			require('telescope').load_extension('ui-select')
 		end
 	}
 }
