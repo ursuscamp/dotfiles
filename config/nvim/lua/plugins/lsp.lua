@@ -45,6 +45,8 @@ return {
 					['<C-f>'] = cmp_action.luasnip_jump_forward(),
 					['<C-b>'] = cmp_action.luasnip_jump_backward(),
 					['<C-y>'] = cmp.mapping.confirm({ select = true }),
+					['<Tab>'] = cmp_action.luasnip_supertab(),
+					['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
 				}),
 				snippet = {
 					expand = function(args)
