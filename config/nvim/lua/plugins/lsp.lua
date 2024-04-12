@@ -1,3 +1,26 @@
+local MASON_TOOLS = {
+	-- LSP servers that will be installed and configured by mason-lspconfig
+	servers = {
+		lua_ls = {},
+		rust_analyzer = {
+			["rust-analyzer"] = {
+				checkOnSave = {
+					command = "clippy",
+				},
+			},
+		},
+		html = {},
+		tsserver = {},
+		marksman = {},
+		pyright = {},
+
+	},
+
+	-- Non-LSP tools that can be installed by mason
+	tools = {
+		"prettier",
+	}
+}
 return {
 	"williamboman/mason.nvim",
 	dependencies = {
@@ -17,39 +40,34 @@ return {
 		-- LSP
 		require('neodev').setup()
 
-		local servers = {
-			lua_ls = {},
-			rust_analyzer = {
-				["rust-analyzer"] = {
-					checkOnSave = {
-						command = "clippy",
-					},
-				},
-			},
-			html = {},
-			tsserver = {},
-			marksman = {},
-			pyright = {},
-		}
-
 		require('mason').setup()
 		require('mason-lspconfig').setup({
-			ensure_installed = vim.tbl_keys(servers),
+			ensure_installed = vim.tbl_keys(MASON_TOOLS["servers"]),
 		})
+
+		-- Install missing tools
+		for _, tool in ipairs(MASON_TOOLS["tools"]) do
+			if not require('mason-registry').is_installed(tool) then
+				vim.cmd('MasonInstall ' .. tool)
+			end
+		end
+
 
 		local ih = require('lsp-inlayhints')
 		ih.setup()
 		local lsp = require('lspconfig')
 		local capabilities = require('cmp_nvim_lsp').default_capabilities()
-		for server, config in pairs(servers) do
-			local c = {
-				on_attach = function(client, bufnr)
-					ih.on_attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-				settings = config,
-			}
-			lsp[server].setup(c)
+		for server, config in pairs(MASON_TOOLS["servers"]) do
+			if config ~= nil then
+				local c = {
+					on_attach = function(client, bufnr)
+						ih.on_attach(client, bufnr)
+					end,
+					capabilities = capabilities,
+					settings = config,
+				}
+				lsp[server].setup(c)
+			end
 		end
 
 		-- Completion
