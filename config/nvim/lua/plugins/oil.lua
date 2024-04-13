@@ -4,8 +4,8 @@ return {
 	config = function()
 		require('oil').setup({
 			keymaps = {
-				["h"] = "actions.parent",
-				["l"] = "actions.select",
+				-- ["h"] = "actions.parent",
+				-- ["l"] = "actions.select",
 			},
 		})
 

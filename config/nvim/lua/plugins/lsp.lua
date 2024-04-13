@@ -23,6 +23,7 @@ local MASON_TOOLS = {
 }
 return {
 	"williamboman/mason.nvim",
+	event = 'VeryLazy',
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
 		"neovim/nvim-lspconfig",
@@ -35,6 +36,7 @@ return {
 		'L3MON4D3/LuaSnip',
 		'saadparwaiz1/cmp_luasnip',
 		'lvimuser/lsp-inlayhints.nvim',
+		'rafamadriz/friendly-snippets',
 	},
 	config = function()
 		-- LSP
@@ -118,5 +120,8 @@ return {
 				{ name = 'buffer' },
 			})
 		})
+
+		-- Setup friendly-snippets
+		require("luasnip.loaders.from_vscode").lazy_load()
 	end
 }
