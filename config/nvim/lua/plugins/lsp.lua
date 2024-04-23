@@ -22,6 +22,7 @@ local MASON_TOOLS = {
 		"prettier",
 	}
 }
+
 return {
 	"williamboman/mason.nvim",
 	dependencies = {
