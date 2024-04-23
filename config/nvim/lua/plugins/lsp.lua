@@ -13,6 +13,7 @@ local MASON_TOOLS = {
 		tsserver = {},
 		marksman = {},
 		pyright = {},
+		vuels = {},
 
 	},
 
