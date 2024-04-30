@@ -6,12 +6,14 @@ return {
 		"antoinemadec/FixCursorHold.nvim",
 		"nvim-treesitter/nvim-treesitter",
 		"rouge8/neotest-rust",
+		"olimorris/neotest-rspec",
 	},
 	config = function()
 		local nt = require('neotest')
 		nt.setup({
 			adapters = {
-				require('neotest-rust')
+				require('neotest-rust'),
+				require('neotest-rspec'),
 			}
 		})
 

@@ -14,6 +14,7 @@ local MASON_TOOLS = {
 		marksman = {},
 		pyright = {},
 		vuels = {},
+		solargraph = {},
 
 	},
 
