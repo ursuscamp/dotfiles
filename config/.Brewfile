@@ -3,8 +3,6 @@ tap "homebrew/cask-versions"
 
 brew "awscli"
 brew "bat"
-brew "chezmoi"
-brew "direnv"
 brew "duf"
 brew "dust"
 brew "fd"
