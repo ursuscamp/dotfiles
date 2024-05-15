@@ -12,6 +12,7 @@ return {
 				rust = { "rustfmt" },
 				markdown = { "prettier" },
 				json = { "prettier" },
+				vue = { "prettier" },
 			},
 			format_on_save = {
 				-- These options will be passed to conform.format()
