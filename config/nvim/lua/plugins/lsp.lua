@@ -37,7 +37,7 @@ return {
 		'hrsh7th/nvim-cmp',
 		'L3MON4D3/LuaSnip',
 		'saadparwaiz1/cmp_luasnip',
-		'lvimuser/lsp-inlayhints.nvim',
+		-- 'lvimuser/lsp-inlayhints.nvim',
 		'rafamadriz/friendly-snippets',
 	},
 	config = function()
@@ -57,15 +57,14 @@ return {
 		end
 
 
-		local ih = require('lsp-inlayhints')
-		ih.setup()
+		vim.lsp.inlay_hint.enable()
 		local lsp = require('lspconfig')
 		local capabilities = require('cmp_nvim_lsp').default_capabilities()
 		for server, config in pairs(MASON_TOOLS["servers"]) do
 			if config ~= nil then
 				local c = {
 					on_attach = function(client, bufnr)
-						ih.on_attach(client, bufnr)
+						-- Inlay hints used to be here. Thanks nvim 0.10!
 					end,
 					capabilities = capabilities,
 					settings = config,
