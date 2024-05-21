@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PACKAGES="helix wezterm alacritty kitty zellij xplr fish nvim"
+PACKAGES="helix wezterm alacritty kitty zellij xplr fish nvim tmux"
 
 REPO=~/Dev/dotfiles
 DESTINATION=$HOME
@@ -22,3 +22,8 @@ done
 # Homebrew files
 ln -s $SOURCE/.Brewfile $DESTINATION
 ln -s $SOURCE/.Brewfile.lock.json $DESTINATION
+
+# Setup tmux plugin manager
+if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
