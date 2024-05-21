@@ -12,7 +12,7 @@ end
 -- config.color_scheme = "nightfox"
 config.color_scheme = "Tokyo Night"
 config.font = wezterm.font("JetBrains Mono")
-config.font_size = 14
+config.font_size = 13
 
 config.keys = {
 	{
