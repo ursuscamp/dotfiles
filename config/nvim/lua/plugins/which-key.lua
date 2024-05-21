@@ -8,9 +8,11 @@ return {
 	config = function()
 		require('which-key').register({
 			g = { name = 'Git' },
+			gc = { name = 'Github Copilot' },
 			l = { name = 'LSP' },
 			s = { name = 'Split' },
-			f = { name = 'Find' }
+			f = { name = 'Find' },
+			t = { name = 'Tests' },
 		}, { prefix = '<leader>' })
 	end
 }
