@@ -43,7 +43,8 @@ require("lazy").setup("plugins")
 -- KEYMAPS
 vim.keymap.set('n', '<leader>w', '<cmd>w<CR>', { desc = 'Write buffer' })
 vim.keymap.set('n', '<leader>q', '<cmd>q<CR>', { desc = 'Close window' })
-vim.keymap.set('n', '<leader>c', '<cmd>bdelete!<CR>', { desc = 'Close window' })
+vim.keymap.set('n', '<leader>c', '<cmd>bdelete!<CR>', { desc = 'Close buffer' })
+vim.keymap.set('n', '<leader>X', '<cmd>%bdelete!<CR>', { desc = 'Close all buffers' })
 vim.keymap.set('n', '<C-q>', '<cmd>qa!<CR>', { desc = 'Close Neovim' })
 vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Leave insert mode' })
 vim.keymap.set('n', '<leader>sv', '<cmd>vsplit<CR>', { desc = 'Split vertically' })
@@ -63,8 +64,3 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Goto next diagnost
 vim.keymap.set('n', '<leader>lh', function()
 	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { desc = "Toggle inlay hints" })
-
--- vim.keymap.set({ 'n', 'v' }, '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
--- vim.keymap.set({ 'n', 'v' }, '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
--- vim.keymap.set({ 'n', 'v' }, '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
--- vim.keymap.set({ 'n', 'v' }, '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
