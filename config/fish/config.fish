@@ -30,6 +30,10 @@ if status --is-interactive
 	    "Unleash the kraken." \
 	    "To infinity and beyond!" \
 	    "Ron Paul 2024" \
+	    "The cake is a lie." \
+	    "I'm sorry, Dave. I'm afraid I can't do that." \
+	    "I am Groot." \
+	    "There is no second best." \
 	    )
 	  # If figlet exists, show the message/quote in figlet.
 	  set_color green
