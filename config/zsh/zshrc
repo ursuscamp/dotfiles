@@ -1,31 +1,65 @@
 #### VARIABLES
 
-ZVM_VI_ESCAPE_BINDKEY=jk
+export AWS_CONFIG_FILE=$HOME/.aws/config-i2
+export KUBECONFIG=$HOME/.kube/config-eks
+export AWS_PROFILE=ah-nonprod-pmp@hd-pmp-developer
+export ZVM_VI_ESCAPE_BINDKEY=jk
+export EDITOR=nvim
+export VISUAL=nvim
+export ZSH_PLUGIN_ROOT=$HOME/.local/share/zsh/plugins
+export PATH=$HOME/bin:$PATH
+export FZF_DEFAULT_COMMAND="fd --type f"
+export FZF_DEFAULT_OPTS="--multi --bind ctrl-y:accept"
+export PGDATA=$HOME/.local/share/postgres
+AFTER_INIT_HAS_RUN=0
 
 ##### COMMAND INIT
+
+eval "$(starship init zsh)"
 
 # Run these commands after zsh-vim-mode init
 zvm_after_init ()
 {
-	eval "$(starship init zsh)"
 	eval "$(fzf --zsh)"
+	bindkey '^[[Z' reverse-menu-complete
 }
 
-##### SETTINGS
+##### COMPLETIONS
 
-bindkey -v
+fpath=($ZSH_PLUGIN_ROOT/zsh-completions/src $fpath)
+autoload -U compinit && compinit
+zstyle ':completion:*' menu select
 
 ##### ALIASES
 
 alias ls="lsd"
 alias lsl="lsd -larth"
+alias lg="lazygit"
+alias cat="bat"
+alias dotfiles="cd $HOME/Dev/dotfiles"
+alias kgp="kubectl get pods"
+alias ch="cd ~/Dev/pmpclear-webapp"
+alias aware="cd ~/Dev/pmpaware-webapp"
+alias kccc="kubectl config current-context"
+
+##### FUNCTIONS
+
+ap ()
+{
+	export AWS_PROFILE=$(aws configure list-profiles | sort | fzf)
+}
+
+ksc ()
+{
+	kubectl config use-context $(kubectl config get-contexts | awk '{print $1}' | fzf)
+}
 
 ##### PLUGINS
 
 load_plugin ()
 {
 	PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
-	PLUGIN_DIR=$HOME/.local/share/zsh/plugins/$PLUGIN_NAME
+	PLUGIN_DIR=$ZSH_PLUGIN_ROOT/$PLUGIN_NAME
 	if [[ ! -d $PLUGIN_DIR ]]; then
 		mkdir -p $PLUGIN_DIR
 		git clone https://www.github.com/$1.git $PLUGIN_DIR
@@ -33,6 +67,17 @@ load_plugin ()
 	source $PLUGIN_DIR/$PLUGIN_NAME.plugin.zsh
 }
 
+update_plugins ()
+{
+	for dir in $ZSH_PLUGIN_ROOT/*(N/); do
+		echo "Updating $dir..."
+		cd $dir && git pull
+	done
+	
+	
+}
+
+load_plugin "zsh-users/zsh-completions"
 load_plugin "jeffreytse/zsh-vi-mode"
 load_plugin "zsh-users/zsh-autosuggestions"
 load_plugin "zsh-users/zsh-syntax-highlighting"

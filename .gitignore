@@ -1,2 +1,3 @@
 config/tmux/plugins
 config/zsh/.zsh_history
+config/zsh/.zcompdump
