@@ -1,0 +1,38 @@
+#### VARIABLES
+
+ZVM_VI_ESCAPE_BINDKEY=jk
+
+##### COMMAND INIT
+
+# Run these commands after zsh-vim-mode init
+zvm_after_init ()
+{
+	eval "$(starship init zsh)"
+	eval "$(fzf --zsh)"
+}
+
+##### SETTINGS
+
+bindkey -v
+
+##### ALIASES
+
+alias ls="lsd"
+alias lsl="lsd -larth"
+
+##### PLUGINS
+
+load_plugin ()
+{
+	PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
+	PLUGIN_DIR=$HOME/.local/share/zsh/plugins/$PLUGIN_NAME
+	if [[ ! -d $PLUGIN_DIR ]]; then
+		mkdir -p $PLUGIN_DIR
+		git clone https://www.github.com/$1.git $PLUGIN_DIR
+	fi
+	source $PLUGIN_DIR/$PLUGIN_NAME.plugin.zsh
+}
+
+load_plugin "jeffreytse/zsh-vi-mode"
+load_plugin "zsh-users/zsh-autosuggestions"
+load_plugin "zsh-users/zsh-syntax-highlighting"
