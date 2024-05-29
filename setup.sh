@@ -28,8 +28,15 @@ if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
+# Zsh boilerplace and setup
+
 if ! grep -q ZDOTDIR ~/.zprofile
 then
 	echo "ZDOTDIR=\$HOME/.config/zsh" >> ~/.zprofile
 	echo "ZDOTDIR set in .zprofile"
+fi
+
+if [[ ! -f "$HOME/.config/zsh/envrc" ]]; then
+	touch $HOME/.config/zsh/envrc
+	echo "Put any private environment variables in the file $HOME/.config/zsh/envrc"
 fi
