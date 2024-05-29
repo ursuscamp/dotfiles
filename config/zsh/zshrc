@@ -16,6 +16,7 @@ AFTER_INIT_HAS_RUN=0
 ##### COMMAND INIT
 
 eval "$(starship init zsh)"
+eval "$(mise activate zsh)"
 
 # Run these commands after zsh-vim-mode init
 zvm_after_init ()
