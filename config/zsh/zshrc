@@ -22,6 +22,7 @@ zvm_after_init ()
 {
 	eval "$(fzf --zsh)"
 	bindkey '^[[Z' reverse-menu-complete
+	bindkey '^y' autosuggest-accept
 }
 
 ##### COMPLETIONS
