@@ -4,5 +4,6 @@ return {
 	cmd = { 'CodeSnap', 'CodeSnapSave', 'CodeSnapHighlight', 'CodeSnapSaveHighlight' },
 	opts = {
 		watermark = "",
+		save_path = "~/Downloads"
 	}
 }
