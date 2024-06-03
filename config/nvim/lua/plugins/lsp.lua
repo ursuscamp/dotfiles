@@ -24,6 +24,9 @@ local MASON_TOOLS = {
 	}
 }
 
+-- Border for hover
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+
 return {
 	"williamboman/mason.nvim",
 	dependencies = {
