@@ -1,5 +1,7 @@
 local t = function(c)
-	return ':Telescope ' .. c .. '<CR>'
+	return function()
+		return require('telescope.builtin')[c]()
+	end
 end
 
 return {
