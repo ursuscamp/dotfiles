@@ -1,5 +1,6 @@
 return {
 	"levouh/tint.nvim",
+	event = { "BufReadPost", "BufNewFile" },
 	config = function()
 		require('tint').setup({
 			tint = -80,

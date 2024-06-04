@@ -64,3 +64,4 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Goto next diagnost
 vim.keymap.set('n', '<leader>lh', function()
 	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { desc = "Toggle inlay hints" })
+vim.keymap.set('n', '<leader>L', '<cmd>Lazy<CR>', { desc = "Open Lazy dialog" })

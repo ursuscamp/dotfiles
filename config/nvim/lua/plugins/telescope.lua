@@ -1,3 +1,7 @@
+local t = function(c)
+	return ':Telescope ' .. c .. '<CR>'
+end
+
 return {
 	'nvim-telescope/telescope.nvim',
 	branch = '0.1.x',
@@ -6,7 +10,26 @@ return {
 		{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 		'benfowler/telescope-luasnip.nvim',
 	},
-	event = 'VeryLazy',
+	cmd = 'Telescope',
+	keys = {
+		{ '<leader>ff', t('find_files'),            desc = "Find files" },
+		{ '<leader>fg', t('live_grep'),             desc = "Live grep" },
+		{ '<leader>fb', t('buffers'),               desc = "Find buffers" },
+		{ '<leader>fh', t('help_tags'),             desc = "Find help" },
+		{ '<leader>fc', t('commands'),              desc = "Find commands" },
+		{ '<leader>fk', t('keymaps'),               desc = "Find keymaps" },
+		{ '<leader>fy', t('filetypes'),             desc = "Select filetype" },
+		{ '<leader>fs', t('luasnip'),               desc = "Find snippets" },
+
+		-- LSP
+		{ '<leader>lr', t('lsp_references'),        desc = "Find references under cursor" },
+		{ '<leader>ls', t('lsp_document_symbols'),  desc = "Find document symbols" },
+		{ '<leader>lS', t('lsp_workspace_symbols'), desc = "Find workspace symbols" },
+		{ '<leader>ld', t('diagnostics'),           desc = "Diagnostics" },
+		{ '<leader>li', t('lsp_implementations'),   desc = "Find implementations under cursor" },
+		{ '<leader>lD', t('lsp_definitions'),       desc = "Find definitions under cursor" },
+		{ '<leader>lt', t('lsp_type_definitions'),  desc = "Find type definition under cursor" },
+	},
 	config = function()
 		local telescope = require('telescope')
 		local actions = require('telescope.actions')
@@ -21,27 +44,5 @@ return {
 		})
 		telescope.load_extension('fzf')
 		telescope.load_extension('luasnip')
-		local builtin = require('telescope.builtin')
-
-		vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Find files" })
-		vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Live grep" })
-		vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Find buffers" })
-		vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "Find help" })
-		vim.keymap.set('n', '<leader>fc', builtin.commands, { desc = "Find commands" })
-		vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = "Find keymaps" })
-		vim.keymap.set('n', '<leader>fy', builtin.filetypes, { desc = "Select filetype" })
-		vim.keymap.set('n', '<leader>fs', '<cmd>Telescope luasnip<CR>', { desc = "Find snippets" })
-
-
-		-- LSP
-		vim.keymap.set('n', '<leader>lr', builtin.lsp_references, { desc = "Find references under cursor" })
-		vim.keymap.set('n', '<leader>ls', builtin.lsp_document_symbols, { desc = "Find document symbols" })
-		vim.keymap.set('n', '<leader>lS', builtin.lsp_workspace_symbols, { desc = "Find workspace symbols" })
-		vim.keymap.set('n', '<leader>ld', builtin.diagnostics, { desc = "Diagnostics" })
-		vim.keymap.set('n', '<leader>li', builtin.lsp_implementations,
-			{ desc = "Find implementations under cursor" })
-		vim.keymap.set('n', '<leader>lD', builtin.lsp_definitions, { desc = "Find definitions under cursor" })
-		vim.keymap.set('n', '<leader>lt', builtin.lsp_type_definitions,
-			{ desc = "Find type definition under cursor" })
 	end,
 }

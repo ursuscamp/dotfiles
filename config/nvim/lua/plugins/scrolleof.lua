@@ -1,6 +1,6 @@
 return {
 	'Aasim-A/scrollEOF.nvim',
-	event = 'VeryLazy',
+	event = { "BufReadPost", "BufNewFile" },
 	config = function()
 		require('scrollEOF').setup()
 	end
