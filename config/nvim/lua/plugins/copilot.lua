@@ -7,7 +7,15 @@ local config = {
 		{ "nvim-lua/plenary.nvim" },
 	},
 	config = function()
-		require("CopilotChat").setup()
+		require("CopilotChat").setup({
+			auto_insert_mode = true,
+			mappings = {
+				reset = {
+					normal = "<C-r>",
+					insert = "<C-r>",
+				}
+			},
+		})
 		vim.cmd(":Copilot enable")
 
 		vim.keymap.set({ 'n', 'v' }, '<leader>gcc', '<cmd>CopilotChatToggle<CR>',
