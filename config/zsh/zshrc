@@ -14,6 +14,11 @@ AFTER_INIT_HAS_RUN=0
 
 [[ -f $ZDOTDIR/envrc ]] && source $ZDOTDIR/envrc # Private environment variables can be loaded here.
 
+##### OPTS
+
+setopt histignorealldups
+
+
 ##### COMMAND INIT
 
 eval "$(starship init zsh)"
