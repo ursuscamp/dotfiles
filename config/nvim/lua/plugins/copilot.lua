@@ -13,7 +13,11 @@ local config = {
 				reset = {
 					normal = "<C-r>",
 					insert = "<C-r>",
-				}
+				},
+				complete = {
+					normal = "<C-g>",
+					insert = "<C-g>",
+				},
 			},
 		})
 		vim.cmd(":Copilot enable")
