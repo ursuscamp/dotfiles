@@ -2,16 +2,14 @@ local wezterm = require("wezterm")
 
 local config = {}
 
+local smart_splits = wezterm.plugin.require('https://github.com/mrjones2014/smart-splits.nvim')
+
 if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
--- config.color_scheme = "Catppuccin Macchiato"
--- config.color_scheme = "FarSide (terminal.sexy)"
--- config.color_scheme = "Dracula"
--- config.color_scheme = "nightfox"
 config.color_scheme = "Tokyo Night"
-config.font = wezterm.font("JetBrains Mono")
+config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 13
 
 config.keys = {
@@ -24,26 +22,6 @@ config.keys = {
 		key = "\\",
 		mods = "CTRL",
 		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		key = "h",
-		mods = "CTRL|SHIFT",
-		action = wezterm.action.ActivatePaneDirection("Left"),
-	},
-	{
-		key = "l",
-		mods = "CTRL|SHIFT",
-		action = wezterm.action.ActivatePaneDirection("Right"),
-	},
-	{
-		key = "j",
-		mods = "CTRL|SHIFT",
-		action = wezterm.action.ActivatePaneDirection("Down"),
-	},
-	{
-		key = "k",
-		mods = "CTRL|SHIFT",
-		action = wezterm.action.ActivatePaneDirection("Up"),
 	},
 	{
 		key = "w",
@@ -61,53 +39,12 @@ config.keys = {
 		action = wezterm.action.ClearScrollback("ScrollbackAndViewport"),
 	},
 	{
-		key = "h",
-		mods = "CTRL|ALT",
-		action = wezterm.action.AdjustPaneSize({ "Left", 5 }),
-	},
-	{
-		key = "l",
-		mods = "CTRL|ALT",
-		action = wezterm.action.AdjustPaneSize({ "Right", 5 }),
-	},
-	{
-		key = "j",
-		mods = "CTRL|ALT",
-		action = wezterm.action.AdjustPaneSize({ "Down", 5 }),
-	},
-	{
-		key = "k",
-		mods = "CTRL|ALT",
-		action = wezterm.action.AdjustPaneSize({ "Up", 5 }),
-	},
-	{
-		key = "G",
-		mods = "CTRL|SHIFT",
-		action = wezterm.action_callback(function(window, pane)
-			local cwd = pane:get_current_working_dir()
-			print("hello world")
-			print(cwd)
-			wezterm.mux.spawn_window({
-				width = 200,
-				height = 50,
-				args = { "lazygit" },
-				cwd = cwd.file_path,
-			})
-			-- wezterm.mux.spawn_window({
-			-- 	width = 100,
-			-- 	height = 100,
-			-- 	cwd = cwd,
-			-- 	args = { "lazygit" },
-			-- })
-		end)
-	},
-	{
-		key = "LeftArrow",
+		key = "H",
 		mods = "CTRL|SHIFT",
 		action = wezterm.action.MoveTabRelative(-1),
 	},
 	{
-		key = "RightArrow",
+		key = "L",
 		mods = "CTRL|SHIFT",
 		action = wezterm.action.MoveTabRelative(1),
 	},
@@ -126,6 +63,17 @@ config.set_environment_variables = {
 	PATH = "/opt/homebrew/bin:/usr/local/bin:" .. os.getenv("PATH"),
 }
 
-config.default_prog = { '/opt/homebrew/bin/fish', '-l' }
+smart_splits.apply_to_config(config, {
+	-- the default config is here, if you'd like to use the default keys,
+	-- you can omit this configuration table parameter and just use
+	-- smart_splits.apply_to_config(config)
+	-- directional keys to use in order of: left, down, up, right
+	direction_keys = { 'h', 'j', 'k', 'l' },
+	-- modifier keys to combine with direction_keys
+	modifiers = {
+		move = 'CTRL', -- modifier to use for pane movement, e.g. CTRL+h to move left
+		resize = 'META', -- modifier to use for pane resize, e.g. META+h to resize to the left
+	},
+})
 
 return config
