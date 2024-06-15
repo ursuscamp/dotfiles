@@ -2,7 +2,8 @@ local wezterm = require("wezterm")
 
 local config = {}
 
-local smart_splits = wezterm.plugin.require('https://github.com/mrjones2014/smart-splits.nvim')
+-- local smart_splits = wezterm.plugin.require('https://github.com/mrjones2014/smart-splits.nvim')
+local smart_splits = wezterm.plugin.require('https://github.com/ursuscamp/smart-splits.nvim')
 
 if wezterm.config_builder then
 	config = wezterm.config_builder()
@@ -64,6 +65,7 @@ config.set_environment_variables = {
 }
 
 smart_splits.apply_to_config(config, {
+	default_amount = 5,
 	-- the default config is here, if you'd like to use the default keys,
 	-- you can omit this configuration table parameter and just use
 	-- smart_splits.apply_to_config(config)

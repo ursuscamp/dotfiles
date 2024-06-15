@@ -1,7 +1,9 @@
 return {
 	'mrjones2014/smart-splits.nvim',
 	config = function()
-		require('smart-splits').setup()
+		require('smart-splits').setup({
+			default_amount = 5,
+		})
 
 		-- recommended mappings
 		-- resizing splits
