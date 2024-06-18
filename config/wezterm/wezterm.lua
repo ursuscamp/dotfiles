@@ -2,8 +2,7 @@ local wezterm = require("wezterm")
 
 local config = {}
 
--- local smart_splits = wezterm.plugin.require('https://github.com/mrjones2014/smart-splits.nvim')
-local smart_splits = wezterm.plugin.require('https://github.com/ursuscamp/smart-splits.nvim')
+local smart_splits = wezterm.plugin.require('https://github.com/mrjones2014/smart-splits.nvim')
 
 if wezterm.config_builder then
 	config = wezterm.config_builder()
@@ -48,22 +47,41 @@ config.keys = {
 		key = "L",
 		mods = "CTRL|SHIFT",
 		action = wezterm.action.MoveTabRelative(1),
-	}, {
-	key = 'E',
-	mods = 'CTRL|SHIFT',
-	action = wezterm.action.PromptInputLine {
-		description = 'Enter new name for tab',
-		action = wezterm.action_callback(function(window, _, line)
-			-- line will be `nil` if they hit escape without entering anything
-			-- An empty string if they just hit enter
-			-- Or the actual line of text they wrote
-			if line then
-				window:active_tab():set_title(line)
-			end
-		end),
 	},
-},
+	{
+		key = 'E',
+		mods = 'CTRL|SHIFT',
+		action = wezterm.action.PromptInputLine {
+			description = 'Enter new name for tab',
+			action = wezterm.action_callback(function(window, _, line)
+				-- line will be `nil` if they hit escape without entering anything
+				-- An empty string if they just hit enter
+				-- Or the actual line of text they wrote
+				if line then
+					window:active_tab():set_title(line)
+				end
+			end),
+		},
+	},
 }
+
+-- Tabs
+
+-- config.use_fancy_tab_bar = false
+config.hide_tab_bar_if_only_one_tab = true
+config.window_frame = {
+	font_size = 13
+}
+
+
+-- Background image stuff (disabled for now)
+
+-- config.window_background_image = '/Users/rbreen/Downloads/bg.jpg'
+-- config.window_background_image_hsb = {
+-- 	brightness = 0.1,
+-- }
+-- config.window_background_opacity = 0.6
+-- config.text_background_opacity = 0.9
 
 config.colors = {
 	quick_select_label_fg = { Color = "black" },
