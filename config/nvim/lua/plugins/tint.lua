@@ -3,7 +3,7 @@ return {
 	event = { "BufReadPost", "BufNewFile" },
 	config = function()
 		require('tint').setup({
-			tint = -80,
+			tint = -50,
 			saturation = 0.8,
 		})
 	end
