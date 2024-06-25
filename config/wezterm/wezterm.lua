@@ -76,12 +76,17 @@ config.window_frame = {
 
 -- Background image stuff (disabled for now)
 
--- config.window_background_image = '/Users/rbreen/Downloads/bg.jpg'
--- config.window_background_image_hsb = {
--- 	brightness = 0.1,
--- }
+config.window_background_image = wezterm.config_dir .. "/bg.jpg"
+config.window_background_image_hsb = {
+	brightness = 1,
+}
 -- config.window_background_opacity = 0.6
--- config.text_background_opacity = 0.9
+config.text_background_opacity = 0.9
+
+config.inactive_pane_hsb = {
+	-- saturation = 0.3,
+	brightness = 0.8,
+}
 
 config.colors = {
 	quick_select_label_fg = { Color = "black" },
