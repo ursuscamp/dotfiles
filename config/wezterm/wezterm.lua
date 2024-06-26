@@ -8,7 +8,8 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-config.color_scheme = "Tokyo Night"
+-- config.color_scheme = "Tokyo Night"
+config.color_scheme = "Dracula"
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 13
 
@@ -78,19 +79,19 @@ config.window_frame = {
 
 config.window_background_image = wezterm.config_dir .. "/bg.jpg"
 config.window_background_image_hsb = {
-	brightness = 1,
+	brightness = 0.5,
 }
 -- config.window_background_opacity = 0.6
 config.text_background_opacity = 0.9
 
 config.inactive_pane_hsb = {
 	-- saturation = 0.3,
-	brightness = 0.8,
+	brightness = 0.6,
 }
 
 config.colors = {
-	quick_select_label_fg = { Color = "black" },
-	quick_select_label_bg = { Color = "yellow" },
+	quick_select_label_fg = { Color = "white" },
+	quick_select_label_bg = { Color = "magenta" },
 }
 
 config.quick_select_patterns = {
