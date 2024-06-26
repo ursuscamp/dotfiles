@@ -10,6 +10,7 @@ export PATH=$HOME/bin:$PATH
 export FZF_DEFAULT_COMMAND="fd --type f"
 export FZF_DEFAULT_OPTS="--multi --bind ctrl-y:accept"
 export PGDATA=$HOME/.local/share/postgres
+export BATH_THEME=Dracula
 AFTER_INIT_HAS_RUN=0
 
 [[ -f $ZDOTDIR/envrc ]] && source $ZDOTDIR/envrc # Private environment variables can be loaded here.
