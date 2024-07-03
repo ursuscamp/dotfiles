@@ -13,6 +13,7 @@ return {
 			s = { name = 'Split' },
 			f = { name = 'Find' },
 			t = { name = 'Tests' },
+			x = { name = "Trouble lists" }
 		}, { prefix = '<leader>' })
 	end
 }
