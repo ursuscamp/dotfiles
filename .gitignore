@@ -3,3 +3,4 @@ config/zsh/.zsh_history
 config/zsh/.zcompdump
 config/zsh/envrc
 config/zsh/.zsh_sessions
+config/.DS_Store
