@@ -1,8 +1,14 @@
+local function open_cwd()
+	local oil = require('oil')
+	oil.open(vim.fn.getcwd())
+end
+
 return {
 	'stevearc/oil.nvim',
 	cmd = "Oil",
 	keys = {
-		{ '<leader>e', '<cmd>Oil --float<CR>', desc = "Open file explorer" },
+		{ '<leader>e', '<cmd>Oil --float<CR>', desc = "Open file explorer (buffer)" },
+		{ '<leader>E', open_cwd,               desc = "Open file explorer (cwd)" },
 	},
 	opts = {
 		default_file_explorer = true,
