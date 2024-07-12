@@ -20,6 +20,7 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 vim.opt.hlsearch = true
 vim.opt.termguicolors = true
+vim.opt.sessionoptions:remove('help')
 
 -- HIGHLIGHT YANKED TEXT
 vim.api.nvim_create_autocmd('TextYankPost', {
