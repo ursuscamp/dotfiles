@@ -18,6 +18,19 @@ return {
 			is_always_hidden = function(name, _)
 				return name == ".." or name == ".git"
 			end,
+		},
+		keymaps = {
+			["gy"] = {
+				"actions.yank_entry",
+				opts = {
+					modify = ":."
+				},
+				desc = "Yank relative path of file under cursor"
+			},
+			["gY"] = {
+				"actions.yank_entry",
+				desc = "Yank absolute path of file under cursor"
+			}
 		}
 	},
 }
