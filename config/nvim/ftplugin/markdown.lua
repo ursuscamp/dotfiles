@@ -15,10 +15,8 @@ local status, wk = pcall(require, 'which-key')
 if (not status) then
 	vim.keymap.set('n', '<leader>zc', checkbox, { desc = 'Mark/create checkbox', buffer = true })
 else
-	wk.register({
-		['<leader>z'] = {
-			name = 'Buffer/filetype-specific',
-			c = { checkbox, 'Mark/create checkbox' },
-		},
+	wk.add({
+		{ '<leader>z',  group = "Miscellaneous" },
+		{ '<leaxer>zc', checkbox,               desc = 'Mark/create checkbox' },
 	})
 end
