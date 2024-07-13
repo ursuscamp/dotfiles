@@ -68,6 +68,13 @@ config.keys = {
 		key = 'O',
 		mods = 'CTRL|SHIFT',
 		action = wezterm.action.EmitEvent 'trigger-vim-with-scrollback',
+	},
+	{
+		key = 'S',
+		mods = 'CTRL|SHIFT',
+		action = wezterm.action.PaneSelect {
+			mode = 'SwapWithActiveKeepFocus'
+		}
 	}
 }
 
