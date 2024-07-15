@@ -11,6 +11,10 @@ return {
 	end,
 	config = function()
 		require('which-key').setup({
+			preset = "modern",
+			win = {
+				width = { max = 0.5 }
+			},
 			spec = {
 				{ "<leader>f",  group = "Find" },
 				{ "<leader>g",  group = "Git" },
