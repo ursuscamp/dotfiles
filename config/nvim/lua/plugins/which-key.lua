@@ -11,13 +11,15 @@ return {
 	end,
 	config = function()
 		require('which-key').setup({
-			{ "<leader>f",  group = "Find" },
-			{ "<leader>g",  group = "Git" },
-			{ "<leader>gc", group = "Github Copilot" },
-			{ "<leader>l",  group = "LSP" },
-			{ "<leader>s",  group = "Split" },
-			{ "<leader>t",  group = "Tests" },
-			{ "<leader>x",  group = "Trouble lists" },
+			spec = {
+				{ "<leader>f",  group = "Find" },
+				{ "<leader>g",  group = "Git" },
+				{ "<leader>gc", group = "Github Copilot" },
+				{ "<leader>l",  group = "LSP" },
+				{ "<leader>s",  group = "Split" },
+				{ "<leader>t",  group = "Tests" },
+				{ "<leader>x",  group = "Trouble lists" },
+			}
 		})
 	end
 }
