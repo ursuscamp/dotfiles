@@ -1,9 +1,6 @@
 return {
 	'akinsho/bufferline.nvim',
-	-- Use branch instead of release since release seems broken in neovim 0.10
-	-- version = "*",
-	branch = "main",
-	-- event = "BufEnter",
+	version = "*",
 	event = { "BufReadPost", "BufNewFile" },
 	dependencies = {
 		'nvim-tree/nvim-web-devicons',
