@@ -13,6 +13,8 @@ config.color_scheme = "Dracula"
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 13
 
+config.scrollback_lines = 50000
+
 config.keys = {
 	{
 		key = "|",
