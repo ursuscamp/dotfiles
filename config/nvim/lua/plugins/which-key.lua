@@ -23,7 +23,7 @@ return {
 				{ "<leader>s",  group = "Split" },
 				{ "<leader>t",  group = "Tests" },
 				{ "<leader>x",  group = "Trouble lists" },
-				{ "<leader>z",  group = "Misc" },
+				{ "<leader>z",  group = "Miscellaneous" },
 			}
 		})
 	end
