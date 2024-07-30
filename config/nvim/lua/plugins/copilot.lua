@@ -20,6 +20,7 @@ local config = {
 				},
 			},
 		})
+		vim.g.copilot_filetypes = { markdown = false }
 		vim.cmd(":Copilot enable")
 
 		vim.keymap.set({ 'n', 'v' }, '<leader>gcc', '<cmd>CopilotChatToggle<CR>',
