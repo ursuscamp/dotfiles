@@ -82,12 +82,13 @@ config.keys = {
 
 -- Tabs
 
--- config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
+config.use_fancy_tab_bar = false
+config.tab_max_width = 30
+config.window_decorations = "RESIZE"
 config.window_frame = {
 	font_size = 13
 }
-
 
 -- Background image stuff (disabled for now)
 
@@ -151,15 +152,28 @@ local function tab_title(tab_info)
 end
 
 function on_format_tab_title(tab, _tabs, _panes, _config, _hover, _max_width)
-	local zoomed = ''
+	local zoomed_left = ''
+	local zoomed_right = ''
 	local index = tab.tab_index + 1
 	local title = tab_title(tab)
 	if tab.active_pane.is_zoomed then
-		zoomed = '   🔍'
+		zoomed_left = wezterm.nerdfonts.fa_angle_double_right
+		zoomed_right = wezterm.nerdfonts.fa_angle_double_left
 	end
-	return {
-		{ Text = string.format(' %d: %s%s ', index, title, zoomed) }
-	}
+	local format_items = {}
+
+	-- FormatItem: https://wezfurlong.org/wezterm/config/lua/wezterm/format.html
+	if tab.is_active then
+		table.insert(format_items, { Background = { Color = '#bd93f9' } })
+		table.insert(format_items, { Foreground = { Color = '#282a36' } })
+	else
+		table.insert(format_items, { Background = { Color = '#282a36' } })
+		table.insert(format_items, { Foreground = { Color = '#bd93f9' } })
+	end
+
+	-- it seems like the text must be inserted last
+	table.insert(format_items, { Text = string.format(' %s %d: %s %s ', zoomed_left, index, title, zoomed_right) })
+	return format_items
 end
 
 wezterm.on('format-tab-title', on_format_tab_title)
