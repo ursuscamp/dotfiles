@@ -90,14 +90,8 @@ config.window_frame = {
 	font_size = 13
 }
 
--- Background image stuff (disabled for now)
-
-config.window_background_image = wezterm.config_dir .. "/bg.jpg"
-config.window_background_image_hsb = {
-	brightness = 0.5,
-}
--- config.window_background_opacity = 0.6
-config.text_background_opacity = 0.9
+config.window_background_opacity = 0.8
+config.macos_window_background_blur = 50
 
 config.inactive_pane_hsb = {
 	-- saturation = 0.3,

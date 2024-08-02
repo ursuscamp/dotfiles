@@ -8,7 +8,13 @@ return {
 	config = function()
 		require('bufferline').setup({
 			options = {
-				separator_style = 'slant',
+				separator_style = { ' ', '' },
+				-- separator_style = 'slant',
+			},
+			highlights = {
+				buffer_selected = {
+					fg = require('dracula.palette').purple
+				},
 			},
 		})
 

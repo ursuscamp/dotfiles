@@ -40,6 +40,7 @@ return {
 				mappings = {
 					i = {
 						["<C-y>"] = actions.select_default,
+						["<Esc>"] = actions.close,
 					},
 				},
 			},
