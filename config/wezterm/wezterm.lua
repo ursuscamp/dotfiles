@@ -90,7 +90,7 @@ config.window_frame = {
 	font_size = 13
 }
 
-config.window_background_opacity = 0.8
+config.window_background_opacity = 0.80
 config.macos_window_background_blur = 50
 
 config.inactive_pane_hsb = {

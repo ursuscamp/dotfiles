@@ -13,7 +13,20 @@ return {
 			},
 			highlights = {
 				buffer_selected = {
-					fg = require('dracula.palette').purple
+					fg = require('dracula.palette').base04,
+					bg = require('dracula.palette').purple,
+				},
+				close_button_selected = {
+					fg = require('dracula.palette').base04,
+					bg = require('dracula.palette').purple,
+				},
+				background = {
+					fg = require('dracula.palette').purple,
+					bg = require('dracula.palette').base03
+				},
+				close_button = {
+					fg = require('dracula.palette').purple,
+					bg = require('dracula.palette').base03,
 				},
 			},
 		})
