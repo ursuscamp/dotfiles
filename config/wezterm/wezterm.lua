@@ -14,6 +14,7 @@ config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 13
 
 config.scrollback_lines = 50000
+config.enable_kitty_keyboard = true
 
 config.keys = {
 	{
