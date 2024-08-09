@@ -46,6 +46,7 @@ export FZF_DEFAULT_COMMAND="fd --type f"
 export FZF_DEFAULT_OPTS="--multi --bind ctrl-y:accept"
 export PGDATA=$HOME/.local/share/postgres
 export BATH_THEME=Dracula
+export MANPAGER='nvim +Man!'
 AFTER_INIT_HAS_RUN=0
 
 [[ -f $ZDOTDIR/envrc ]] && source $ZDOTDIR/envrc # Private environment variables can be loaded here.
