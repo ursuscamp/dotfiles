@@ -2,14 +2,19 @@ local wezterm = require("wezterm")
 
 local config = {}
 
-local smart_splits = wezterm.plugin.require('https://github.com/mrjones2014/smart-splits.nvim')
+local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
 
 if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
--- config.color_scheme = "Tokyo Night"
-config.color_scheme = "Dracula"
+-- Calculating some colors for use in various schemes
+local COLOR_SCHEME = "Dracula"
+local CALCULATED_BG_COLOR = wezterm.color.get_builtin_schemes()[COLOR_SCHEME].background
+local CALCULATED_FG_COLOR = wezterm.color.get_builtin_schemes()[COLOR_SCHEME].brights[5]
+local CALCULATED_HIGHLIGHT_COLOR = wezterm.color.get_builtin_schemes()[COLOR_SCHEME].brights[2]
+
+config.color_scheme = COLOR_SCHEME
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 13
 
@@ -43,20 +48,20 @@ config.keys = {
 		action = wezterm.action.ClearScrollback("ScrollbackAndViewport"),
 	},
 	{
-		key = "H",
+		key = "[",
 		mods = "CTRL|SHIFT",
 		action = wezterm.action.MoveTabRelative(-1),
 	},
 	{
-		key = "L",
+		key = "]",
 		mods = "CTRL|SHIFT",
 		action = wezterm.action.MoveTabRelative(1),
 	},
 	{
-		key = 'E',
-		mods = 'CTRL|SHIFT',
-		action = wezterm.action.PromptInputLine {
-			description = 'Enter new name for tab',
+		key = "E",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.PromptInputLine({
+			description = "Enter new name for tab",
 			action = wezterm.action_callback(function(window, _, line)
 				-- line will be `nil` if they hit escape without entering anything
 				-- An empty string if they just hit enter
@@ -65,20 +70,20 @@ config.keys = {
 					window:active_tab():set_title(line)
 				end
 			end),
-		},
+		}),
 	},
 	{
-		key = 'O',
-		mods = 'CTRL|SHIFT',
-		action = wezterm.action.EmitEvent 'trigger-vim-with-scrollback',
+		key = "O",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.EmitEvent("trigger-vim-with-scrollback"),
 	},
 	{
-		key = 'S',
-		mods = 'CTRL|SHIFT',
-		action = wezterm.action.PaneSelect {
-			mode = 'SwapWithActiveKeepFocus'
-		}
-	}
+		key = "S",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.PaneSelect({
+			mode = "SwapWithActiveKeepFocus",
+		}),
+	},
 }
 
 -- Tabs
@@ -88,7 +93,7 @@ config.use_fancy_tab_bar = false
 config.tab_max_width = 30
 config.window_decorations = "RESIZE"
 config.window_frame = {
-	font_size = 13
+	font_size = 13,
 }
 
 -- config.window_background_opacity = 0.80
@@ -101,7 +106,7 @@ config.inactive_pane_hsb = {
 
 config.colors = {
 	quick_select_label_fg = { Color = "white" },
-	quick_select_label_bg = { Color = "magenta" },
+	quick_select_label_bg = { Color = CALCULATED_HIGHLIGHT_COLOR },
 }
 
 config.quick_select_patterns = {
@@ -112,8 +117,8 @@ config.set_environment_variables = {
 	PATH = "/opt/homebrew/bin:/usr/local/bin:" .. os.getenv("PATH"),
 }
 
-config.command_palette_bg_color = "#282a36"
-config.command_palette_fg_color = "#bd93f9"
+config.command_palette_bg_color = CALCULATED_BG_COLOR
+config.command_palette_fg_color = CALCULATED_FG_COLOR
 config.switch_to_last_active_tab_when_closing_tab = true
 config.use_resize_increments = true
 
@@ -123,11 +128,11 @@ smart_splits.apply_to_config(config, {
 	-- you can omit this configuration table parameter and just use
 	-- smart_splits.apply_to_config(config)
 	-- directional keys to use in order of: left, down, up, right
-	direction_keys = { 'h', 'j', 'k', 'l' },
+	direction_keys = { "h", "j", "k", "l" },
 	-- modifier keys to combine with direction_keys
 	modifiers = {
-		move = 'CTRL', -- modifier to use for pane movement, e.g. CTRL+h to move left
-		resize = 'META', -- modifier to use for pane resize, e.g. META+h to resize to the left
+		move = "CTRL", -- modifier to use for pane movement, e.g. CTRL+h to move left
+		resize = "META", -- modifier to use for pane resize, e.g. META+h to resize to the left
 	},
 })
 
@@ -147,8 +152,8 @@ local function tab_title(tab_info)
 end
 
 function on_format_tab_title(tab, _tabs, _panes, _config, _hover, _max_width)
-	local zoomed_left = ''
-	local zoomed_right = ''
+	local zoomed_left = ""
+	local zoomed_right = ""
 	local index = tab.tab_index + 1
 	local title = tab_title(tab)
 	if tab.active_pane.is_zoomed then
@@ -159,24 +164,23 @@ function on_format_tab_title(tab, _tabs, _panes, _config, _hover, _max_width)
 
 	-- FormatItem: https://wezfurlong.org/wezterm/config/lua/wezterm/format.html
 	if tab.is_active then
-		table.insert(format_items, { Background = { Color = '#bd93f9' } })
-		table.insert(format_items, { Foreground = { Color = '#282a36' } })
+		table.insert(format_items, { Background = { Color = CALCULATED_FG_COLOR } })
+		table.insert(format_items, { Foreground = { Color = CALCULATED_BG_COLOR } })
 	else
-		table.insert(format_items, { Background = { Color = '#282a36' } })
-		table.insert(format_items, { Foreground = { Color = '#bd93f9' } })
+		table.insert(format_items, { Background = { Color = CALCULATED_BG_COLOR } })
+		table.insert(format_items, { Foreground = { Color = CALCULATED_FG_COLOR } })
 	end
 
 	-- it seems like the text must be inserted last
-	table.insert(format_items, { Text = string.format(' %s %d: %s %s ', zoomed_left, index, title, zoomed_right) })
+	table.insert(format_items, { Text = string.format(" %s %d: %s %s ", zoomed_left, index, title, zoomed_right) })
 	return format_items
 end
 
-wezterm.on('format-tab-title', on_format_tab_title)
+wezterm.on("format-tab-title", on_format_tab_title)
 
-
-wezterm.on('trigger-vim-with-scrollback', function(window, pane)
-	local io = require 'io'
-	local os = require 'os'
+wezterm.on("trigger-vim-with-scrollback", function(window, pane)
+	local io = require("io")
+	local os = require("os")
 	local act = wezterm.action
 
 	-- Retrieve the text from the pane
@@ -184,16 +188,16 @@ wezterm.on('trigger-vim-with-scrollback', function(window, pane)
 
 	-- Create a temporary file to pass to vim
 	local name = os.tmpname()
-	local f = io.open(name, 'w+')
+	local f = io.open(name, "w+")
 	f:write(text)
 	f:flush()
 	f:close()
 
 	-- Open a new window running vim and tell it to open the file
 	window:perform_action(
-		act.SpawnCommandInNewTab {
-			args = { 'nvim', name },
-		},
+		act.SpawnCommandInNewTab({
+			args = { "nvim", name },
+		}),
 		pane
 	)
 
