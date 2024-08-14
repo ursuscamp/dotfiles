@@ -15,13 +15,13 @@ local MASON_TOOLS = {
 		pyright = {},
 		vuels = {},
 		solargraph = {},
-
+		groovyls = {},
 	},
 
 	-- Non-LSP tools that can be installed by mason
 	tools = {
 		"prettier",
-	}
+	},
 }
 
 -- Border for hover
@@ -34,26 +34,25 @@ return {
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
 		"neovim/nvim-lspconfig",
-		'hrsh7th/cmp-nvim-lsp',
+		"hrsh7th/cmp-nvim-lsp",
 	},
 	config = function()
 		-- LSP
-		require('mason').setup()
-		require('mason-lspconfig').setup({
+		require("mason").setup()
+		require("mason-lspconfig").setup({
 			ensure_installed = vim.tbl_keys(MASON_TOOLS["servers"]),
 		})
 
 		-- Install missing tools
 		for _, tool in ipairs(MASON_TOOLS["tools"]) do
-			if not require('mason-registry').is_installed(tool) then
-				vim.cmd('MasonInstall ' .. tool)
+			if not require("mason-registry").is_installed(tool) then
+				vim.cmd("MasonInstall " .. tool)
 			end
 		end
 
-
 		vim.lsp.inlay_hint.enable()
-		local lsp = require('lspconfig')
-		local capabilities = require('cmp_nvim_lsp').default_capabilities()
+		local lsp = require("lspconfig")
+		local capabilities = require("cmp_nvim_lsp").default_capabilities()
 		for server, config in pairs(MASON_TOOLS["servers"]) do
 			if config ~= nil then
 				local c = {
@@ -66,5 +65,5 @@ return {
 				lsp[server].setup(c)
 			end
 		end
-	end
+	end,
 }
