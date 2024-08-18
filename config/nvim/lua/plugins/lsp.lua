@@ -15,7 +15,6 @@ local MASON_TOOLS = {
 		pyright = {},
 		vuels = {},
 		solargraph = {},
-		groovyls = {},
 	},
 
 	-- Non-LSP tools that can be installed by mason
