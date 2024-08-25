@@ -45,7 +45,7 @@ export PATH=$HOME/bin:$PATH
 export FZF_DEFAULT_COMMAND="fd --type f"
 export FZF_DEFAULT_OPTS="--multi --bind ctrl-y:accept"
 export PGDATA=$HOME/.local/share/postgres
-export BATH_THEME=Dracula
+export BAT_THEME=Dracula
 export MANPAGER='nvim +Man!'
 AFTER_INIT_HAS_RUN=0
 
@@ -58,8 +58,13 @@ setopt histignorealldups
 
 ##### COMMAND INIT
 
+# Load homebrew if on Linux
+test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 eval "$(starship init zsh)"
 eval "$(mise activate zsh)"
+
 
 # Run these commands after zsh-vim-mode init
 zvm_after_init ()
@@ -91,6 +96,8 @@ alias aware="cd ~/Dev/pmpaware-webapp"
 alias kccc="kubectl config current-context"
 alias jil='jira issue list -a "$(jira me)" -q "sprint = P1"'
 alias zsource="source $ZDOTDIR/.zshrc"
+alias dc='docker-compose'
+alias dcup='docker-compose up -d'
 
 ##### FUNCTIONS
 
