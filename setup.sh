@@ -32,8 +32,8 @@ fi
 
 if ! grep -q ZDOTDIR ~/.zprofile
 then
-	echo "ZDOTDIR=\$HOME/.config/zsh" >> ~/.zprofile
-	echo "ZDOTDIR set in .zprofile"
+	echo "ZDOTDIR=\$HOME/.config/zsh" >> ~/.zshenv
+	echo "ZDOTDIR set in .zshenv"
 fi
 
 if [[ ! -f "$HOME/.config/zsh/envrc" ]]; then
