@@ -211,4 +211,12 @@ wezterm.on("trigger-vim-with-scrollback", function(window, pane)
 	os.remove(name)
 end)
 
+config.ssh_domains = {
+	{
+		name = "halfin",
+		remote_address = "halfin",
+		remote_wezterm_path = "/home/linuxbrew/.linuxbrew/bin/wezterm",
+	},
+}
+
 return config
