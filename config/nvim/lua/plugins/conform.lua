@@ -23,6 +23,7 @@ return {
 				markdown = { "prettier" },
 				json = { "prettier" },
 				vue = { "prettier" },
+				yaml = { "yamlfix" },
 			},
 			format_on_save = function(bufnr)
 				if vim.g.format_on_save_disabled then
