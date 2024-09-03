@@ -10,6 +10,8 @@ keybinds {
         bind "Alt l" "Alt Right" { MoveFocusOrTab "Right"; }
         bind "Alt j" "Alt Down" { MoveFocus "Down"; }
         bind "Alt k" "Alt Up" { MoveFocus "Up"; }
+	bind "Alt n" { FocusNextPane; }
+	bind "Alt p" { FocusPreviousPane; }
     }
     resize {
         bind "Ctrl n" { SwitchToMode "Normal"; }
