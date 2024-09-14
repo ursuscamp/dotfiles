@@ -96,8 +96,8 @@ alias aware="cd ~/Dev/pmpaware-webapp"
 alias kccc="kubectl config current-context"
 alias jil='jira issue list -a "$(jira me)" -q "sprint = P1"'
 alias zsource="source $ZDOTDIR/.zshrc"
-alias dc='docker-compose'
-alias dcup='docker-compose up -d'
+alias dc='docker compose'
+alias dcup='docker compose up -d'
 
 ##### FUNCTIONS
 
