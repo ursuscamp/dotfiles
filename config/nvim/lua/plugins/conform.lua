@@ -24,6 +24,8 @@ return {
 				json = { "prettier" },
 				vue = { "prettier" },
 				yaml = { "yamlfix" },
+				html = { "prettier" },
+				htmldjango = { "prettier" },
 			},
 			format_on_save = function(bufnr)
 				if vim.g.format_on_save_disabled then
