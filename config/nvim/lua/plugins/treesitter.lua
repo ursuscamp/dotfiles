@@ -18,6 +18,8 @@ return {
 				"javascript",
 				"typescript",
 				"diff",
+				"vue",
+				"css",
 			},
 			auto_install = true,
 			highlight = {

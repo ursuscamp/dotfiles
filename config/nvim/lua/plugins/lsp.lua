@@ -10,11 +10,17 @@ local MASON_TOOLS = {
 			},
 		},
 		html = {},
-		tsserver = {},
 		marksman = {},
 		pyright = {},
-		vuels = {},
-		solargraph = {},
+		ruby_lsp = {},
+		volar = {
+			init_options = {
+				vue = {
+					hybridMode = true,
+				},
+			},
+		},
+		vtsls = {},
 	},
 
 	-- Non-LSP tools that can be installed by mason
