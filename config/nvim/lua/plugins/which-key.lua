@@ -10,21 +10,22 @@ return {
 		vim.o.timeoutlen = 300
 	end,
 	config = function()
-		require('which-key').setup({
+		require("which-key").setup({
 			preset = "modern",
 			win = {
-				width = { max = 0.5 }
+				width = { max = 0.5 },
 			},
 			spec = {
-				{ "<leader>f",  group = "Find" },
-				{ "<leader>g",  group = "Git" },
+				{ "<leader>d", group = "Debugging" },
+				{ "<leader>f", group = "Find" },
+				{ "<leader>g", group = "Git" },
 				{ "<leader>gc", group = "Github Copilot" },
-				{ "<leader>l",  group = "LSP" },
-				{ "<leader>s",  group = "Split" },
-				{ "<leader>t",  group = "Tests" },
-				{ "<leader>x",  group = "Trouble lists" },
-				{ "<leader>z",  group = "Miscellaneous" },
-			}
+				{ "<leader>l", group = "LSP", icon = "" },
+				{ "<leader>s", group = "Split" },
+				{ "<leader>t", group = "Tests" },
+				{ "<leader>x", group = "Trouble lists" },
+				{ "<leader>z", group = "Miscellaneous" },
+			},
 		})
-	end
+	end,
 }
