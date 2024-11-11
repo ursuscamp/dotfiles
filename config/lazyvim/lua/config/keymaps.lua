@@ -20,4 +20,7 @@ map("n", "<C-k>", require("smart-splits").move_cursor_up)
 map("n", "<C-l>", require("smart-splits").move_cursor_right)
 map("n", "<C-\\>", require("smart-splits").move_cursor_previous)
 
-map("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+map("n", "<leader>e", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
+map("n", "<leader>E", function()
+  require("oil").open_float(vim.fn.getcwd())
+end, { desc = "Open current working directory" })
