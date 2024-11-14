@@ -8,6 +8,7 @@ map("n", "<C-n>", ":BufferLineCycleNext<CR>")
 map("n", "<C-p>", ":BufferLineCyclePrev<CR>")
 map("n", "gb", ":BufferLinePick<CR>")
 map("i", "jk", "<Esc>")
+map("n", "U", "<C-r>", { noremap = true })
 
 map("n", "<A-h>", require("smart-splits").resize_left)
 map("n", "<A-j>", require("smart-splits").resize_down)
