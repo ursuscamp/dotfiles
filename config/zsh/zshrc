@@ -128,11 +128,6 @@ kdpf ()
 	
 }
 
-lvim()
-{
-	NVIM_APPNAME=lazyvim nvim $@
-}
-
 gdb()
 {
     git branch --list | fzf | xargs -n 1 git branch -D

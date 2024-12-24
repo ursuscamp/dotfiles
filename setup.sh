@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PACKAGES="helix wezterm alacritty kitty zellij xplr fish nvim tmux zsh aerospace lazyvim"
+PACKAGES="helix wezterm alacritty kitty zellij xplr fish nvim tmux zsh aerospace"
 
 REPO=~/Dev/dotfiles
 DESTINATION=$HOME
