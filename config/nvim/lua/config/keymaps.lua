@@ -25,3 +25,26 @@ map("n", "<leader>e", "<CMD>Oil --float<CR>", { desc = "Open parent directory" }
 map("n", "<leader>E", function()
   require("oil").open_float(vim.fn.getcwd())
 end, { desc = "Open current working directory" })
+
+local Snacks = require("snacks")
+local copilot_exists = pcall(require, "copilot")
+
+if copilot_exists then
+  Snacks.toggle({
+    name = "Copilot Completion",
+    color = {
+      enabled = "azure",
+      disabled = "orange",
+    },
+    get = function()
+      return not require("copilot.client").is_disabled()
+    end,
+    set = function(state)
+      if state then
+        require("copilot.command").enable()
+      else
+        require("copilot.command").disable()
+      end
+    end,
+  }):map("<leader>at")
+end
