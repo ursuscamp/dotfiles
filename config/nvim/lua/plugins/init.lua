@@ -357,6 +357,12 @@ return {
 				end,
 				desc = "Colorschemes",
 			},
+			{
+				"<leader>sP",
+				function ()
+					Snacks.picker.pickers()
+				end
+			},
 			-- LSP
 			{
 				"gd",
