@@ -359,7 +359,7 @@ return {
 			},
 			{
 				"<leader>sP",
-				function ()
+				function()
 					Snacks.picker.pickers()
 				end
 			},
@@ -432,14 +432,14 @@ return {
 		opts = {},
 		-- stylua: ignore
 		keys = {
-			{ "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-			{ "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-			{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-			{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-			{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+			{ "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+			{ "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+			{ "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+			{ "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+			{ "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
 		},
 	},
-	{ "echasnovski/mini.nvim", version = "*" },
+	{ "echasnovski/mini.nvim",         version = "*" },
 	{
 		"folke/persistence.nvim",
 		event = "BufReadPre",
@@ -480,6 +480,7 @@ return {
 			preset = "modern",
 			delay = 0,
 			spec = {
+				{ "<leader>a", group = "AI" },
 				{ "<leader>f", group = "File" },
 				{ "<leader>g", group = "Git" },
 				{ "<leader>s", group = "Search/Snacks" },
