@@ -37,11 +37,9 @@ return {
 	},
 	{
 		"folke/lazydev.nvim",
-		ft = "lua", -- only load on lua files
+		ft = "lua",
 		opts = {
 			library = {
-				-- See the configuration section for more details
-				-- Load luvit types when the `vim.uv` word is found
 				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 				{ path = "Snacks",             words = { "Snacks" } },
 			},
@@ -58,36 +56,6 @@ return {
 				nerd_font_variant = "mono",
 				kind_icons = {
 					Copilot = "",
-					Text = '󰉿',
-					Method = '󰊕',
-					Function = '󰊕',
-					Constructor = '󰒓',
-
-					Field = '󰜢',
-					Variable = '󰆦',
-					Property = '󰖷',
-
-					Class = '󱡠',
-					Interface = '󱡠',
-					Struct = '󱡠',
-					Module = '󰅩',
-
-					Unit = '󰪚',
-					Value = '󰦨',
-					Enum = '󰦨',
-					EnumMember = '󰦨',
-
-					Keyword = '󰻾',
-					Constant = '󰏿',
-
-					Snippet = '󱄽',
-					Color = '󰏘',
-					File = '󰈔',
-					Reference = '󰬲',
-					Folder = '󰉋',
-					Event = '󱐋',
-					Operator = '󰪚',
-					TypeParameter = '󰬛',
 				},
 			},
 			sources = {
@@ -125,6 +93,13 @@ return {
 			completion = {
 				menu = {
 					border = "rounded",
+					draw = {
+						columns = {
+							{ "label",     "label_description", gap = 1 },
+							{ "kind_icon", gap = 1 },
+							{ "kind" }
+						}
+					}
 				},
 				documentation = {
 					auto_show = true,
