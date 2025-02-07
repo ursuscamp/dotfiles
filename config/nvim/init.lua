@@ -33,6 +33,7 @@ require("mini.ai").setup()
 -- Basic options
 vim.opt.relativenumber = true
 vim.opt.termguicolors = true
+vim.opt.scrolloff = 10
 
 local function f(c)
 	return function()

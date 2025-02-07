@@ -22,9 +22,10 @@
   "oil.nvim": { "branch": "master", "commit": "add50252b5e9147c0a09d36480d418c7e2737472" },
   "persistence.nvim": { "branch": "main", "commit": "f6aad7dde7fcf54148ccfc5f622c6d5badd0cc3d" },
   "plenary.nvim": { "branch": "master", "commit": "3707cdb1e43f5cea73afb6037e6494e7ce847a66" },
-  "render-markdown.nvim": { "branch": "main", "commit": "2a9e0ab6043bfb4996ce6a6a35594ab357e5d299" },
+  "render-markdown.nvim": { "branch": "main", "commit": "5c2440d932a4ba96840e5ce5a7bd40f0624bdaa2" },
+  "scrollEOF.nvim": { "branch": "master", "commit": "a186f695b500e9f0b569102a4a5e8a255cd0d198" },
   "smart-splits.nvim": { "branch": "master", "commit": "fc7bb00fe67ab504356bed4310d23c2e4cb4b06b" },
-  "snacks.nvim": { "branch": "main", "commit": "9e7e4b73ce627275b2f91aee83b5c3b91dc1ff77" },
+  "snacks.nvim": { "branch": "main", "commit": "4a6ed6912e5b5cabeb3c3dbbecaedf7a1c743256" },
   "todo-comments.nvim": { "branch": "main", "commit": "304a8d204ee787d2544d8bc23cd38d2f929e7cc5" },
   "tokyonight.nvim": { "branch": "main", "commit": "dca4adba7dc5f09302a00b0e76078d54d82d2658" },
   "which-key.nvim": { "branch": "main", "commit": "0e76a87ac51772569aec678dc74baa8e2a86100c" }

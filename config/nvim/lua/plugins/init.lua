@@ -530,4 +530,9 @@ return {
 		},
 	},
 	{ "mrjones2014/smart-splits.nvim", event = "VeryLazy", opts = {} },
+	{
+		'Aasim-A/scrollEOF.nvim',
+		event = { 'CursorMoved', 'WinScrolled' },
+		opts = {},
+	}
 }

@@ -16,9 +16,9 @@ return {
 				rust_analyzer = {
 					settings = {
 						['rust-analyzer'] = {
-							checkOnSave = {
-								command = "clippy",
-							},
+							-- checkOnSave = {
+							-- 	command = "clippy",
+							-- },
 							completion = {
 								postfix = { enable = true },
 								termSearch = { enable = true }
