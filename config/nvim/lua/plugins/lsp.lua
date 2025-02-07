@@ -13,7 +13,19 @@ return {
 		opts = {
 			servers = {
 				lua_ls = {},
-				rust_analyzer = {},
+				rust_analyzer = {
+					settings = {
+						['rust-analyzer'] = {
+							checkOnSave = {
+								command = "clippy",
+							},
+							completion = {
+								postfix = { enable = true },
+								termSearch = { enable = true }
+							}
+						},
+					}
+				},
 				ts_ls = {},
 				pyright = {},
 				marksman = {},
