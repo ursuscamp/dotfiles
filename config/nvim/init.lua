@@ -34,6 +34,7 @@ require("mini.ai").setup()
 vim.opt.relativenumber = true
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 10
+vim.g.copilot_cmp = true
 
 local function f(c)
 	return function()
@@ -54,6 +55,29 @@ vim.keymap.set({ "n" }, "U", function()
 end)
 require("snacks.toggle").inlay_hints():map("<leader>uh")
 require("snacks.toggle").diagnostics():map("<leader>ud")
+require('snacks.toggle').option("spell", { name = "Spelling" }):map("<leader>us")
+require('snacks.toggle').option("wrap", { name = "Wrap" }):map("<leader>uw")
+require('snacks.toggle').option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+require('snacks.toggle').diagnostics():map("<leader>ud")
+require('snacks.toggle').line_number():map("<leader>ul")
+require('snacks.toggle').option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+    :map(
+	    "<leader>uc")
+require('snacks.toggle').treesitter():map("<leader>uT")
+require('snacks.toggle').option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+require('snacks.toggle').inlay_hints():map("<leader>uh")
+require('snacks.toggle').indent():map("<leader>ug")
+require('snacks.toggle').dim():map("<leader>uD")
+require('snacks.toggle').new({
+	id = "compilot_cmp",
+	name = "Copilot completion",
+	get = function()
+		return vim.g.copilot_cmp
+	end,
+	set = function(value)
+		vim.g.copilot_cmp = value
+	end,
+}):map("<leader>aC")
 
 vim.keymap.set("n", "<leader>bd", MiniBufremove.delete, { desc = "Delete buffer" })
 vim.keymap.set("n", "H", f("BufferLineCyclePrev"), { desc = "Previous buffer" })
@@ -91,3 +115,5 @@ end, { desc = "Next warning" })
 vim.keymap.set("n", "[w", function()
 	vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARN })
 end, { desc = "Previous warning" })
+
+vim.keymap.set("n", "<leader>am", vim.cmd.CopilotChatModels, { desc = 'Change Copilot Model' })

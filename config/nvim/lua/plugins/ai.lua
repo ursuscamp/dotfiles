@@ -19,7 +19,7 @@ return {
 		},
 		build = "make tiktoken",
 		opts = {},
-		cmd = { "CopilotChat", "CopilotChatToggle" },
+		cmd = { "CopilotChat", "CopilotChatToggle", "CopilotChatModels" },
 		keys = {
 			{ "<leader>ac", mode = { "n", "x", "o" }, function() vim.cmd("CopilotChatToggle") end, desc = "Toggle Copilot Chat" },
 		},

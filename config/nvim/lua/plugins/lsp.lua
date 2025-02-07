@@ -71,7 +71,14 @@ return {
 				},
 			},
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer", "markdown", "lazydev", "copilot" },
+				default = function()
+					if vim.g.copilot_cmp then
+						return { "lsp", "path", "snippets", "buffer", "markdown", "lazydev",
+							"copilot" }
+					else
+						return { "lsp", "path", "snippets", "buffer", "markdown", "lazydev" }
+					end
+				end,
 				providers = {
 					markdown = {
 						name = "RenderMarkdown",
