@@ -21,7 +21,8 @@ return {
 		opts = {},
 		cmd = { "CopilotChat", "CopilotChatToggle", "CopilotChatModels" },
 		keys = {
-			{ "<leader>ac", mode = { "n", "x", "o" }, function() vim.cmd("CopilotChatToggle") end, desc = "Toggle Copilot Chat" },
+			{ "<leader>ac", mode = { "n", "x", "o" }, vim.cmd.CoppilotChatToggle, desc = "Toggle Copilot Chat" },
+			{ "<leader>am", mode = { "n", "x", "o" }, vim.cmd.CopilotChatModels,  desc = "Pick chat model" },
 		},
 	},
 }
