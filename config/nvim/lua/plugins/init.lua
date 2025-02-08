@@ -28,7 +28,23 @@ return {
 		lazy = false,
 		opts = {
 			bigfile = { enabled = true },
-			dashboard = { enabled = true },
+			dashboard = {
+				preset = {
+					header = [[
+  ::   .: .,::::::   :::      :::         ...
+ ,;;   ;;,;;;;''''   ;;;      ;;;      .;;;;;;;.
+,[[[,,,[[[ [[cccc    [[[      [[[     ,[[     \[[,
+"$$$"""$$$ $$""""    $$'      $$'     $$$,     $$$
+ 888   "88o888oo,__ o88oo,.__o88oo,.__"888,_ _,88P
+ MMM    YMM""""YUMMM""""YUMMM""""YUMMM  "YMMMMMP"
+.::    .   .:::  ...    :::::::..    :::   :::::::-.
+';;,  ;;  ;;;'.;;;;;;;. ;;;;``;;;;   ;;;    ;;,   `';,
+ '[[, [[, [[',[[     \[[,[[[,/[[['   [[[    `[[     [[
+   Y$c$$$c$P $$$,     $$$$$$$$$c     $$'     $$,    $$
+    "88"888  "888,_ _,88P888b "88bo,o88oo,.__888_,o8P'
+     "M "M"    "YMMMMMP" MMMM   "W" """"YUMMMMMMMP"`  ]]
+				}
+			},
 			indent = {
 				enabled = true,
 				animate = {

@@ -44,15 +44,14 @@ end
 
 -- Keymaps
 vim.keymap.set({ "i" }, "jk", "<esc>")
-vim.keymap.set({ "n" }, "<leader>gg", function()
-	require("snacks").lazygit()
-end, { desc = "LazyGit" })
+vim.keymap.set({ "n" }, "<leader>gg", require('snacks').lazygit.open, { desc = "LazyGit" })
+vim.keymap.set({ "n" }, "<leader>gl", require('snacks').lazygit.log, { desc = "LazyGit log" })
+vim.keymap.set({ "n" }, "<leader>gL", require('snacks').lazygit.log_file, { desc = "LazyGit log file" })
 vim.keymap.set({ "n", "x", "v", "i" }, "<C-q>", function()
 	vim.cmd("quitall!")
 end)
-vim.keymap.set({ "n" }, "U", function()
-	vim.cmd("redo")
-end)
+vim.keymap.set({ "n" }, "U", vim.cmd.redo)
+
 require("snacks.toggle").inlay_hints():map("<leader>uh")
 require("snacks.toggle").diagnostics():map("<leader>ud")
 require('snacks.toggle').option("spell", { name = "Spelling" }):map("<leader>us")
