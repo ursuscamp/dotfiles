@@ -134,8 +134,8 @@ return {
 		event = "VeryLazy",
 		opts = {},
 		keys = {
-			{ "<a-h>", vim.cmd.SmartRezizeLeft,      desc = "Resize left" },
-			{ "<a-j>", vim.cmd.SmartResizeRight,     desc = "Resize right" },
+			{ "<a-h>", vim.cmd.SmartResizeLeft,      desc = "Resize left" },
+			{ "<a-l>", vim.cmd.SmartResizeRight,     desc = "Resize right" },
 			{ "<a-j>", vim.cmd.SmartResizeDown,      desc = "Resize down" },
 			{ "<a-k>", vim.cmd.SmartResizeUp,        desc = "Resize up" },
 			{ "<c-h>", vim.cmd.SmartCursorMoveLeft,  desc = "Move left" },
