@@ -14,6 +14,7 @@ vim.keymap.set({ "n" }, "U", vim.cmd.redo)
 vim.keymap.set("n", "<leader>|", vim.cmd.vsplit, { desc = "Vertical split" })
 vim.keymap.set("n", "<leader>\\", vim.cmd.split, { desc = "Horizontal split" })
 vim.keymap.set("n", "<leader>q", vim.cmd.quit, { desc = "Quit window" })
+vim.keymap.set("n", "<leader>L", vim.cmd.Lazy, { desc = "Lazy" })
 
 
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })

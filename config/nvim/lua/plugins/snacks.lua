@@ -7,19 +7,7 @@ return {
 			bigfile = { enabled = true },
 			dashboard = {
 				preset = {
-					header = [[
-  ::   .: .,::::::   :::      :::         ...
- ,;;   ;;,;;;;''''   ;;;      ;;;      .;;;;;;;.
-,[[[,,,[[[ [[cccc    [[[      [[[     ,[[     \[[,
-"$$$"""$$$ $$""""    $$'      $$'     $$$,     $$$
- 888   "88o888oo,__ o88oo,.__o88oo,.__"888,_ _,88P
- MMM    YMM""""YUMMM""""YUMMM""""YUMMM  "YMMMMMP"
-.::    .   .:::  ...    :::::::..    :::   :::::::-.
-';;,  ;;  ;;;'.;;;;;;;. ;;;;``;;;;   ;;;    ;;,   `';,
- '[[, [[, [[',[[     \[[,[[[,/[[['   [[[    `[[     [[
-   Y$c$$$c$P $$$,     $$$$$$$$$c     $$'     $$,    $$
-    "88"888  "888,_ _,88P888b "88bo,o88oo,.__888_,o8P'
-     "M "M"    "YMMMMMP" MMMM   "W" """"YUMMMMMMMP"`  ]]
+					header = require('config.header')
 				}
 			},
 			indent = {
@@ -49,12 +37,16 @@ return {
 			words = { enabled = true },
 			lazygit = { enabled = true },
 			image = { enabled = true },
+			gitbrowse = { enabled = true },
+			git = { enabled = true },
 			toggle = {},
 		},
 		keys = {
 			{ "<leader>gg",      function() Snacks.lazygit.open() end,                                   desc = "LazyGit" },
-			{ "<leader>gl",      function() Snacks.lazygit.log() end,                                    desc = "LazyGit log" },
-			{ "<leader>gL",      function() Snacks.lazygit.log_file() end,                               desc = "LazyGit log file" },
+			{ "<leader>gx",      function() Snacks.lazygit.log() end,                                    desc = "LazyGit log" },
+			{ "<leader>gX",      function() Snacks.lazygit.log_file() end,                               desc = "LazyGit log file" },
+			{ "<leader>gB",      function() Snacks.gitbrowse() end,                                      desc = "Browse to git repo" },
+			{ "<leader>gb",      function() Snacks.git.blame_line() end,                                 desc = "Git blame line" },
 			{ "<leader><space>", function() Snacks.picker.smart() end,                                   desc = "Smart Find Files", },
 			{ "<leader>,",       function() Snacks.picker.buffers() end,                                 desc = "Buffers", },
 			{ "<leader>/",       function() Snacks.picker.grep() end,                                    desc = "Grep", },
