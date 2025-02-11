@@ -134,5 +134,14 @@ return {
 		'Aasim-A/scrollEOF.nvim',
 		event = { 'CursorMoved', 'WinScrolled' },
 		opts = {},
+	},
+	{
+		"monaqa/dial.nvim",
+		keys = {
+			{ "<C-a>", function() require('dial.map').manipulate("increment", "normal") end, desc = "Increment", mode = "n" },
+			{ "<C-x>", function() require('dial.map').manipulate("decrement", "normal") end, desc = "Decrement", mode = "n" },
+			{ "<C-a>", function() require('dial.map').manipulate("increment", "visual") end, desc = "Increment", mode = "v" },
+			{ "<C-x>", function() require('dial.map').manipulate("decrement", "visual") end, desc = "Decrement", mode = "v" },
+		}
 	}
 }
