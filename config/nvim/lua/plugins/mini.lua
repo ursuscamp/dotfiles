@@ -58,8 +58,9 @@ return {
 			}):map("<leader>gO")
 		end,
 		keys = {
-			{ "<leader>e",  function() MiniFiles.open() end,       desc = "Explore files" },
-			{ "<leader>bd", function() MiniBufremove.delete() end, desc = "Delete buffer" },
+			{ "<leader>E",  function() MiniFiles.open() end,                                    desc = "Explore files" },
+			{ "<leader>e",  function() MiniFiles.open(vim.api.nvim_buf_get_name(0), false) end, desc = "Explore files" },
+			{ "<leader>bd", function() MiniBufremove.delete() end,                              desc = "Delete buffer" },
 		}
 	},
 }
