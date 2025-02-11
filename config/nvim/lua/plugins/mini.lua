@@ -34,6 +34,28 @@ return {
 			require("mini.ai").setup()
 			require("mini.files").setup()
 			require('mini.splitjoin').setup()
+			require('mini.diff').setup({
+				view = {
+					style = "sign",
+					signs = {
+						add = "",
+						change = "",
+						delete = "",
+					},
+				}
+			})
+
+			require('snacks.toggle').new({
+				id = "diff_overlay",
+				name = "Git Diff overlay",
+				get = function()
+					return vim.g.diff_overlay
+				end,
+				set = function(value)
+					vim.g.diff_overlay = value
+					MiniDiff.toggle_overlay(0)
+				end,
+			}):map("<leader>gO")
 		end,
 		keys = {
 			{ "<leader>e",  function() MiniFiles.open() end,       desc = "Explore files" },

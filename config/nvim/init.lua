@@ -5,6 +5,7 @@ vim.opt.relativenumber = true
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 10
 vim.g.copilot_cmp = true
+vim.g.diff_overlay = false
 
 -- Keymaps
 vim.keymap.set({ "i" }, "jk", "<esc>")
