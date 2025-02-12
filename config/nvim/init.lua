@@ -4,6 +4,7 @@ require("config.lazy")
 vim.opt.relativenumber = true
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 10
+vim.o.clipboard = "unnamedplus"
 vim.g.copilot_cmp = true
 vim.g.diff_overlay = false
 
