@@ -3,8 +3,23 @@ return {
 		"folke/tokyonight.nvim",
 		priority = 1000,
 		init = function()
-			vim.cmd.colorscheme("tokyonight-storm")
+			-- vim.cmd.colorscheme("tokyonight-storm")
 		end,
+	},
+	{
+		"EdenEast/nightfox.nvim",
+		priority = 1000,
+		init = function()
+			-- vim.cmd.colorscheme("nightfox")
+		end
+	},
+	{
+		"rose-pine/neovim",
+		name = "rose-pine",
+		priority = 1000,
+		config = function()
+			vim.cmd.colorscheme('rose-pine')
+		end
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
