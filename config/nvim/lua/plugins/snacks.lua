@@ -39,9 +39,12 @@ return {
 			image = { enabled = true },
 			gitbrowse = { enabled = true },
 			git = { enabled = true },
+			bufdelete = { enabled = true },
 			toggle = {},
 		},
 		keys = {
+			{ "<leader>bd",      function() Snacks.bufdelete() end,                                      desc = "Delete buffer" },
+			{ "<leader>bD",      function() Snacks.bufdelete.all() end,                                  desc = "Delete all buffers" },
 			{ "<leader>gg",      function() Snacks.lazygit.open() end,                                   desc = "LazyGit" },
 			{ "<leader>gx",      function() Snacks.lazygit.log() end,                                    desc = "LazyGit log" },
 			{ "<leader>gX",      function() Snacks.lazygit.log_file() end,                               desc = "LazyGit log file" },

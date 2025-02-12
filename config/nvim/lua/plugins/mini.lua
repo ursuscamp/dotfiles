@@ -28,7 +28,6 @@ return {
 					suffix_next = "n", -- Suffix to search with "next" method
 				},
 			})
-			require("mini.bufremove").setup()
 			require("mini.icons").setup()
 			MiniIcons.mock_nvim_web_devicons()
 			require("mini.ai").setup()
@@ -58,9 +57,8 @@ return {
 			}):map("<leader>gO")
 		end,
 		keys = {
-			{ "<leader>E",  function() MiniFiles.open() end,                                    desc = "Explore files" },
-			{ "<leader>e",  function() MiniFiles.open(vim.api.nvim_buf_get_name(0), false) end, desc = "Explore files" },
-			{ "<leader>bd", function() MiniBufremove.delete() end,                              desc = "Delete buffer" },
+			{ "<leader>E", function() MiniFiles.open() end,                                    desc = "Explore files" },
+			{ "<leader>e", function() MiniFiles.open(vim.api.nvim_buf_get_name(0), false) end, desc = "Explore files" },
 		}
 	},
 }

@@ -11,6 +11,7 @@ return {
 		build = ":TSUpdate",
 		main = "nvim-treesitter.configs",
 		opts = {
+			ensure_installed = { "lua", "vim", "vimdoc", "query", "markdown", "typescript", "javascript", "ruby", "rust", "python", "html" },
 			auto_install = true,
 			highlight = {
 				enable = true,
