@@ -58,7 +58,7 @@ return {
 		end,
 		keys = {
 			{ "<leader>E", function() MiniFiles.open() end,                                    desc = "Explore files" },
-			{ "<leader>e", function() MiniFiles.open(vim.api.nvim_buf_get_name(0), false) end, desc = "Explore files" },
+			{ "<leader>e", function() MiniFiles.open(vim.api.nvim_buf_get_name(0), false) end, desc = "Explore files (current buffer dir)" },
 		}
 	},
 }
