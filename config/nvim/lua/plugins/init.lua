@@ -119,6 +119,14 @@ return {
 			{ "<leader>bc", vim.cmd.BufferLineCloseOthers, desc = "Close other buffers" },
 			{ "<leader>br", vim.cmd.BufferLineCloseRight,  desc = "Close to right" },
 			{ "<leader>bl", vim.cmd.BufferLineCloseLeft,   desc = "Close to left" },
+			-- Close non-pinned buffers
+			{
+				"<leader>bP",
+				function()
+					vim.cmd.BufferLineGroupClose("ungrouped")
+				end,
+				desc = "Close unpinned buffers"
+			},
 		}
 	},
 	{
