@@ -1,5 +1,5 @@
 {
-  "CopilotChat.nvim": { "branch": "main", "commit": "07bcd20f408d9e43bdfab0e96c3f4d3aa860ef6a" },
+  "CopilotChat.nvim": { "branch": "main", "commit": "03565fe668b407f8d7130953d3709241f8d0f809" },
   "blink-cmp-copilot": { "branch": "main", "commit": "5d4ed42c5d7d144012792bb6cc4ac7899a108169" },
   "blink.cmp": { "branch": "main", "commit": "18b352d12b35bca148427b607098df14b75a218f" },
   "bufferline.nvim": { "branch": "main", "commit": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3" },
@@ -18,14 +18,14 @@
   "noice.nvim": { "branch": "main", "commit": "0427460c2d7f673ad60eb02b35f5e9926cf67c59" },
   "nui.nvim": { "branch": "main", "commit": "53e907ffe5eedebdca1cd503b00aa8692068ca46" },
   "nvim-lspconfig": { "branch": "master", "commit": "7c8cb61b21727a473663054edec4b83633d9e442" },
-  "nvim-treesitter": { "branch": "master", "commit": "d2ff4006418750aa8b91f280e66bdb623c891c95" },
+  "nvim-treesitter": { "branch": "master", "commit": "bf18d4dc8d9a7a61e855190bc154df12d6536741" },
   "persistence.nvim": { "branch": "main", "commit": "f6aad7dde7fcf54148ccfc5f622c6d5badd0cc3d" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "render-markdown.nvim": { "branch": "main", "commit": "57fa691b9e374c6539cc0340062dac8f42d4bd8b" },
   "rose-pine": { "branch": "main", "commit": "20c7940da844aa4f162a64e552ae3c7e9fdc3b93" },
   "scrollEOF.nvim": { "branch": "master", "commit": "a186f695b500e9f0b569102a4a5e8a255cd0d198" },
   "smart-splits.nvim": { "branch": "master", "commit": "de1d5ed60c1407b7704495d7b3c8e262358728c9" },
-  "snacks.nvim": { "branch": "main", "commit": "a4e2c3e4fc54af78c7d351fe84399305119f59fa" },
+  "snacks.nvim": { "branch": "main", "commit": "5fa93cb6846b5998bc0b4b4ac9de47108fe39ce6" },
   "todo-comments.nvim": { "branch": "main", "commit": "304a8d204ee787d2544d8bc23cd38d2f929e7cc5" },
   "tokyonight.nvim": { "branch": "main", "commit": "057ef5d260c1931f1dffd0f052c685dcd14100a3" },
   "which-key.nvim": { "branch": "main", "commit": "5bf7a73fe851896d5ac26d313db849bf00f45b78" }
