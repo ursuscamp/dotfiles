@@ -70,12 +70,27 @@ return {
 				-- Conform will run the first available formatter
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 			},
-			format_on_save = {
-				-- These options will be passed to conform.format()
-				timeout_ms = 500,
-				lsp_format = "fallback",
-			},
+			-- format_on_save = {
+			-- 	-- These options will be passed to conform.format()
+			-- 	timeout_ms = 500,
+			-- 	lsp_format = "fallback",
+			-- },
 		},
+		config = function(opts)
+			require("conform").setup(opts)
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				pattern = "*",
+				callback = function(args)
+					if vim.g.autoformat then
+						require("conform").format({
+							bufnr = args.buf,
+							timeout_ms = 500,
+							lsp_format = "fallback"
+						})
+					end
+				end,
+			})
+		end
 	},
 	{
 		"folke/which-key.nvim",

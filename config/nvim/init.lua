@@ -8,6 +8,7 @@ vim.opt.swapfile = false
 vim.o.clipboard = "unnamedplus"
 vim.g.copilot_cmp = true
 vim.g.diff_overlay = false
+vim.g.autoformat = true
 
 -- Keymaps
 vim.keymap.set({ "i" }, "jk", "<esc>")

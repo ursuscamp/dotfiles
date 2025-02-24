@@ -137,6 +137,16 @@ return {
 					vim.g.copilot_cmp = value
 				end,
 			}):map("<leader>aC")
+			t.new({
+				id = "autoformat",
+				name = "Autoformat",
+				get = function()
+					return vim.g.autoformat
+				end,
+				set = function(value)
+					vim.g.autoformat = value
+				end,
+			}):map("<leader>cf")
 		end
 	},
 }
