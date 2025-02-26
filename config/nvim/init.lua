@@ -12,6 +12,12 @@ if vim.g.vscode then
 	return
 end
 
+if vim.uv.os_gethostname():find("rbreen") then
+	vim.g.work_computer = true
+end
+
+
+
 require("config.lazy")
 
 
