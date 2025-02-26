@@ -1,5 +1,3 @@
-require("config.lazy")
-
 -- Basic options
 vim.opt.relativenumber = true
 vim.opt.termguicolors = true
@@ -9,6 +7,13 @@ vim.o.clipboard = "unnamedplus"
 vim.g.copilot_cmp = true
 vim.g.diff_overlay = false
 vim.g.autoformat = true
+
+if vim.g.vscode then
+	return
+end
+
+require("config.lazy")
+
 
 -- Keymaps
 vim.keymap.set({ "i" }, "jk", "<esc>")
