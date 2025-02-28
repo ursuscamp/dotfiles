@@ -1,6 +1,6 @@
 local function copilot_model()
 	if vim.g.work_computer then
-		return "claude-3.5-sonnet"
+		return "claude-3.7-sonnet"
 	else
 		return "gpt-4o"
 	end
@@ -76,6 +76,7 @@ return {
 				end,
 				desc = "Toggle CodeCompanion chat"
 			}
-		}
+		},
+		cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions", "CodeCompanionCmd", },
 	},
 }
