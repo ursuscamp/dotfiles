@@ -50,3 +50,6 @@ end, { desc = "Next warning" })
 vim.keymap.set("n", "[w", function()
 	vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARN })
 end, { desc = "Previous warning" })
+
+vim.cmd.cnoreabbrev("cc", "CodeCompanion")
+vim.cmd.cnoreabbrev("ccc", "CodeCompanionChat")
