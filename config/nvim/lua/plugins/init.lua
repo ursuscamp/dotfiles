@@ -185,5 +185,14 @@ return {
 			{ "<C-a>", function() require('dial.map').manipulate("increment", "visual") end, desc = "Increment", mode = "v" },
 			{ "<C-x>", function() require('dial.map').manipulate("decrement", "visual") end, desc = "Decrement", mode = "v" },
 		}
+	},
+	{
+		'kevinhwang91/nvim-ufo',
+		dependencies = { 'kevinhwang91/promise-async' },
+		opts = {
+			provider_selector = function()
+				return { 'treesitter', 'indent' }
+			end
+		}
 	}
 }
