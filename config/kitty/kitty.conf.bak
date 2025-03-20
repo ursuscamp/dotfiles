@@ -712,7 +712,7 @@ font_size 13
 #: refresh rate. Also, to minimize latency when there is pending input
 #: to be processed, this option is ignored.
 
-input_delay 1
+# input_delay 3
 
 #: Delay before input from the program running in the terminal is
 #: processed (in milliseconds). Note that decreasing it will increase
@@ -2527,9 +2527,3 @@ background_tint_gaps 0.2
 #: }}}
 
 
-
-
-# BEGIN_KITTY_THEME
-# Tokyo Night
-include current-theme.conf
-# END_KITTY_THEME
