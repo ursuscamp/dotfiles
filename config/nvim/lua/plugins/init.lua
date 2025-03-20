@@ -1,3 +1,12 @@
+local function reg_component()
+	local reg = vim.fn.reg_recording()
+	if reg == "" then
+		return ""
+	else
+		return "recording @" .. reg
+	end
+end
+
 return {
 	{
 		"folke/tokyonight.nvim",
@@ -150,7 +159,13 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = "echasnovski/mini.nvim",
-		opts = {},
+		opts = {
+			sections = {
+				lualine_c = {
+					reg_component, 'filename'
+				},
+			}
+		},
 	},
 	{
 		"folke/noice.nvim",
