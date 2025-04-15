@@ -20,22 +20,34 @@ return {
 		priority = 1000,
 		init = function()
 			-- vim.cmd.colorscheme("nightfox")
-		end
+		end,
 	},
 	{
 		"rose-pine/neovim",
 		name = "rose-pine",
 		priority = 1000,
 		config = function()
-			vim.cmd.colorscheme('rose-pine')
-		end
+			vim.cmd.colorscheme("rose-pine")
+		end,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		main = "nvim-treesitter.configs",
 		opts = {
-			ensure_installed = { "lua", "vim", "vimdoc", "query", "markdown", "typescript", "javascript", "ruby", "rust", "python", "html" },
+			ensure_installed = {
+				"lua",
+				"vim",
+				"vimdoc",
+				"query",
+				"markdown",
+				"typescript",
+				"javascript",
+				"ruby",
+				"rust",
+				"python",
+				"html",
+			},
 			auto_install = true,
 			highlight = {
 				enable = true,
@@ -75,31 +87,20 @@ return {
 				-- Conform will run multiple formatters sequentially
 				python = { "isort", "black" },
 				-- You can customize some of the format options for the filetype (:help conform.format)
-				rust = { "rustfmt", lsp_format = "fallback" },
+				rust = { "rustfmt" },
 				-- Conform will run the first available formatter
-				javascript = { "prettierd", "prettier", stop_after_first = true },
+				javascript = { "prettier" },
+				ruby = { "rufo", timeout_ms = 1000 },
+				markdown = { "prettier" },
 			},
-			-- format_on_save = {
-			-- 	-- These options will be passed to conform.format()
-			-- 	timeout_ms = 500,
-			-- 	lsp_format = "fallback",
-			-- },
+			format_on_save = function()
+				if vim.g.autoformat then
+					return { timeout_ms = 500, lsp_format = "fallback" }
+				end
+			end,
 		},
-		config = function(opts)
-			require("conform").setup(opts)
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				pattern = "*",
-				callback = function(args)
-					if vim.g.autoformat then
-						require("conform").format({
-							bufnr = args.buf,
-							timeout_ms = 500,
-							lsp_format = "fallback"
-						})
-					end
-				end,
-			})
-		end
+		event = "BufEnter",
+		cmd = "ConformInfo",
 	},
 	{
 		"folke/which-key.nvim",
@@ -137,24 +138,24 @@ return {
 		dependencies = "echasnovski/mini.nvim",
 		opts = {},
 		keys = {
-			{ "H",          vim.cmd.BufferLineCyclePrev,   desc = "Previous buffer" },
-			{ "L",          vim.cmd.BufferLineCycleNext,   desc = "Next buffer" },
-			{ "[B",         vim.cmd.BufferLineMovePrev,    desc = "Move buffer left", },
-			{ "]B",         vim.cmd.BufferLineMoveNext,    desc = "Move buffer right", },
-			{ "<c-f>",      vim.cmd.BufferLinePick,        desc = "Pick buffer" },
-			{ "<leader>bp", vim.cmd.BufferLineTogglePin,   desc = "Toggle pin" },
+			{ "H", vim.cmd.BufferLineCyclePrev, desc = "Previous buffer" },
+			{ "L", vim.cmd.BufferLineCycleNext, desc = "Next buffer" },
+			{ "[B", vim.cmd.BufferLineMovePrev, desc = "Move buffer left" },
+			{ "]B", vim.cmd.BufferLineMoveNext, desc = "Move buffer right" },
+			{ "<c-f>", vim.cmd.BufferLinePick, desc = "Pick buffer" },
+			{ "<leader>bp", vim.cmd.BufferLineTogglePin, desc = "Toggle pin" },
 			{ "<leader>bc", vim.cmd.BufferLineCloseOthers, desc = "Close other buffers" },
-			{ "<leader>br", vim.cmd.BufferLineCloseRight,  desc = "Close to right" },
-			{ "<leader>bl", vim.cmd.BufferLineCloseLeft,   desc = "Close to left" },
+			{ "<leader>br", vim.cmd.BufferLineCloseRight, desc = "Close to right" },
+			{ "<leader>bl", vim.cmd.BufferLineCloseLeft, desc = "Close to left" },
 			-- Close non-pinned buffers
 			{
 				"<leader>bP",
 				function()
 					vim.cmd.BufferLineGroupClose("ungrouped")
 				end,
-				desc = "Close unpinned buffers"
+				desc = "Close unpinned buffers",
 			},
-		}
+		},
 	},
 	{
 		"nvim-lualine/lualine.nvim",
@@ -162,9 +163,10 @@ return {
 		opts = {
 			sections = {
 				lualine_c = {
-					reg_component, 'filename'
+					reg_component,
+					"filename",
 				},
-			}
+			},
 		},
 	},
 	{
@@ -177,37 +179,65 @@ return {
 		event = "VeryLazy",
 		opts = {},
 		keys = {
-			{ "<a-h>", vim.cmd.SmartResizeLeft,      desc = "Resize left" },
-			{ "<a-l>", vim.cmd.SmartResizeRight,     desc = "Resize right" },
-			{ "<a-j>", vim.cmd.SmartResizeDown,      desc = "Resize down" },
-			{ "<a-k>", vim.cmd.SmartResizeUp,        desc = "Resize up" },
-			{ "<c-h>", vim.cmd.SmartCursorMoveLeft,  desc = "Move left" },
-			{ "<c-j>", vim.cmd.SmartCursorMoveDown,  desc = "Move down" },
-			{ "<c-k>", vim.cmd.SmartCursorMoveUp,    desc = "Move up" },
+			{ "<a-h>", vim.cmd.SmartResizeLeft, desc = "Resize left" },
+			{ "<a-l>", vim.cmd.SmartResizeRight, desc = "Resize right" },
+			{ "<a-j>", vim.cmd.SmartResizeDown, desc = "Resize down" },
+			{ "<a-k>", vim.cmd.SmartResizeUp, desc = "Resize up" },
+			{ "<c-h>", vim.cmd.SmartCursorMoveLeft, desc = "Move left" },
+			{ "<c-j>", vim.cmd.SmartCursorMoveDown, desc = "Move down" },
+			{ "<c-k>", vim.cmd.SmartCursorMoveUp, desc = "Move up" },
 			{ "<c-l>", vim.cmd.SmartCursorMoveRight, desc = "Move right" },
-		}
+		},
 	},
 	{
-		'Aasim-A/scrollEOF.nvim',
-		event = { 'CursorMoved', 'WinScrolled' },
+		"Aasim-A/scrollEOF.nvim",
+		event = { "CursorMoved", "WinScrolled" },
 		opts = {},
 	},
 	{
 		"monaqa/dial.nvim",
 		keys = {
-			{ "<C-a>", function() require('dial.map').manipulate("increment", "normal") end, desc = "Increment", mode = "n" },
-			{ "<C-x>", function() require('dial.map').manipulate("decrement", "normal") end, desc = "Decrement", mode = "n" },
-			{ "<C-a>", function() require('dial.map').manipulate("increment", "visual") end, desc = "Increment", mode = "v" },
-			{ "<C-x>", function() require('dial.map').manipulate("decrement", "visual") end, desc = "Decrement", mode = "v" },
-		}
+			{
+				"<C-a>",
+				function()
+					require("dial.map").manipulate("increment", "normal")
+				end,
+				desc = "Increment",
+				mode = "n",
+			},
+			{
+				"<C-x>",
+				function()
+					require("dial.map").manipulate("decrement", "normal")
+				end,
+				desc = "Decrement",
+				mode = "n",
+			},
+			{
+				"<C-a>",
+				function()
+					require("dial.map").manipulate("increment", "visual")
+				end,
+				desc = "Increment",
+				mode = "v",
+			},
+			{
+				"<C-x>",
+				function()
+					require("dial.map").manipulate("decrement", "visual")
+				end,
+				desc = "Decrement",
+				mode = "v",
+			},
+		},
 	},
 	{
-		'kevinhwang91/nvim-ufo',
-		dependencies = { 'kevinhwang91/promise-async' },
+		"kevinhwang91/nvim-ufo",
+		dependencies = { "kevinhwang91/promise-async" },
 		opts = {
 			provider_selector = function()
-				return { 'treesitter', 'indent' }
-			end
-		}
-	}
+				return { "treesitter", "indent" }
+			end,
+		},
+	},
 }
