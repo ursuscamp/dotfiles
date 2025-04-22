@@ -90,7 +90,7 @@ return {
 				rust = { "rustfmt" },
 				-- Conform will run the first available formatter
 				javascript = { "prettier" },
-				ruby = { "rufo", timeout_ms = 1000 },
+				ruby = { timeout_ms = 2000, lsp_format = "fallback" },
 				markdown = { "prettier" },
 			},
 			format_on_save = function()

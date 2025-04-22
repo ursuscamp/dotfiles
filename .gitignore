@@ -5,3 +5,4 @@ config/zsh/envrc
 config/zsh/.zsh_sessions
 config/.DS_Store
 .DS_Store
+config/fish/conf.d/uv.env.fish

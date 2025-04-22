@@ -23,6 +23,9 @@ done
 ln -s $SOURCE/.Brewfile $DESTINATION
 ln -s $SOURCE/.Brewfile.lock.json $DESTINATION
 
+# Other dotfiles
+ln -s $SOURCE/.aider.conf.yml $DESTINATION
+
 # Setup tmux plugin manager
 if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
