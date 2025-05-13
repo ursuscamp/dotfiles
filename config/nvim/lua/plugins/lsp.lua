@@ -15,21 +15,26 @@ return {
 				lua_ls = {},
 				rust_analyzer = {
 					settings = {
-						['rust-analyzer'] = {
+						["rust-analyzer"] = {
 							-- checkOnSave = {
 							-- 	command = "clippy",
 							-- },
 							completion = {
 								postfix = { enable = true },
-								termSearch = { enable = true }
-							}
+								termSearch = { enable = true },
+							},
 						},
-					}
+					},
 				},
 				ts_ls = {},
 				pyright = {},
 				marksman = {},
-				ruby_lsp = {},
+				ruby_lsp = {
+					init_options = {
+						formatter = "standard",
+						linters = { "standard" },
+					},
+				},
 			},
 		},
 		config = function(_, opts)
@@ -54,7 +59,7 @@ return {
 		opts = {
 			library = {
 				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-				{ path = "Snacks",             words = { "Snacks" } },
+				{ path = "Snacks", words = { "Snacks" } },
 			},
 		},
 	},
@@ -74,8 +79,7 @@ return {
 			sources = {
 				default = function()
 					if vim.g.copilot_cmp then
-						return { "lsp", "path", "snippets", "buffer", "markdown", "lazydev",
-							"copilot" }
+						return { "lsp", "path", "snippets", "buffer", "markdown", "lazydev", "copilot" }
 					else
 						return { "lsp", "path", "snippets", "buffer", "markdown", "lazydev" }
 					end
@@ -98,8 +102,7 @@ return {
 						score_offset = 100,
 						async = true,
 						transform_items = function(_, items)
-							local CompletionItemKind = require("blink.cmp.types")
-							    .CompletionItemKind
+							local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
 							local kind_idx = #CompletionItemKind + 1
 							CompletionItemKind[kind_idx] = "Copilot"
 							for _, item in ipairs(items) do
@@ -107,7 +110,7 @@ return {
 							end
 							return items
 						end,
-					}
+					},
 				},
 			},
 			completion = {
@@ -115,11 +118,11 @@ return {
 					border = "rounded",
 					draw = {
 						columns = {
-							{ "label",     "label_description", gap = 1 },
+							{ "label", "label_description", gap = 1 },
 							{ "kind_icon", gap = 1 },
-							{ "kind" }
-						}
-					}
+							{ "kind" },
+						},
+					},
 				},
 				documentation = {
 					auto_show = true,

@@ -90,12 +90,12 @@ return {
 				rust = { "rustfmt" },
 				-- Conform will run the first available formatter
 				javascript = { "prettier" },
-				ruby = { timeout_ms = 2000, lsp_format = "fallback" },
+				ruby = { timeout_ms = 10000 },
 				markdown = { "prettier" },
 			},
 			format_on_save = function()
 				if vim.g.autoformat then
-					return { timeout_ms = 500, lsp_format = "fallback" }
+					return { timeout_ms = 10000, lsp_format = "fallback" }
 				end
 			end,
 		},
