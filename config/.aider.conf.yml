@@ -1,3 +1,7 @@
 watch-files: true
-model: openrouter/google/gemini-2.0-flash-001
+# model: openrouter/google/gemini-2.0-flash-001
+# model: openrouter/google/gemini-2.5-pro-exp-03-25
+model: openrouter/google/gemini-2.5-pro-preview-03-25
+# model: openrouter/google/gemini-2.5-flash-preview
+# model: openrouter/deepseek/deepseek-chat-v3-0324:free
 dark-mode: true
