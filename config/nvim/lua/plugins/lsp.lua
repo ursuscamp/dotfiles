@@ -27,7 +27,8 @@ return {
 					},
 				},
 				ts_ls = {},
-				pyright = {},
+				-- pyright = {},
+				pylsp = {},
 				marksman = {},
 				ruby_lsp = {
 					init_options = {

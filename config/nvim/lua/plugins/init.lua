@@ -94,6 +94,7 @@ return {
 				markdown = { "prettier" },
 				html = { "prettier" },
 				htmldjango = { "prettier" },
+				vue = { "prettier" },
 			},
 			format_on_save = function()
 				if vim.g.autoformat then
