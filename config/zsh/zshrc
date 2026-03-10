@@ -47,6 +47,7 @@ export FZF_DEFAULT_OPTS="--multi --bind ctrl-y:accept"
 export PGDATA=$HOME/.local/share/postgres
 export BAT_THEME=Dracula
 export MANPAGER='nvim +Man!'
+export GIT_EXTERNAL_DIFF=difft
 AFTER_INIT_HAS_RUN=0
 
 [[ -f $ZDOTDIR/envrc ]] && source $ZDOTDIR/envrc # Private environment variables can be loaded here.

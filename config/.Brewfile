@@ -22,6 +22,7 @@ brew "tealdeer"
 brew "tree-sitter"
 brew "xplr"
 brew "zellij"
+brew "difftastic"
 
 cask "font-fira-code-nerd-font"
 cask "font-ubuntu-mono-nerd-font"
