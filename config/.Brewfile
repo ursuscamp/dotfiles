@@ -23,6 +23,7 @@ brew "tree-sitter"
 brew "xplr"
 brew "zellij"
 brew "difftastic"
+brew "delta"
 
 cask "font-fira-code-nerd-font"
 cask "font-ubuntu-mono-nerd-font"

@@ -48,6 +48,7 @@ export PGDATA=$HOME/.local/share/postgres
 export BAT_THEME=Dracula
 export MANPAGER='nvim +Man!'
 export GIT_EXTERNAL_DIFF=difft
+export XDG_CONFIG_HOME=$HOME/.config
 AFTER_INIT_HAS_RUN=0
 
 [[ -f $ZDOTDIR/envrc ]] && source $ZDOTDIR/envrc # Private environment variables can be loaded here.
