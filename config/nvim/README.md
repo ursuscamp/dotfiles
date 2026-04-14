@@ -31,6 +31,7 @@ Modular Neovim config for Neovim 0.12+ using the built-in package manager.
   - `mini.files`
   - `mini.bufremove`
   - `mini.extra`
+  - `buffer_manager.nvim`
   - `lazygit.nvim`
 - Completion and snippets:
   - `mini.completion`
@@ -53,6 +54,7 @@ Modular Neovim config for Neovim 0.12+ using the built-in package manager.
 
 - `<leader>ff` and `<leader><leader>`: find files
 - `<leader>fb`: find buffers
+- `<C-b>`: open Buffer Manager
 - `<leader>fh`: find help
 - `<leader>fg`: live grep
 - `<leader>fe` and `<leader>e`: open `mini.files`
@@ -61,6 +63,7 @@ Modular Neovim config for Neovim 0.12+ using the built-in package manager.
 - `<leader>w`: save buffer
 - `<leader>W`: save all buffers
 - `<leader>bd`: delete current buffer
+- `]b` / `[b`: next and previous buffer in Buffer Manager order
 - `<leader>q`: quit current window
 - `<leader>tw`: toggle word wrap
 - `<C-q>`: quit without saving
@@ -69,6 +72,7 @@ Modular Neovim config for Neovim 0.12+ using the built-in package manager.
 - `<Tab>` / `<S-Tab>`: jump through snippet stops
 - `<C-y>` in insert mode: accept completion, or choose the first completion item if nothing is selected
 - `<C-d>` in the buffers picker: delete marked buffers, or the current buffer if none are marked
+- `J` / `K` in Buffer Manager: move current or selected entries down and up
 - `grr`: LSP references in Mini Pick
 - `gri`: LSP implementations in Mini Pick
 - `grt`: LSP type definitions in Mini Pick

@@ -5,6 +5,7 @@ local bufremove = mini.bufremove
 local colorscheme_picker = mini.colorscheme_picker
 local snippets = mini.snippets
 local flash = require("flash")
+local buffer_manager_ui = require("buffer_manager.ui")
 
 local function check_health(targets)
   local cmd = "checkhealth"
@@ -100,6 +101,10 @@ vim.keymap.set("n", "<leader>fb", function()
   pick.builtin.buffers(nil, { mappings = buffer_mappings })
 end, { desc = "Find buffers" })
 
+vim.keymap.set("n", "<C-b>", function()
+  buffer_manager_ui.toggle_quick_menu()
+end, { desc = "Open Buffer Manager" })
+
 vim.keymap.set("n", "<leader>fh", function()
   pick.builtin.help()
 end, { desc = "Find help" })
@@ -135,6 +140,14 @@ vim.keymap.set("n", "<leader>W", "<cmd>wall<cr>", { desc = "Save all buffers" })
 vim.keymap.set("n", "<leader>bd", function()
   bufremove.delete(0, true)
 end, { desc = "Delete current buffer" })
+
+vim.keymap.set("n", "]b", function()
+  buffer_manager_ui.nav_next()
+end, { desc = "Next buffer" })
+
+vim.keymap.set("n", "[b", function()
+  buffer_manager_ui.nav_prev()
+end, { desc = "Previous buffer" })
 
 vim.keymap.set("n", "<leader>q", "<cmd>quit<cr>", { desc = "Quit current window" })
 
