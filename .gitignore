@@ -6,3 +6,5 @@ config/zsh/.zsh_sessions
 config/.DS_Store
 .DS_Store
 config/fish/conf.d/uv.env.fish
+/config/zsh/.zcompcache/brew_all_commands
+/nvim.log

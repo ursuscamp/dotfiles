@@ -86,11 +86,18 @@ minicompletion.setup({
 
 local minisnippets = require("mini.snippets")
 local gen_loader = minisnippets.gen_loader
+local lang_patterns = {
+  -- Markdown code blocks use the injected `markdown_inline` language.
+  markdown_inline = { "markdown.json" },
+}
 minisnippets.setup({
   snippets = {
-    gen_loader.from_lang(),
+    gen_loader.from_lang({ lang_patterns = lang_patterns }),
   },
 })
+
+-- Expose loaded snippets to completion engines like mini.completion.
+minisnippets.start_lsp_server({ match = false })
 
 local minisurround = require("mini.surround")
 minisurround.setup({

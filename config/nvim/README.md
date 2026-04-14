@@ -82,3 +82,4 @@ Modular Neovim config for Neovim 0.12+ using the built-in package manager.
 
 - The built-in package manager installs plugins on demand.
 - `mini.pick` is also wired into `vim.ui.select()`, so selection prompts use it automatically.
+- `../../scripts/clear-nvim-state.sh` clears `~/.cache/nvim`, `~/.local/state/nvim`, and `~/.local/share/nvim` for a fresh Neovim start.
