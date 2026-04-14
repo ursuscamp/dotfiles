@@ -6,6 +6,14 @@ local colorscheme_picker = mini.colorscheme_picker
 local snippets = mini.snippets
 local flash = require("flash")
 
+local function check_health(targets)
+  local cmd = "checkhealth"
+  if targets and #targets > 0 then
+    cmd = cmd .. " " .. table.concat(targets, " ")
+  end
+  vim.cmd(cmd)
+end
+
 local buffer_mappings = {
   delete = {
     char = "<C-d>",
@@ -101,6 +109,48 @@ vim.keymap.set("n", "<leader>tw", function()
 end, { desc = "Toggle word wrap" })
 
 vim.keymap.set("n", "<leader>fc", colorscheme_picker, { desc = "Pick colorscheme" })
+
+vim.keymap.set("n", "<leader>hh", function()
+  check_health()
+end, { desc = "Check all health" })
+
+vim.keymap.set("n", "<leader>hn", function()
+  check_health({ "vim.health" })
+end, { desc = "Check Nvim health" })
+
+vim.keymap.set("n", "<leader>hp", function()
+  check_health({ "vim.provider" })
+end, { desc = "Check provider health" })
+
+vim.keymap.set("n", "<leader>hl", function()
+  check_health({ "vim.lsp" })
+end, { desc = "Check LSP health" })
+
+vim.keymap.set("n", "<leader>hk", function()
+  check_health({ "vim.pack" })
+end, { desc = "Check vim.pack health" })
+
+vim.keymap.set("n", "<leader>ho", function()
+  vim.notify("Opening vim.pack status view", vim.log.levels.INFO)
+  vim.pack.update(nil, { offline = true })
+end, { desc = "Open vim.pack status" })
+
+vim.keymap.set("n", "<leader>ht", function()
+  check_health({ "vim.treesitter" })
+end, { desc = "Check Treesitter health" })
+
+vim.keymap.set("n", "<leader>hu", function()
+  vim.notify("Updating vim.pack plugins", vim.log.levels.INFO)
+  vim.pack.update()
+end, { desc = "Update vim.pack plugins" })
+
+vim.keymap.set("n", "<leader>hm", function()
+  check_health({ "mason" })
+end, { desc = "Check Mason health" })
+
+vim.keymap.set("n", "<leader>ha", function()
+  check_health({ "arborist" })
+end, { desc = "Check Arborist health" })
 
 vim.keymap.set("n", "U", "u", { desc = "Undo" })
 
