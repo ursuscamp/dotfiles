@@ -14,6 +14,40 @@ local function check_health(targets)
   vim.cmd(cmd)
 end
 
+local function pick_filetype()
+  local target_buf = vim.api.nvim_get_current_buf()
+  local current = vim.bo.filetype
+  local filetypes = vim.fn.getcompletion("", "filetype")
+  table.sort(filetypes)
+
+  if current ~= "" then
+    filetypes = vim.tbl_filter(function(filetype)
+      return filetype ~= current
+    end, filetypes)
+    table.insert(filetypes, 1, current)
+  end
+
+  pick.start({
+    source = {
+      items = filetypes,
+      name = current ~= "" and ("Filetypes (" .. current .. ")") or "Filetypes",
+      choose = function(item)
+        if not item or item == "" then
+          return
+        end
+
+        if not vim.api.nvim_buf_is_valid(target_buf) then
+          vim.notify("Original buffer is no longer available", vim.log.levels.WARN)
+          return
+        end
+
+        vim.api.nvim_set_option_value("filetype", item, { buf = target_buf })
+        vim.notify("Filetype set to " .. item, vim.log.levels.INFO)
+      end,
+    },
+  })
+end
+
 local buffer_mappings = {
   delete = {
     char = "<C-d>",
@@ -109,6 +143,8 @@ vim.keymap.set("n", "<leader>tw", function()
 end, { desc = "Toggle word wrap" })
 
 vim.keymap.set("n", "<leader>fc", colorscheme_picker, { desc = "Pick colorscheme" })
+
+vim.keymap.set("n", "<leader>ft", pick_filetype, { desc = "Pick filetype" })
 
 vim.keymap.set("n", "<leader>hh", function()
   check_health()
