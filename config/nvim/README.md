@@ -62,6 +62,7 @@ Modular Neovim config for Neovim 0.12+ using the built-in package manager.
 - `<leader>fc`: pick a colorscheme
 - `<leader>w`: save buffer
 - `<leader>W`: save all buffers
+- `<leader>sh` / `<leader>sv`: split horizontally and vertically
 - `<leader>bd`: delete current buffer
 - `]b` / `[b`: next and previous buffer in Buffer Manager order
 - `<leader>q`: quit current window

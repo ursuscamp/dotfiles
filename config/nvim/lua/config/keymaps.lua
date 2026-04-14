@@ -137,6 +137,10 @@ vim.keymap.set("n", "<leader>w", "<cmd>write<cr>", { desc = "Save buffer" })
 
 vim.keymap.set("n", "<leader>W", "<cmd>wall<cr>", { desc = "Save all buffers" })
 
+vim.keymap.set("n", "<leader>sh", "<cmd>split<cr>", { desc = "Split horizontally" })
+
+vim.keymap.set("n", "<leader>sv", "<cmd>vsplit<cr>", { desc = "Split vertically" })
+
 vim.keymap.set("n", "<leader>bd", function()
   bufremove.delete(0, true)
 end, { desc = "Delete current buffer" })

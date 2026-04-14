@@ -37,3 +37,21 @@ opt.listchars = {
   extends = "›",
   precedes = "‹",
 }
+
+local function set_window_separator_highlight()
+  local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = "FloatBorder" })
+  if not ok then
+    return
+  end
+
+  vim.api.nvim_set_hl(0, "WinSeparator", {
+    fg = hl.fg,
+    bold = true,
+  })
+end
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = set_window_separator_highlight,
+})
+
+set_window_separator_highlight()

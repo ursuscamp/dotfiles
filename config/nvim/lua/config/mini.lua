@@ -187,6 +187,7 @@ miniclue.setup({
       { mode = "n", keys = "<Leader>b", desc = "Buffers" },
       { mode = "n", keys = "<Leader>h", desc = "Help" },
       { mode = "n", keys = "<Leader>g", desc = "Search" },
+      { mode = "n", keys = "<Leader>s", desc = "Splits" },
     },
   },
   window = {
