@@ -1,53 +1,3 @@
-local minipick = require("mini.pick")
-minipick.setup({
-  mappings = {
-    choose = "<C-y>",
-  },
-})
-vim.ui.select = MiniPick.ui_select
-
-local colorscheme_picker = function()
-  local schemes = vim.fn.getcompletion("", "color")
-  table.sort(schemes)
-  local original = vim.g.colors_name
-  local committed = false
-  local restore_group = vim.api.nvim_create_augroup("NvimNextColorschemePreview", { clear = true })
-
-  local apply_preview = function(_, item)
-    if item == nil then
-      return
-    end
-
-    pcall(vim.cmd.colorscheme, item)
-  end
-
-  vim.api.nvim_create_autocmd("User", {
-    group = restore_group,
-    pattern = "MiniPickStop",
-    once = true,
-    callback = function()
-      if not committed and original and original ~= "" then
-        pcall(vim.cmd.colorscheme, original)
-      end
-    end,
-  })
-
-  minipick.start({
-    source = {
-      items = schemes,
-      name = "Colorschemes",
-      preview = apply_preview,
-      choose = function(item)
-        committed = true
-        pcall(vim.cmd.colorscheme, item)
-      end,
-    },
-  })
-end
-
-local miniextra = require("mini.extra")
-miniextra.setup()
-
 local miniicons = require("mini.icons")
 miniicons.setup()
 miniicons.tweak_lsp_kind()
@@ -196,9 +146,6 @@ miniclue.setup({
 })
 
 return {
-  pick = minipick,
-  colorscheme_picker = colorscheme_picker,
-  extra = miniextra,
   files = minifiles,
   bufremove = minibufremove,
   pairs = minipairs,

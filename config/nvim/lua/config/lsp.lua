@@ -6,8 +6,8 @@ local map = function(bufnr, modes, lhs, rhs, desc)
 end
 
 local minicompletion = require("config.mini").completion
-local miniextra = require("config.mini").extra
 local lsp_servers = require("config.lsp_servers")
+local fzf = require("fzf-lua")
 
 vim.diagnostic.config({
   float = {
@@ -50,31 +50,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     vim.bo[bufnr].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
 
-    local lsp_picker = function(scope, opts)
-      return function()
-        return miniextra.pickers.lsp(vim.tbl_deep_extend("force", { scope = scope }, opts or {}))
-      end
-    end
-
-    -- Use MiniExtra pickers where available so LSP navigation lands in MiniPick
-    -- instead of the default quickfix / location list flow.
     map(bufnr, "n", "gd", vim.lsp.buf.definition, "LSP definition")
     map(bufnr, "n", "gD", vim.lsp.buf.declaration, "LSP declaration")
-    map(bufnr, "n", "grr", lsp_picker("references"), "LSP references")
-    map(bufnr, "n", "gri", lsp_picker("implementation"), "LSP implementations")
-    map(bufnr, "n", "grt", lsp_picker("type_definition"), "LSP type definition")
+    map(bufnr, "n", "grr", fzf.lsp_references, "LSP references")
+    map(bufnr, "n", "gri", fzf.lsp_implementations, "LSP implementations")
+    map(bufnr, "n", "grt", fzf.lsp_typedefs, "LSP type definition")
     map(bufnr, "n", "grd", function()
-      return miniextra.pickers.diagnostic({ scope = "current" })
+      return fzf.diagnostics_document()
     end, "LSP buffer diagnostics")
     map(bufnr, "n", "grD", function()
-      return miniextra.pickers.diagnostic({ scope = "all" })
+      return fzf.diagnostics_workspace()
     end, "LSP workspace diagnostics")
-    map(bufnr, "n", "grs", lsp_picker("document_symbol"), "LSP document symbols")
-    map(bufnr, "n", "grS", lsp_picker("workspace_symbol"), "LSP workspace symbols")
-    map(bufnr, "n", "gO", lsp_picker("document_symbol"), "LSP document symbols")
+    map(bufnr, "n", "grs", fzf.lsp_document_symbols, "LSP document symbols")
+    map(bufnr, "n", "grS", fzf.lsp_workspace_symbols, "LSP workspace symbols")
+    map(bufnr, "n", "gO", fzf.lsp_document_symbols, "LSP document symbols")
 
-    -- These don't have MiniExtra picker equivalents, so keep the native LSP
-    -- actions and let mini.pick handle any selection prompts via vim.ui.select.
+    -- Keep native LSP actions and let fzf-lua handle selection prompts via
+    -- its vim.ui.select integration where needed.
     map(bufnr, { "n", "x" }, "gra", vim.lsp.buf.code_action, "LSP code action")
     map(bufnr, "n", "grn", vim.lsp.buf.rename, "LSP rename")
     map(bufnr, "n", "grx", vim.lsp.codelens.run, "LSP code lens")

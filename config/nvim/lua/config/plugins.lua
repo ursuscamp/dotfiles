@@ -2,6 +2,7 @@ vim.pack.add({
   "https://github.com/folke/tokyonight.nvim",
   "https://github.com/catppuccin/nvim",
   "https://github.com/arborist-ts/arborist.nvim",
+  "https://github.com/ibhagwan/fzf-lua",
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/j-morano/buffer_manager.nvim",
   "https://github.com/folke/flash.nvim",

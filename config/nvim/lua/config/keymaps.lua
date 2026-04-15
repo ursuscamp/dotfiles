@@ -1,11 +1,11 @@
 local mini = require("config.mini")
-local pick = mini.pick
 local files = mini.files
 local bufremove = mini.bufremove
-local colorscheme_picker = mini.colorscheme_picker
+local colorscheme_picker = require("config.fzf").colorscheme_picker
 local snippets = mini.snippets
 local flash = require("flash")
 local buffer_manager_ui = require("buffer_manager.ui")
+local fzf = require("fzf-lua")
 
 local function check_health(targets)
   local cmd = "checkhealth"
@@ -18,22 +18,12 @@ end
 local function pick_filetype()
   local target_buf = vim.api.nvim_get_current_buf()
   local current = vim.bo.filetype
-  local filetypes = vim.fn.getcompletion("", "filetype")
-  table.sort(filetypes)
 
-  if current ~= "" then
-    filetypes = vim.tbl_filter(function(filetype)
-      return filetype ~= current
-    end, filetypes)
-    table.insert(filetypes, 1, current)
-  end
-
-  pick.start({
-    source = {
-      items = filetypes,
-      name = current ~= "" and ("Filetypes (" .. current .. ")") or "Filetypes",
-      choose = function(item)
-        if not item or item == "" then
+  fzf.filetypes({
+    prompt = current ~= "" and ("Filetypes (" .. current .. ")❯ ") or "Filetypes❯ ",
+    actions = {
+      ["enter"] = function(selected)
+        if not selected or not selected[1] then
           return
         end
 
@@ -42,63 +32,28 @@ local function pick_filetype()
           return
         end
 
-        vim.api.nvim_set_option_value("filetype", item, { buf = target_buf })
-        vim.notify("Filetype set to " .. item, vim.log.levels.INFO)
+        local filetype = selected[1]:match("[^%s]+$")
+        if not filetype or filetype == "" then
+          return
+        end
+
+        vim.api.nvim_set_option_value("filetype", filetype, { buf = target_buf })
+        vim.notify("Filetype set to " .. filetype, vim.log.levels.INFO)
       end,
     },
   })
 end
 
-local buffer_mappings = {
-  delete = {
-    char = "<C-d>",
-    func = function()
-      -- Delete marked buffers if present; otherwise delete the focused one,
-      -- then refresh the picker list so removed entries disappear immediately.
-      local matches = MiniPick.get_picker_matches()
-      if not matches then
-        return
-      end
-
-      local targets = {}
-      if matches.marked and #matches.marked > 0 then
-        for _, item in ipairs(matches.marked) do
-          if type(item) == "table" and item.bufnr then
-            targets[item.bufnr] = true
-          end
-        end
-      elseif matches.current and matches.current.bufnr then
-        targets[matches.current.bufnr] = true
-      end
-
-      local removed = {}
-      for bufnr in pairs(targets) do
-        if bufremove.delete(bufnr, true) then
-          removed[bufnr] = true
-        end
-      end
-
-      if next(removed) ~= nil then
-        local items = MiniPick.get_picker_items() or {}
-        local filtered = vim.tbl_filter(function(item)
-          return not (type(item) == "table" and item.bufnr and removed[item.bufnr])
-        end, items)
-        MiniPick.set_picker_items(filtered, { do_match = true })
-      end
-    end,
-  },
-}
-
 vim.keymap.set("n", "<leader>ff", function()
-  pick.builtin.files()
+  fzf.files()
 end, { desc = "Find files" })
 
 vim.keymap.set("n", "<leader><leader>", function()
-  pick.builtin.files()
+  fzf.files()
 end, { desc = "Find files" })
 
 vim.keymap.set("n", "<leader>fb", function()
-  pick.builtin.buffers(nil, { mappings = buffer_mappings })
+  fzf.buffers()
 end, { desc = "Find buffers" })
 
 vim.keymap.set("n", "<C-b>", function()
@@ -106,20 +61,12 @@ vim.keymap.set("n", "<C-b>", function()
 end, { desc = "Open Buffer Manager" })
 
 vim.keymap.set("n", "<leader>fh", function()
-  pick.builtin.help()
+  fzf.helptags()
 end, { desc = "Find help" })
 
 vim.keymap.set("n", "<leader>fg", function()
-  pick.builtin.grep_live()
+  fzf.live_grep()
 end, { desc = "Live grep" })
-
-vim.keymap.set("n", "<leader>fe", function()
-  local path = vim.api.nvim_buf_get_name(0)
-  if path == "" then
-    path = nil
-  end
-  files.open(path, false)
-end, { desc = "Explore files" })
 
 vim.keymap.set("n", "<leader>e", function()
   local path = vim.api.nvim_buf_get_name(0)
@@ -132,6 +79,8 @@ end, { desc = "Explore files" })
 vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 
 vim.keymap.set("n", "<C-q>", "<cmd>qa!<cr>", { desc = "Quit without saving" })
+
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search highlight" })
 
 vim.keymap.set("n", "<leader>w", "<cmd>write<cr>", { desc = "Save buffer" })
 
@@ -200,6 +149,10 @@ end, { desc = "Update vim.pack plugins" })
 vim.keymap.set("n", "<leader>hm", function()
   check_health({ "mason" })
 end, { desc = "Check Mason health" })
+
+vim.keymap.set("n", "<leader>hf", function()
+  check_health({ "fzf_lua" })
+end, { desc = "Check fzf-lua health" })
 
 vim.keymap.set("n", "<leader>ha", function()
   check_health({ "arborist" })

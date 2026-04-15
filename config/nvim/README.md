@@ -18,7 +18,7 @@ Modular Neovim config for Neovim 0.12+ using the built-in package manager.
   - `mini.icons`
   - `mini.clue`
   - `mini.indentscope` with a solid bar and no animation
-  - a Mini Pick colorscheme picker with live preview while you navigate
+  - an `fzf-lua` colorscheme picker with live preview while you navigate
 - Editing helpers:
   - `mini.pairs`
   - `mini.surround` using `gs` as the prefix
@@ -27,10 +27,9 @@ Modular Neovim config for Neovim 0.12+ using the built-in package manager.
   - tree-sitter folds
   - word-wrap toggle
 - File and buffer tools:
-  - `mini.pick`
+  - `fzf-lua`
   - `mini.files`
   - `mini.bufremove`
-  - `mini.extra`
   - `buffer_manager.nvim`
   - `lazygit.nvim`
 - Completion and snippets:
@@ -48,7 +47,7 @@ Modular Neovim config for Neovim 0.12+ using the built-in package manager.
   - shared server list for both install and enable
   - `rust_analyzer` included
   - `mini.completion` wired into LSP completion
-  - `mini.extra` pickers for references, implementations, type definitions, diagnostics, and symbols
+  - `fzf-lua` pickers for references, implementations, type definitions, diagnostics, and symbols
 
 ## Key mappings
 
@@ -72,19 +71,18 @@ Modular Neovim config for Neovim 0.12+ using the built-in package manager.
 - `s` / `S` / `r` / `R` / `<C-s>`: Flash motions
 - `<Tab>` / `<S-Tab>`: jump through snippet stops
 - `<C-y>` in insert mode: accept completion, or choose the first completion item if nothing is selected
-- `<C-d>` in the buffers picker: delete marked buffers, or the current buffer if none are marked
 - `J` / `K` in Buffer Manager: move current or selected entries down and up
-- `grr`: LSP references in Mini Pick
-- `gri`: LSP implementations in Mini Pick
-- `grt`: LSP type definitions in Mini Pick
-- `grd`: current-buffer diagnostics in Mini Pick
-- `grD`: workspace diagnostics in Mini Pick
-- `grs`: document symbols in Mini Pick
-- `grS`: workspace symbols in Mini Pick
+- `grr`: LSP references in `fzf-lua`
+- `gri`: LSP implementations in `fzf-lua`
+- `grt`: LSP type definitions in `fzf-lua`
+- `grd`: current-buffer diagnostics in `fzf-lua`
+- `grD`: workspace diagnostics in `fzf-lua`
+- `grs`: document symbols in `fzf-lua`
+- `grS`: workspace symbols in `fzf-lua`
 - `gra`, `grn`, `grx`: native LSP code actions, rename, and code lens
 
 ## Notes
 
 - The built-in package manager installs plugins on demand.
-- `mini.pick` is also wired into `vim.ui.select()`, so selection prompts use it automatically.
+- `fzf-lua` is also wired into `vim.ui.select()`, so selection prompts use it automatically.
 - `../../scripts/clear-nvim-state.sh` clears `~/.cache/nvim`, `~/.local/state/nvim`, and `~/.local/share/nvim` for a fresh Neovim start.
