@@ -58,6 +58,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Use MiniExtra pickers where available so LSP navigation lands in MiniPick
     -- instead of the default quickfix / location list flow.
+    map(bufnr, "n", "gd", vim.lsp.buf.definition, "LSP definition")
+    map(bufnr, "n", "gD", vim.lsp.buf.declaration, "LSP declaration")
     map(bufnr, "n", "grr", lsp_picker("references"), "LSP references")
     map(bufnr, "n", "gri", lsp_picker("implementation"), "LSP implementations")
     map(bufnr, "n", "grt", lsp_picker("type_definition"), "LSP type definition")
