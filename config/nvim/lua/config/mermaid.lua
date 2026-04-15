@@ -184,6 +184,16 @@ local function open_local_preview(source)
 end
 
 local function mermaid_live_url(source)
+  local payload = vim.json.encode({
+    code = table.concat(source, "\n"),
+    mermaid = {
+      theme = "default",
+    },
+    autoSync = true,
+    updateDiagram = false,
+    editorMode = "code",
+  })
+
   local script = [[
 import base64
 import sys
@@ -195,7 +205,7 @@ sys.stdout.write("https://mermaid.live/edit#pako:" + encoded)
 ]]
 
   local ok, result = pcall(function()
-    return vim.system({ "python3", "-c", script }, { text = true, stdin = table.concat(source, "\n") }):wait()
+    return vim.system({ "python3", "-c", script }, { text = true, stdin = payload }):wait()
   end)
 
   if not ok then
@@ -250,19 +260,23 @@ vim.api.nvim_create_autocmd("FileType", {
   group = mermaid_group,
   pattern = { "markdown", "mdx", "rmd", "quarto", "mermaid" },
   callback = function(ev)
-    vim.keymap.set("n", "<leader>mp", "<cmd>MermaidLive<cr>", {
+    vim.keymap.set("n", "<leader>ml", "<cmd>MermaidLive<cr>", {
       buffer = ev.buf,
       desc = "Open Mermaid in browser",
     })
 
-    vim.keymap.set("x", "<leader>mp", ":MermaidLive<cr>", {
+    vim.keymap.set("x", "<leader>ml", ":MermaidLive<cr>", {
       buffer = ev.buf,
       desc = "Open Mermaid selection in browser",
     })
 
-    vim.keymap.set("n", "<leader>mP", "<cmd>MermaidPreview<cr>", {
+    vim.keymap.set("n", "<leader>mp", "<cmd>MermaidPreview<cr>", {
       buffer = ev.buf,
       desc = "Open Mermaid local preview",
     })
+
+    if _G.MiniClue ~= nil then
+      MiniClue.ensure_buf_triggers(ev.buf)
+    end
   end,
 })
