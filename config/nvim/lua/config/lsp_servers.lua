@@ -8,4 +8,5 @@ return {
   "rust_analyzer",
   "ts_ls",
   "yamlls",
+  "ruby_lsp",
 }
