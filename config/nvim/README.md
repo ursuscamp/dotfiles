@@ -80,9 +80,13 @@ Modular Neovim config for Neovim 0.12+ using the built-in package manager.
 - `grs`: document symbols in `fzf-lua`
 - `grS`: workspace symbols in `fzf-lua`
 - `gra`, `grn`, `grx`: native LSP code actions, rename, and code lens
+- In Mermaid and Markdown buffers:
+  - `<leader>mp`: open the current Mermaid file or fenced Mermaid block in `mermaid.live`
+  - `<leader>mP`: open a local HTML Mermaid preview in your browser
 
 ## Notes
 
 - The built-in package manager installs plugins on demand.
 - `fzf-lua` is also wired into `vim.ui.select()`, so selection prompts use it automatically.
+- Mermaid files and Mermaid code blocks can be opened in a browser with `:MermaidLive` or `:MermaidPreview`.
 - `../../scripts/clear-nvim-state.sh` clears `~/.cache/nvim`, `~/.local/state/nvim`, and `~/.local/share/nvim` for a fresh Neovim start.

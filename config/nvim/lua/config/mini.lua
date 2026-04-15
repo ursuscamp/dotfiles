@@ -111,6 +111,7 @@ miniclue.setup({
   triggers = {
     { mode = "n", keys = "<Leader>" },
     { mode = "x", keys = "<Leader>" },
+    { mode = "i", keys = "<C-x>" },
     { mode = "n", keys = "g" },
     { mode = "x", keys = "g" },
     { mode = "n", keys = "'" },

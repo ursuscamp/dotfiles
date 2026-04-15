@@ -47,6 +47,7 @@ vim.lsp.config("lua_ls", {
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local bufnr = args.buf
+    local miniclue = require("mini.clue")
 
     vim.bo[bufnr].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
 
@@ -75,6 +76,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map(bufnr, { "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, "Code action")
     map(bufnr, "n", "[d", vim.diagnostic.goto_prev, "Previous diagnostic")
     map(bufnr, "n", "]d", vim.diagnostic.goto_next, "Next diagnostic")
+
+    miniclue.ensure_buf_triggers(bufnr)
   end,
 })
 
