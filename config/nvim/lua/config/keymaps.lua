@@ -64,9 +64,21 @@ vim.keymap.set("n", "<leader>fh", function()
   fzf.helptags()
 end, { desc = "Find help" })
 
+vim.keymap.set("n", "<leader>fk", function()
+  fzf.keymaps()
+end, { desc = "Find keymaps" })
+
 vim.keymap.set("n", "<leader>fg", function()
   fzf.live_grep()
 end, { desc = "Live grep" })
+
+vim.keymap.set("n", "<leader>fl", function()
+  fzf.lsp_finder()
+end, { desc = "LSP finder" })
+
+vim.keymap.set("n", "<leader>fr", function()
+  fzf.resume()
+end, { desc = "Resume picker" })
 
 vim.keymap.set("n", "<leader>e", function()
   local path = vim.api.nvim_buf_get_name(0)
