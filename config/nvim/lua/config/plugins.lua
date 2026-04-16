@@ -6,6 +6,7 @@ vim.pack.add({
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/j-morano/buffer_manager.nvim",
   "https://github.com/folke/flash.nvim",
+  "https://github.com/stevearc/conform.nvim",
   "https://github.com/mason-org/mason.nvim",
   "https://github.com/mason-org/mason-lspconfig.nvim",
   "https://github.com/rafamadriz/friendly-snippets",

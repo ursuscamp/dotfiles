@@ -49,6 +49,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local bufnr = args.buf
     local miniclue = require("mini.clue")
 
+    -- Let conform.nvim handle gq on LSP-attached buffers.
+    vim.bo[bufnr].formatexpr = nil
     vim.bo[bufnr].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
 
     map(bufnr, "n", "gd", vim.lsp.buf.definition, "LSP definition")

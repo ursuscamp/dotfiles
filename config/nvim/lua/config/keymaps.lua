@@ -98,6 +98,10 @@ vim.keymap.set("n", "<leader>w", "<cmd>write<cr>", { desc = "Save buffer" })
 
 vim.keymap.set("n", "<leader>W", "<cmd>wall<cr>", { desc = "Save all buffers" })
 
+vim.keymap.set("n", "<leader>fm", function()
+  require("conform").format({ async = true, lsp_format = "fallback" })
+end, { desc = "Format buffer" })
+
 vim.keymap.set("n", "<leader>sh", "<cmd>split<cr>", { desc = "Split horizontally" })
 
 vim.keymap.set("n", "<leader>sv", "<cmd>vsplit<cr>", { desc = "Split vertically" })
