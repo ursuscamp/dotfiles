@@ -76,13 +76,13 @@ ministatusline.setup({
       local searchcount = ministatusline.section_searchcount({ trunc_width = 75 })
 
       return ministatusline.combine_groups({
-        { hl = mode_hl, strings = { mode } },
+        { hl = mode_hl,                 strings = { mode } },
         { hl = "MiniStatuslineDevinfo", strings = { git, diff, diagnostics } },
         "%<",
         { hl = "MiniStatuslineFilename", strings = { filename } },
         "%=",
         { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
-        { hl = mode_hl, strings = { searchcount, location } },
+        { hl = mode_hl,                  strings = { searchcount, location } },
       })
     end,
     inactive = function()
@@ -134,12 +134,12 @@ miniclue.setup({
     miniclue.gen_clues.windows(),
     miniclue.gen_clues.z(),
     {
-      { mode = "n", keys = "<Leader>f", desc = "Files" },
-      { mode = "n", keys = "<Leader>b", desc = "Buffers" },
-      { mode = "n", keys = "<Leader>h", desc = "Help" },
-      { mode = "n", keys = "<Leader>g", desc = "Search" },
-      { mode = { "n", "x" }, keys = "<Leader>m", desc = "+Mermaid diagrams" },
-      { mode = "n", keys = "<Leader>s", desc = "Splits" },
+      { mode = "n",          keys = "<Leader>f", desc = "Files" },
+      { mode = "n",          keys = "<Leader>b", desc = "Buffers" },
+      { mode = "n",          keys = "<Leader>h", desc = "Healthcheck" },
+      { mode = "n",          keys = "<Leader>g", desc = "Git" },
+      { mode = { "n", "x" }, keys = "<Leader>m", desc = "Mermaid" },
+      { mode = "n",          keys = "<Leader>s", desc = "Splits" },
     },
   },
   window = {

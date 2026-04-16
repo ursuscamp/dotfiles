@@ -22,7 +22,8 @@ vim.diagnostic.config({
 })
 
 vim.lsp.config("*", {
-  capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), minicompletion.get_lsp_capabilities()),
+  capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(),
+    minicompletion.get_lsp_capabilities()),
 })
 
 vim.lsp.config("lua_ls", {
@@ -74,8 +75,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map(bufnr, "n", "grn", vim.lsp.buf.rename, "LSP rename")
     map(bufnr, "n", "grx", vim.lsp.codelens.run, "LSP code lens")
 
-    map(bufnr, "n", "<leader>rn", vim.lsp.buf.rename, "Rename symbol")
-    map(bufnr, { "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, "Code action")
     map(bufnr, "n", "[d", vim.diagnostic.goto_prev, "Previous diagnostic")
     map(bufnr, "n", "]d", vim.diagnostic.goto_next, "Next diagnostic")
 
