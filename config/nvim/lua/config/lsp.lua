@@ -85,8 +85,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
       })
     end, "Toggle inlay hints")
 
-    map(bufnr, "n", "[d", vim.diagnostic.goto_prev, "Previous diagnostic")
-    map(bufnr, "n", "]d", vim.diagnostic.goto_next, "Next diagnostic")
+    map(bufnr, "n", "[d", function()
+      vim.diagnostic.jump({ count = -1, float = true })
+    end, "Previous diagnostic")
+    map(bufnr, "n", "]d", function()
+      vim.diagnostic.jump({ count = 1, float = true })
+    end, "Next diagnostic")
 
     miniclue.ensure_buf_triggers(bufnr)
   end,
