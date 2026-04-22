@@ -48,11 +48,14 @@ vim.lsp.config("lua_ls", {
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
     local miniclue = require("mini.clue")
 
     -- Let conform.nvim handle gq on LSP-attached buffers.
     vim.bo[bufnr].formatexpr = nil
     vim.bo[bufnr].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
+
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 
     map(bufnr, "n", "gd", vim.lsp.buf.definition, "LSP definition")
     map(bufnr, "n", "gD", vim.lsp.buf.declaration, "LSP declaration")
@@ -74,6 +77,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map(bufnr, { "n", "x" }, "gra", vim.lsp.buf.code_action, "LSP code action")
     map(bufnr, "n", "grn", vim.lsp.buf.rename, "LSP rename")
     map(bufnr, "n", "grx", vim.lsp.codelens.run, "LSP code lens")
+    map(bufnr, "n", "<leader>uh", function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), {
+        bufnr = bufnr,
+      })
+    end, "Toggle inlay hints")
 
     map(bufnr, "n", "[d", vim.diagnostic.goto_prev, "Previous diagnostic")
     map(bufnr, "n", "]d", vim.diagnostic.goto_next, "Next diagnostic")

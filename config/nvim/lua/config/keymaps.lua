@@ -120,7 +120,7 @@ end, { desc = "Previous buffer" })
 
 vim.keymap.set("n", "<leader>q", "<cmd>quit<cr>", { desc = "Quit current window" })
 
-vim.keymap.set("n", "<leader>tw", function()
+vim.keymap.set("n", "<leader>uw", function()
   vim.wo.wrap = not vim.wo.wrap
 end, { desc = "Toggle word wrap" })
 
