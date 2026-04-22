@@ -13,7 +13,24 @@ vim.pack.add({
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/echasnovski/mini.nvim",
   "https://github.com/kdheepak/lazygit.nvim",
-}, { load = true })
+  { src = "https://github.com/folke/lazydev.nvim", name = "lazydev" },
+}, {
+  load = function(plugin)
+    if plugin.spec.name == "lazydev" then
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "lua",
+        once = true,
+        callback = function()
+          vim.cmd.packadd("lazydev")
+          require("config.lazydev").setup()
+        end,
+      })
+      return
+    end
+
+    vim.cmd.packadd(plugin.spec.name)
+  end,
+})
 
 vim.cmd.colorscheme("catppuccin")
 
