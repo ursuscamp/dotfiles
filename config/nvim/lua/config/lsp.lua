@@ -48,7 +48,6 @@ vim.lsp.config("lua_ls", {
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local bufnr = args.buf
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
     local miniclue = require("mini.clue")
 
     -- Let conform.nvim handle gq on LSP-attached buffers.
@@ -59,6 +58,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     map(bufnr, "n", "gd", vim.lsp.buf.definition, "LSP definition")
     map(bufnr, "n", "gD", vim.lsp.buf.declaration, "LSP declaration")
+    map(bufnr, "n", "K", function()
+      vim.lsp.buf.hover({ border = "rounded" })
+    end, "LSP hover")
     map(bufnr, "n", "grr", fzf.lsp_references, "LSP references")
     map(bufnr, "n", "gri", fzf.lsp_implementations, "LSP implementations")
     map(bufnr, "n", "grt", fzf.lsp_typedefs, "LSP type definition")
