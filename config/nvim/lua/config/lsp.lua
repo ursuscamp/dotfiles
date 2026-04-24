@@ -45,6 +45,21 @@ vim.lsp.config("lua_ls", {
   },
 })
 
+vim.lsp.config("rust_analyzer", {
+  settings = {
+    ["rust-analyzer"] = {
+      workspace = {
+        symbol = {
+          search = {
+            -- Raise the default workspace symbol cap so fzf-lua sees more results.
+            limit = 1000,
+          },
+        },
+      },
+    },
+  },
+})
+
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local bufnr = args.buf
