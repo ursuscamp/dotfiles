@@ -7,6 +7,91 @@ local flash = require("flash")
 local buffer_manager_ui = require("buffer_manager.ui")
 local fzf = require("fzf-lua")
 
+local lazygit_buf = nil
+
+local function lazygit_float_opts()
+  local factor = vim.g.lazygit_floating_window_scaling_factor
+  if type(factor) == "table" then
+    factor = factor[false]
+  end
+  if type(factor) ~= "number" then
+    factor = 0.9
+  end
+
+  local height = math.max(1, math.ceil(vim.o.lines * factor) - 1)
+  local width = math.max(1, math.ceil(vim.o.columns * factor))
+  local row = math.floor((vim.o.lines - height) / 2)
+  local col = math.floor((vim.o.columns - width) / 2)
+
+  return {
+    style = "minimal",
+    relative = "editor",
+    row = row,
+    col = col,
+    width = width,
+    height = height,
+    border = vim.g.lazygit_floating_window_border_chars,
+  }
+end
+
+local function remember_lazygit_buffer()
+  local win = vim.api.nvim_get_current_win()
+  local buf = vim.api.nvim_win_get_buf(win)
+  if vim.bo[buf].filetype == "lazygit" then
+    lazygit_buf = buf
+  end
+end
+
+local function open_lazygit()
+  vim.cmd("LazyGit")
+  vim.schedule(remember_lazygit_buffer)
+end
+
+local function reopen_lazygit()
+  if not lazygit_buf or not vim.api.nvim_buf_is_valid(lazygit_buf) then
+    open_lazygit()
+    return
+  end
+
+  local wins = vim.fn.win_findbuf(lazygit_buf)
+  if #wins > 0 then
+    vim.api.nvim_set_current_win(wins[1])
+    vim.cmd("startinsert")
+    return
+  end
+
+  local win = vim.api.nvim_open_win(lazygit_buf, true, lazygit_float_opts())
+  vim.bo[lazygit_buf].filetype = "lazygit"
+  vim.bo[lazygit_buf].bufhidden = "hide"
+  vim.wo[win].cursorcolumn = false
+  vim.wo[win].signcolumn = "no"
+  vim.api.nvim_set_hl(0, "LazyGitBorder", { link = "Normal", default = true })
+  vim.api.nvim_set_hl(0, "LazyGitFloat", { link = "Normal", default = true })
+  vim.wo[win].winhl = "FloatBorder:LazyGitBorder,NormalFloat:LazyGitFloat"
+  vim.wo[win].winblend = vim.g.lazygit_floating_window_winblend or 0
+  vim.cmd("startinsert")
+end
+
+local function toggle_lazygit()
+  if lazygit_buf and vim.api.nvim_buf_is_valid(lazygit_buf) then
+    local wins = vim.fn.win_findbuf(lazygit_buf)
+    if #wins > 0 then
+      vim.api.nvim_win_hide(wins[1])
+      return
+    end
+  end
+
+  reopen_lazygit()
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "lazygit",
+  callback = function(ev)
+    vim.keymap.set("t", "<C-Space>", toggle_lazygit, { buffer = ev.buf, desc = "Toggle LazyGit" })
+    vim.keymap.set("t", "<C-@>", toggle_lazygit, { buffer = ev.buf, desc = "Toggle LazyGit" })
+  end,
+})
+
 local function check_health(targets)
   local cmd = "checkhealth"
   if targets and #targets > 0 then
@@ -88,7 +173,7 @@ vim.keymap.set("n", "<leader>e", function()
   files.open(path, false)
 end, { desc = "Explore files" })
 
-vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
+vim.keymap.set("n", "<C-Space>", toggle_lazygit, { desc = "Toggle LazyGit" })
 
 vim.keymap.set("n", "<C-q>", "<cmd>qa!<cr>", { desc = "Quit without saving" })
 
