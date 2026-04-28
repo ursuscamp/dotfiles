@@ -50,11 +50,12 @@ vim.lsp.config("rust_analyzer", {
     ["rust-analyzer"] = {
       workspace = {
         symbol = {
-          search = {
-            -- Raise the default workspace symbol cap so fzf-lua sees more results.
-            limit = 1000,
+            search = {
+              -- Raise the default workspace symbol cap so fzf-lua sees more results.
+              kind = "all_symbols",
+              limit = 5000,
+            },
           },
-        },
       },
     },
   },
