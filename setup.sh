@@ -26,6 +26,16 @@ ln -s $SOURCE/.Brewfile.lock.json $DESTINATION
 # Other dotfiles
 ln -s $SOURCE/.aider.conf.yml $DESTINATION
 
+# Pi config (safe subpaths only)
+PI_AGENT_SOURCE="$SOURCE/pi/agent"
+PI_AGENT_DEST="$HOME/.pi/agent"
+
+echo "Linking Pi config (extensions, themes)..."
+mkdir -p "$PI_AGENT_DEST"
+ln -sfn "$PI_AGENT_SOURCE/extensions" "$PI_AGENT_DEST/extensions"
+ln -sfn "$PI_AGENT_SOURCE/themes" "$PI_AGENT_DEST/themes"
+echo "Pi config linked: $PI_AGENT_DEST/extensions, $PI_AGENT_DEST/themes"
+
 # Setup tmux plugin manager
 if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

@@ -1,0 +1,10 @@
+# Pi secrets/state (do not commit)
+settings.json
+auth.json
+models.json
+sessions/
+cache/
+*.log
+*.jsonl
+*.sqlite
+*.db

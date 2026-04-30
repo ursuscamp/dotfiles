@@ -11,3 +11,14 @@ config/fish/conf.d/uv.env.fish
 /config/fish/conf.d/00_fig_pre.fish
 /config/fish/conf.d/99_fig_post.fish
 /config/zsh/.zcompcache
+
+# Pi config: keep secrets/state out of the repo
+config/pi/agent/settings.json
+config/pi/agent/auth.json
+config/pi/agent/models.json
+config/pi/agent/sessions/
+config/pi/agent/cache/
+config/pi/agent/*.log
+config/pi/agent/*.jsonl
+config/pi/agent/*.sqlite
+config/pi/agent/*.db
