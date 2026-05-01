@@ -146,6 +146,7 @@ export default function planMode(pi: ExtensionAPI): void {
 	let mode: Mode = "normal";
 	let steps: PlanStep[] = [];
 	let normalTools: string[] = [];
+	let continueExecution = false;
 
 	pi.registerFlag("plan", {
 		description: "Start in plan mode (read-only exploration)",
@@ -170,6 +171,10 @@ export default function planMode(pi: ExtensionAPI): void {
 		if (!step || step.completed) return false;
 		step.completed = true;
 		return true;
+	}
+
+	function nextIncompleteStep(): PlanStep | undefined {
+		return steps.find((s) => !s.completed);
 	}
 
 	function updateUi(ctx: ExtensionContext): void {
@@ -209,6 +214,7 @@ export default function planMode(pi: ExtensionAPI): void {
 	function enterNormal(ctx: ExtensionContext): void {
 		mode = "normal";
 		steps = [];
+		continueExecution = false;
 		pi.setActiveTools(activeNormalTools());
 		ctx.ui.notify("Plan mode disabled. Normal tools restored.", "info");
 		updateUi(ctx);
@@ -217,11 +223,12 @@ export default function planMode(pi: ExtensionAPI): void {
 
 	function enterExecuting(ctx: ExtensionContext): void {
 		mode = "executing";
+		continueExecution = false;
 		pi.setActiveTools(executionTools());
-		ctx.ui.notify("Executing approved plan. The agent should call plan_done after each completed step.", "info");
+		ctx.ui.notify("Executing approved plan. The agent will advance to the next step after each plan_done.", "info");
 		updateUi(ctx);
 		persist();
-		const first = steps.find((s) => !s.completed);
+		const first = nextIncompleteStep();
 		pi.sendMessage(
 			{
 				customType: EXECUTE_CONTEXT_ENTRY,
@@ -252,6 +259,7 @@ export default function planMode(pi: ExtensionAPI): void {
 				};
 			}
 			const changed = markStepDone(params.step);
+			continueExecution = continueExecution || changed;
 			updateUi(ctx);
 			persist();
 			const completed = steps.filter((s) => s.completed).length;
@@ -330,7 +338,7 @@ You are in read-only planning mode.
 Follow the remaining steps in order:
 ${remaining}
 
-After completing step N, call the plan_done tool with { step: N }.`,
+After completing step N, call the plan_done tool with { step: N }. The next unfinished step will be queued automatically.`,
 				},
 			};
 		}
@@ -338,14 +346,33 @@ After completing step N, call the plan_done tool with { step: N }.`,
 
 
 	pi.on("agent_end", async (event, ctx) => {
-		if (mode === "executing" && steps.length > 0 && steps.every((s) => s.completed)) {
-			pi.sendMessage({ customType: "plan-mode-complete", display: true, content: "✅ Plan complete." }, { triggerTurn: false });
-			mode = "normal";
-			steps = [];
-			pi.setActiveTools(activeNormalTools());
-			updateUi(ctx);
-			persist();
-			return;
+		if (mode === "executing" && steps.length > 0) {
+			if (steps.every((s) => s.completed)) {
+				pi.sendMessage({ customType: "plan-mode-complete", display: true, content: "✅ Plan complete." }, { triggerTurn: false });
+				mode = "normal";
+				steps = [];
+				continueExecution = false;
+				pi.setActiveTools(activeNormalTools());
+				updateUi(ctx);
+				persist();
+				return;
+			}
+
+			if (continueExecution) {
+				continueExecution = false;
+				const next = nextIncompleteStep();
+				if (next) {
+					pi.sendMessage(
+						{
+							customType: EXECUTE_CONTEXT_ENTRY,
+							content: `Continue the approved plan with step ${next.step}: ${next.text}`,
+							display: true,
+						},
+						{ triggerTurn: true },
+					);
+					return;
+				}
+			}
 		}
 
 		if (mode !== "planning") return;
