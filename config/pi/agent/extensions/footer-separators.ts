@@ -14,7 +14,9 @@ function formatTokens(count: number): string {
   return `${Math.round(count / 1000000)}M`;
 }
 
-function installFooter(ctx: ExtensionContext) {
+const SEPARATOR = " • ";
+
+function installFooter(pi: ExtensionAPI, ctx: ExtensionContext) {
   if (!ctx.hasUI) return;
 
   ctx.ui.setFooter((tui, theme, footerData) => {
@@ -51,10 +53,10 @@ function installFooter(ctx: ExtensionContext) {
         if (home && pwd.startsWith(home)) pwd = `~${pwd.slice(home.length)}`;
 
         const branch = footerData.getGitBranch();
-        if (branch) pwd = `${pwd} (${branch})`;
+        if (branch) pwd = `${pwd}${SEPARATOR}${branch}`;
 
         const sessionName = ctx.sessionManager.getSessionName();
-        if (sessionName) pwd = `${pwd} • ${sessionName}`;
+        if (sessionName) pwd = `${pwd}${SEPARATOR}${sessionName}`;
 
         const statsParts: string[] = [];
         if (totalInput) statsParts.push(`↑${formatTokens(totalInput)}`);
@@ -82,7 +84,20 @@ function installFooter(ctx: ExtensionContext) {
         }
 
         const modelName = ctx.model?.id || "no-model";
-        const rightSide = footerData.getAvailableProviderCount() > 1 && ctx.model ? `(${ctx.model.provider}) ${modelName}` : modelName;
+        let rightSideWithoutProvider = modelName;
+        if (ctx.model?.reasoning) {
+          const thinkingLevel = pi.getThinkingLevel() || "off";
+          rightSideWithoutProvider = thinkingLevel === "off" ? `${modelName}${SEPARATOR}thinking off` : `${modelName}${SEPARATOR}${thinkingLevel}`;
+        }
+
+        let rightSide = rightSideWithoutProvider;
+        if (footerData.getAvailableProviderCount() > 1 && ctx.model) {
+          const withProvider = `(${ctx.model.provider}) ${rightSideWithoutProvider}`;
+          if (statsLeftWidth + 2 + visibleWidth(withProvider) <= width) {
+            rightSide = withProvider;
+          }
+        }
+
         const rightSideWidth = visibleWidth(rightSide);
         const padding = " ".repeat(Math.max(2, width - statsLeftWidth - rightSideWidth));
 
@@ -97,7 +112,7 @@ function installFooter(ctx: ExtensionContext) {
           .filter(Boolean);
 
         if (statuses.length > 0) {
-          lines.push(truncateToWidth(statuses.join(theme.fg("dim", " │ ")), width, theme.fg("dim", "...")));
+          lines.push(truncateToWidth(statuses.join(theme.fg("dim", SEPARATOR)), width, theme.fg("dim", "...")));
         }
 
         return lines;
@@ -107,6 +122,8 @@ function installFooter(ctx: ExtensionContext) {
 }
 
 export default function(pi: ExtensionAPI) {
-  pi.on("session_start", async (_event, ctx) => installFooter(ctx));
-  pi.on("session_tree", async (_event, ctx) => installFooter(ctx));
+  pi.on("session_start", async (_event, ctx) => installFooter(pi, ctx));
+  pi.on("session_tree", async (_event, ctx) => installFooter(pi, ctx));
+  pi.on("model_select", async (_event, ctx) => installFooter(pi, ctx));
+  pi.on("thinking_level_select", async (_event, ctx) => installFooter(pi, ctx));
 }

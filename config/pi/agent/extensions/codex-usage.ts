@@ -410,13 +410,10 @@ function pickPreferredBuckets(rateLimits: RateLimitsReadResult): RateLimitDispla
   return all.slice(0, 2);
 }
 
-function buildStatusText(ctx: ExtensionContextLike, rateLimits: RateLimitsReadResult): string | undefined {
-  const buckets = pickPreferredBuckets(rateLimits);
-  if (buckets.length === 0) {
-    return undefined;
-  }
+function buildStatusTexts(ctx: ExtensionContextLike, rateLimits: RateLimitsReadResult): Map<string, string> {
+  const statuses = new Map<string, string>();
 
-  const parts = buckets.map((bucket) => {
+  for (const bucket of pickPreferredBuckets(rateLimits)) {
     const remaining = remainingPercent(bucket.usedPercent);
     const tone = toneForRemaining(remaining);
     const label = bucket.label === "5h" ? "5h" : bucket.label === "weekly" ? "1w" : bucket.label;
@@ -424,36 +421,41 @@ function buildStatusText(ctx: ExtensionContextLike, rateLimits: RateLimitsReadRe
     const labelText = ctx.ui.theme.fg("dim", label);
     const resetText = formatDuration(bucket.resetsAt);
     const resetSegment = resetText ? ctx.ui.theme.fg("dim", ` resets ${resetText}`) : "";
-    return `${labelText} ${remainingText} left${resetSegment}`;
-  });
+    statuses.set(bucket.label === "weekly" ? "weekly" : bucket.label, ctx.ui.theme.fg("accent", `Codex ${labelText} ${remainingText} left${resetSegment}`));
+  }
 
-  return ctx.ui.theme.fg("accent", `Codex ${parts.join(ctx.ui.theme.fg("dim", " · "))}`);
+  return statuses;
 }
 
 export default function (pi: ExtensionAPI) {
-  const statusKey = "codex-usage";
+  const statusKeyPrefix = "codex-usage";
+  const statusKeys = [`${statusKeyPrefix}-5h`, `${statusKeyPrefix}-weekly`];
   const pollIntervalMs = 60_000;
   let client: CodexAppServerClient | undefined;
   let pollTimer: ReturnType<typeof setInterval> | undefined;
   let refreshInFlight = false;
-  let currentStatus = "";
+  let currentStatuses = new Map<string, string>();
   let currentAccountIsChatGPT = false;
   let currentCwd = "";
 
   function clearStatus(ctx: ExtensionContextLike): void {
-    currentStatus = "";
+    currentStatuses = new Map();
     currentAccountIsChatGPT = false;
-    ctx.ui.setStatus(statusKey, undefined);
+    for (const key of statusKeys) ctx.ui.setStatus(key, undefined);
   }
 
   function setStatus(ctx: ExtensionContextLike, rateLimits: RateLimitsReadResult): void {
-    const text = buildStatusText(ctx, rateLimits);
-    if (!text || text === currentStatus) {
-      return;
+    const nextStatuses = buildStatusTexts(ctx, rateLimits);
+
+    for (const key of statusKeys) {
+      const bucketKey = key.endsWith("-weekly") ? "weekly" : "5h";
+      const text = nextStatuses.get(bucketKey);
+      if (currentStatuses.get(key) !== text) {
+        ctx.ui.setStatus(key, text);
+      }
     }
 
-    currentStatus = text;
-    ctx.ui.setStatus(statusKey, text);
+    currentStatuses = new Map(statusKeys.map((key) => [key, key.endsWith("-weekly") ? nextStatuses.get("weekly") ?? "" : nextStatuses.get("5h") ?? ""]));
   }
 
   async function closeClient(): Promise<void> {
@@ -463,7 +465,7 @@ export default function (pi: ExtensionAPI) {
     }
 
     currentAccountIsChatGPT = false;
-    currentStatus = "";
+    currentStatuses = new Map();
   }
 
   function stopPolling(): void {
