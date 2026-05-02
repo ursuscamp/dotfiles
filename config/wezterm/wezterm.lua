@@ -151,6 +151,46 @@ config.keys = {
     action = wezterm.action.ActivatePaneDirection("Right"),
   },
   {
+    key = "h",
+    mods = "ALT|SHIFT",
+    action = wezterm.action.AdjustPaneSize({ "Left", 5 }),
+  },
+  {
+    key = "j",
+    mods = "ALT|SHIFT",
+    action = wezterm.action.AdjustPaneSize({ "Down", 5 }),
+  },
+  {
+    key = "k",
+    mods = "ALT|SHIFT",
+    action = wezterm.action.AdjustPaneSize({ "Up", 5 }),
+  },
+  {
+    key = "l",
+    mods = "ALT|SHIFT",
+    action = wezterm.action.AdjustPaneSize({ "Right", 5 }),
+  },
+  {
+    key = "LeftArrow",
+    mods = "ALT|SHIFT",
+    action = wezterm.action.AdjustPaneSize({ "Left", 1 }),
+  },
+  {
+    key = "DownArrow",
+    mods = "ALT|SHIFT",
+    action = wezterm.action.AdjustPaneSize({ "Down", 1 }),
+  },
+  {
+    key = "UpArrow",
+    mods = "ALT|SHIFT",
+    action = wezterm.action.AdjustPaneSize({ "Up", 1 }),
+  },
+  {
+    key = "RightArrow",
+    mods = "ALT|SHIFT",
+    action = wezterm.action.AdjustPaneSize({ "Right", 1 }),
+  },
+  {
     key = "w",
     mods = "CTRL|SHIFT",
     action = wezterm.action.CloseCurrentPane({ confirm = true }),
