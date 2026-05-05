@@ -29,6 +29,7 @@ opt.wrap = false
 
 opt.list = true
 opt.laststatus = 3
+opt.foldcolumn = "auto:1"
 opt.pumborder = "rounded"
 opt.listchars = {
   tab = "» ",
@@ -36,6 +37,16 @@ opt.listchars = {
   nbsp = "␣",
   extends = "›",
   precedes = "‹",
+}
+opt.fillchars = {
+  -- eob = " ",
+  -- fold = " ",
+  fold = " ",
+  foldopen = "▾",
+  foldclose = "▸",
+  foldinner = " ",
+  foldsep = " ",
+  -- foldsep = "│",
 }
 
 local function set_window_separator_highlight()
