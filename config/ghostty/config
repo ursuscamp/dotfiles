@@ -1,5 +1,25 @@
-theme = Ayu
+theme = Rose Pine
+font-family = "JetBrainsMono Nerd Font Mono"
+font-size = 14
+font-feature = +liga
+font-feature = +calt
+font-feature = +dlig
+split-divider-color = #666666
+
+# Navigate splits
 keybind = ctrl+shift+j=goto_split:down
 keybind = ctrl+shift+k=goto_split:up
 keybind = ctrl+shift+h=goto_split:left
 keybind = ctrl+shift+l=goto_split:right
+
+# Resize splits by 60 pixels
+keybind = alt+h=resize_split:left,60
+keybind = alt+j=resize_split:down,60
+keybind = alt+k=resize_split:up,60
+keybind = alt+l=resize_split:right,60
+
+# Resize splits by 10 pixels
+keybind = alt+shift+h=resize_split:left,10
+keybind = alt+shift+j=resize_split:down,10
+keybind = alt+shift+k=resize_split:up,10
+keybind = alt+shift+l=resize_split:right,10
