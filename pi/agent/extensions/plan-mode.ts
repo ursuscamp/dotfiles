@@ -26,21 +26,12 @@ function transitionMessage(enabled: boolean): string {
 
 export default function (pi: ExtensionAPI) {
   let planMode = false;
+  let lastSentPlanMode = false;
 
   const togglePlanMode = (ctx: ExtensionContext): void => {
     planMode = !planMode;
 
     pi.appendEntry(STATE_ENTRY, { enabled: planMode });
-    pi.sendMessage(
-      {
-        customType: MESSAGE_TYPE,
-        content: transitionMessage(planMode),
-        display: true,
-        details: { enabled: planMode },
-      },
-      { deliverAs: "nextTurn" },
-    );
-
     setStatus(ctx, planMode);
     ctx.ui.notify(
       planMode ? "Plan mode enabled" : "Plan mode disabled",
@@ -58,7 +49,22 @@ export default function (pi: ExtensionAPI) {
     const latestState = stateEntries.at(-1);
 
     planMode = latestState?.data?.enabled === true;
+    lastSentPlanMode = planMode;
     setStatus(ctx, planMode);
+  });
+
+  pi.on("before_agent_start", async () => {
+    if (planMode === lastSentPlanMode) return;
+
+    lastSentPlanMode = planMode;
+    return {
+      message: {
+        customType: MESSAGE_TYPE,
+        content: transitionMessage(planMode),
+        display: true,
+        details: { enabled: planMode },
+      },
+    };
   });
 
   pi.on("session_compact", async (_event, ctx) => {
@@ -75,6 +81,7 @@ export default function (pi: ExtensionAPI) {
       },
       { deliverAs: "nextTurn" },
     );
+    lastSentPlanMode = true;
     setStatus(ctx, true);
   });
 
