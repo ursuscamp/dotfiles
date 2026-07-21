@@ -27,13 +27,28 @@ ln -s $SOURCE/.Brewfile.lock.json $DESTINATION
 ln -s $SOURCE/.aider.conf.yml $DESTINATION
 
 # Pi config (safe subpaths only)
-PI_AGENT_SOURCE="$SOURCE/pi/agent"
+PI_AGENT_SOURCE="$REPO/pi/agent"
 PI_AGENT_DEST="$HOME/.pi/agent"
+
+link_pi_directory() {
+  local source="$1"
+  local destination="$2"
+
+  if [[ -L "$destination" && "$(readlink "$destination")" == "$source" ]]; then
+    return
+  fi
+
+  if [[ -e "$destination" || -L "$destination" ]]; then
+    rm -rf -- "$destination"
+  fi
+
+  ln -s "$source" "$destination"
+}
 
 echo "Linking Pi config (extensions, themes)..."
 mkdir -p "$PI_AGENT_DEST"
-ln -sfn "$PI_AGENT_SOURCE/extensions" "$PI_AGENT_DEST/extensions"
-ln -sfn "$PI_AGENT_SOURCE/themes" "$PI_AGENT_DEST/themes"
+link_pi_directory "$PI_AGENT_SOURCE/extensions" "$PI_AGENT_DEST/extensions"
+link_pi_directory "$PI_AGENT_SOURCE/themes" "$PI_AGENT_DEST/themes"
 echo "Pi config linked: $PI_AGENT_DEST/extensions, $PI_AGENT_DEST/themes"
 
 # Setup tmux plugin manager
